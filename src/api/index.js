@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = "http://lookup-service-prod.mlb.com/json/";
+const baseUrl = "https://lookup-service-prod.mlb.com/json/";
 
 
 function getAllClub(season){
