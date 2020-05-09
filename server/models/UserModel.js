@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const user = new mongoose.Schema({
-    id: {
+    username: {
         type: String,
         required: true,
         trim: true,
@@ -10,7 +10,7 @@ const user = new mongoose.Schema({
         type: String,
         required: true,
     },
-    nick: {
+    nickname: {
         type: String,
         required: true,
     },
@@ -24,4 +24,8 @@ const user = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-})
+});
+
+const userModel = mongoose.model('User', user);
+
+module.exports = userModel;
