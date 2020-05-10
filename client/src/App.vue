@@ -1,21 +1,15 @@
 <template>
-  <div >
-    <div v-if="this.$route.name==='start'">
-      <start-view></start-view>
-    </div>
-    <div v-else>
-      <tool-bar></tool-bar>
+    <div>
+      <app-header></app-header>
       <router-view></router-view>
     </div>
-  </div>
 </template>
 
 <script>
-import StartView from './views/StartView.vue';
-import ToolBar from './components/Toolbar.vue';
+import AppHeader from './components/AppHeader.vue';
 export default {
   components: {
-    StartView, ToolBar
+    AppHeader
   },
 }
 </script>
@@ -23,5 +17,8 @@ export default {
 <style>
 body {
   text-align: center;
+}
+a {
+  text-decoration: none;
 }
 </style>

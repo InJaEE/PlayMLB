@@ -1,8 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import StartView from '../views/StartView.vue';
-import ClubList from '../views/ClubList.vue';
-import PlayerDetail from '../views/PlayerDetail.vue';
 
 Vue.use(VueRouter);
 
@@ -11,21 +8,27 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            redirect: 'start',
+            component: () => import('@/views/MainView.vue'),
         },
         {
-            path: '/start',
-            name: 'start',
-            component: StartView,
+            path: '/login',
+            component: () => import('@/views/LoginView.vue'),
         },
         {
-            path: '/clublist',
-            name: 'clublist',
-            component: ClubList,
+            path: '/signup',
+            component: () => import('@/views/SignupView.vue'),
         },
         {
-            path: '/player/:code',
-            component: PlayerDetail
+            path: '/board',
+            component: () => import('@/views/BoardView.vue'),
+        },
+        {
+            path: '/stat',
+            component: () => import('@/views/StatView.vue'),
+        },
+        {
+            path: '/info',
+            component: () => import('@/views/InfoView.vue'),
         }
     ]
 });
