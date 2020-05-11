@@ -21,11 +21,6 @@ export default {
   components: {
     TeamStatList,
   },
-  data(){
-    return{
-      allClub: [],
-    }
-  },
   methods: {
         getLeagueClub(leagueParam){
           let league = this.$route.params.league==='nl'? 'nl':'al';
@@ -39,7 +34,6 @@ export default {
   },
   created(){
     this.$store.dispatch('FETCH_ALL_CLUB', 2019);
-    this.allClub = this.$store.getters.fetchedAllClub;
   },
 }
 </script>

@@ -24,16 +24,15 @@
                   <span :class="{selected: !toggleLeague}">
                     <img width="25px" src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/MLB_National_League_logo.svg/200px-MLB_National_League_logo.svg.png" alt="National League">
                     내셔널리그
-
                   </span>
                 </router-link>
               </li>
           </ul>
       </div>
-      <div class="yearBtn">
-        <button>2019</button>
-        <button>2018</button>
-        <button>2017</button>
+      <div class="year">
+        <span style="border-bottom: solid 2px blue;">2019</span>
+        <span>2018</span>
+        <span>2017</span>
       </div>
   </div>
 </template>
@@ -107,5 +106,10 @@ ul a{
 }
 .router:hover {
   cursor: pointer;
+}
+.year span {
+  margin: 0 10px 0 10px;
+  font-size: 20px;
+  color: #777;
 }
 </style>

@@ -1,9 +1,12 @@
 <template>
   <div class="contents">
     <stat-header></stat-header>
-    <team-stat-main></team-stat-main>
-    <player-stat-main></player-stat-main>
-    <router-view></router-view>
+    <div v-if="currentPage">
+      <player-stat-main></player-stat-main>
+    </div>
+    <div v-else>
+      <team-stat-main></team-stat-main>
+    </div>
   </div>
 </template>
 
@@ -14,10 +17,15 @@ import PlayerStatMain from '../components/stat/PlayerStatMain.vue';
 export default {
   components: {
     StatHeader, TeamStatMain, PlayerStatMain,
-  }
+  },
+  computed: {
+    currentPage(){
+      const teamORplayer = this.$route.params.type === 'player'? true: false
+      return teamORplayer;
+    },
+  },
 }
 </script>
 
 <style>
-
 </style>

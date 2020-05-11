@@ -9,4 +9,7 @@ export default new vuex.Store({
     modules: {
         user, stat,
     },
+    state: {
+        currentPage: '',
+    },
 });
