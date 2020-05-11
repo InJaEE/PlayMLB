@@ -25,10 +25,20 @@ const router = new VueRouter({
         {
             path: '/stat',
             component: () => import('@/views/StatView.vue'),
+            children: [
+                {
+                    path: ':league',
+                    children: [
+                        {
+                            path: ':type',
+                        }
+                    ],
+                }
+            ]
         },
         {
-            path: '/info',
-            component: () => import('@/views/InfoView.vue'),
+            path: '/about',
+            component: () => import('@/views/AboutView.vue'),
         }
     ]
 });

@@ -1,0 +1,11 @@
+body {
+    text-align: center;
+}
+a {
+    text-decoration: none;
+}
+
+.contents {
+    max-width: 60%;
+    margin: 0 auto;
+}

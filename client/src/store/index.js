@@ -1,25 +1,12 @@
 import vue from 'vue';
 import vuex from 'vuex';
-import actions from './module/actions.js';
+import user from './module/user';
+import stat from './module/stat';
 
 vue.use(vuex);
 
 export default new vuex.Store({
-    state: {
-        allClub: {},
-        player: {},
+    modules: {
+        user, stat,
     },
-    getters: {
-        fetchedAllClub: state => state.allClub,
-        fetchedPlayer: state => state.player,
-    },
-    mutations: {
-        SET_ALL_CLUB(state, data){
-            state.allClub = data;
-        },
-        SET_ONE_PLAYER(state, data){
-            state.player = data;
-        }
-    },
-    actions,
 });

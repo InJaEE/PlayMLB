@@ -11,8 +11,8 @@
       <router-link to="/stat">
         기록실
       </router-link>
-      <router-link to="/info">
-        정보
+      <router-link to="/about">
+        About
       </router-link>
     </div>
     <div class="navigations">
@@ -26,7 +26,6 @@
 
 <script>
 export default {
-
 }
 </script>
 
@@ -43,6 +42,7 @@ a {
 	z-index: 2;
 	box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.05);
   color: white;
+  margin-bottom: 20px;
 }
 .logoContent {
   display: table;
@@ -58,7 +58,6 @@ a {
 }
 img {
   display: table-cell;
-  vertical-align: middle;
 }
 .menu > a {
   margin-right: 50px;

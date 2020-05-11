@@ -15,10 +15,5 @@ export default {
 </script>
 
 <style>
-body {
-  text-align: center;
-}
-a {
-  text-decoration: none;
-}
+@import url('css/style.css');
 </style>
