@@ -2,15 +2,15 @@
   <div class="leagueTable">
       <div>
         <h3>동부지구</h3>
-        <team-stat-list :teamList="get_league_club('e')"></team-stat-list>
+        <team-stat-list :teamList="getLeagueClub('e')"></team-stat-list>
       </div>
       <div>
         <h3>중부지구</h3>
-        <team-stat-list :teamList="get_league_club('c')"></team-stat-list>
+        <team-stat-list :teamList="getLeagueClub('c')"></team-stat-list>
       </div>
       <div>
         <h3>서부지구</h3>
-        <team-stat-list :teamList="get_league_club('w')"></team-stat-list>
+        <team-stat-list :teamList="getLeagueClub('w')"></team-stat-list>
       </div>
   </div>
 </template>
@@ -23,35 +23,23 @@ export default {
   },
   data(){
     return{
-      isAL: true,
+      allClub: [],
     }
   },
-  computed: {
-  },
   methods: {
-    getLeagueClub(){
-      let league = this.$route.params.league;
-      if(league !== 'al'){
-        this.isAL = false;
-      } else{
-        this.isAL = true;
-      }
-      const allClub = this.$store.getters.fetchedAllClub;
-      const club = Object.entries(allClub).filter(v => {
-        return v[1].league.toLowerCase() === league;
-      });
-      return club;
-    },
-    get_league_club(league){
-      const leagueName = this.$route.params.league + league;
-      const data = this.getLeagueClub().filter(v => {
-        return v[1].division_abbrev.toLowerCase() === leagueName;
-      });
-      return data;
-    },
+        getLeagueClub(leagueParam){
+          let league = this.$route.params.league==='nl'? 'nl':'al';
+          league += leagueParam;
+          const storeAllClub = this.$store.getters.fetchedAllClub;
+          const filteredLeague = Object.entries(storeAllClub).filter(v => {
+            return v[1].division_abbrev.toLowerCase() === league;
+          });
+          return filteredLeague;
+        },
   },
   created(){
     this.$store.dispatch('FETCH_ALL_CLUB', 2019);
+    this.allClub = this.$store.getters.fetchedAllClub;
   },
 }
 </script>

@@ -21,8 +21,6 @@ const actions = {
     async FETCH_ALL_CLUB({ commit }, season){
         try {
             const res = await getAllClub(season);
-            console.log("#", res);
-            
             commit('SET_ALL_CLUB', res.data.team_all_season.queryResults.row);
             return res;
         } catch (err) {
