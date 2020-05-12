@@ -1,25 +1,29 @@
 <template>
-	<div class="leagueTable">
+	<div>
+		<league-menu></league-menu>
 		<div class="league">
 			<h3>동부지구</h3>
-			<team-stat-list :teamList="getLeagueClub('e')"></team-stat-list>
+			<info-team-list :teamList="getLeagueClub('e')"></info-team-list>
 		</div>
-		<div>
+		<div class="league">
 			<h3>중부지구</h3>
-			<team-stat-list :teamList="getLeagueClub('c')"></team-stat-list>
+			<info-team-list :teamList="getLeagueClub('c')"></info-team-list>
 		</div>
-		<div>
+		<div class="league">
 			<h3>서부지구</h3>
-			<team-stat-list :teamList="getLeagueClub('w')"></team-stat-list>
+			<info-team-list :teamList="getLeagueClub('w')"></info-team-list>
 		</div>
 	</div>
 </template>
 
 <script>
-import TeamStatList from './TeamStatList.vue';
+import LeagueMenu from '../common/LeagueMenu.vue';
+import InfoTeamList from './InfoTeamList.vue';
+
 export default {
 	components: {
-		TeamStatList,
+		LeagueMenu,
+		InfoTeamList,
 	},
 	methods: {
 		getLeagueClub(leagueParam) {
@@ -38,14 +42,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/*
-.leagueTable {
-	border: 1px solid gray;
-	margin: 10px 0 20px 0;
-}
-*/
-.league {
-	width: 100%;
-}
-</style>
+<style></style>

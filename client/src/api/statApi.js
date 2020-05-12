@@ -20,7 +20,7 @@ function getPitcherRank(season, recordType) {
 
 function getHitterRank(season, recordType) {
 	return instance.get(
-		`http://lookup-service-prod.mlb.com/json/named.leader_hitting_repeater.bam?sport_code='mlb'&results=5&game_type='R'&season='${season}'&sort_column='${recordType}'`,
+		`/named.leader_hitting_repeater.bam?sport_code='mlb'&results=10&game_type='R'&season='${season}'&sort_column='${recordType}'`,
 	);
 }
 
