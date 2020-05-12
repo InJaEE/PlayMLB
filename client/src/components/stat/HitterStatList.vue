@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<table>
+		<table class="table">
 			<th>선수</th>
 			<th>타수</th>
 			<th>타율</th>
@@ -51,4 +51,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.table {
+	width: 100%;
+	text-align: center;
+}
+</style>

@@ -27,7 +27,7 @@ export default {
 	},
 	methods: {
 		getLeagueClub(leagueParam) {
-			let league = this.$route.params.league === 'nl' ? 'nl' : 'al';
+			let league = this.$route.params.type === 'nl' ? 'nl' : 'al';
 			league += leagueParam;
 			const storeAllClub = this.$store.getters.fetchedAllClub;
 			const filteredLeague = Object.entries(storeAllClub).filter(v => {
@@ -42,4 +42,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.league {
+	margin: 30px 0;
+	border-bottom: 1px solid black;
+}
+.league h3 {
+	margin-bottom: 30px;
+}
+</style>

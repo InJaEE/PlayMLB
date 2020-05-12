@@ -1,17 +1,17 @@
 <template>
 	<div>
-		<team-player-menu>
+		<header-toggle-menu>
 			<span slot="team">팀 정보</span>
 			<span slot="player">선수 정보</span>
-		</team-player-menu>
+		</header-toggle-menu>
 	</div>
 </template>
 
 <script>
-import TeamPlayerMenu from '../common/TeamPlayerMenu.vue';
+import HeaderToggleMenu from '../common/HeaderToggleMenu.vue';
 export default {
 	components: {
-		TeamPlayerMenu,
+		HeaderToggleMenu,
 	},
 };
 </script>

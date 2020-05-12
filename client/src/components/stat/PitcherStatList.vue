@@ -1,13 +1,12 @@
 <template>
 	<div>
-		<table>
+		<table class="table">
 			<th>선수</th>
 			<th>승</th>
 			<th>패</th>
 			<th>세이브</th>
 			<th>평균자책</th>
 			<th>탈삼진</th>
-			<th>홀드</th>
 			<th>이닝</th>
 			<th>피안타</th>
 			<th>피홈런</th>
@@ -20,7 +19,6 @@
 				<td>{{ item.sv }}</td>
 				<td>{{ item.era }}</td>
 				<td>{{ item.so }}</td>
-				<td></td>
 				<td>{{ item.ip }}</td>
 				<td>{{ item.h }}</td>
 				<td>{{ item.hr }}</td>
@@ -37,4 +35,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.table {
+	width: 100%;
+	text-align: center;
+}
+</style>
