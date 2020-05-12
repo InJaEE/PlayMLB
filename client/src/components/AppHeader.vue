@@ -1,65 +1,64 @@
 <template>
-  <header class="header">
-    <div class="logoContent">
-      <img src="../assets/mlbLogo.png" width="80" height="40" alt="PlayMLB">
-      <router-link to="/" class="mainTitle">PlayMLB</router-link>
-    </div>
-    <div class="menu">
-      <router-link to="/board">
-        게시판
-      </router-link>
-      <router-link to="/stat">
-        기록실
-      </router-link>
-      <router-link to="/about">
-        About
-      </router-link>
-    </div>
-    <div class="navigations">
-      <template>
-        <router-link to="/login">로그인</router-link>
-        <router-link to="/signup">회원가입</router-link>
-      </template>
-    </div>
-  </header>
+	<header class="header">
+		<div class="logoContent">
+			<img src="../assets/mlbLogo.png" width="80" height="40" alt="PlayMLB" />
+			<router-link to="/" class="mainTitle">PlayMLB</router-link>
+		</div>
+		<div class="menu">
+			<router-link to="/board">
+				게시판
+			</router-link>
+			<router-link to="/stat">
+				기록실
+			</router-link>
+			<router-link to="/about">
+				About
+			</router-link>
+		</div>
+		<div class="navigations">
+			<template>
+				<router-link to="/login">로그인</router-link>
+				<router-link to="/signup">회원가입</router-link>
+			</template>
+		</div>
+	</header>
 </template>
 
 <script>
-export default {
-}
+export default {};
 </script>
 
 <style scoped>
 a {
-  color: white;
+	color: white;
 }
 .header {
-  display: flex;
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 10px 20px;
 	background-color: #041e42;
 	z-index: 2;
 	box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.05);
-  color: white;
-  margin-bottom: 20px;
+	color: white;
+	margin-bottom: 20px;
 }
 .logoContent {
-  display: table;
+	display: table;
 }
 .navigations a {
 	margin-left: 10px;
 }
 .mainTitle {
-  font-size: 25px;
-  padding-left: 10px;
-  display: table-cell;
-  vertical-align: middle;
+	font-size: 25px;
+	padding-left: 10px;
+	display: table-cell;
+	vertical-align: middle;
 }
 img {
-  display: table-cell;
+	display: table-cell;
 }
 .menu > a {
-  margin-right: 50px;
+	margin-right: 50px;
 }
 </style>

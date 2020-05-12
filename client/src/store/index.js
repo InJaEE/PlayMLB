@@ -6,10 +6,11 @@ import stat from './module/stat';
 vue.use(vuex);
 
 export default new vuex.Store({
-    modules: {
-        user, stat,
-    },
-    state: {
-        currentPage: '',
-    },
+	modules: {
+		user,
+		stat,
+	},
+	state: {
+		currentPage: '',
+	},
 });

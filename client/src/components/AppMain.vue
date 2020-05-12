@@ -1,13 +1,9 @@
 <template>
-  <img src="@/assets/scherzer.jpg" alt="">
+	<img src="@/assets/scherzer.jpg" alt="" />
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>
