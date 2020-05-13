@@ -8,6 +8,7 @@
 					v-for="(item, index) in thData"
 					:key="index"
 					@click="sortData(item[1])"
+					class="toggleHeader"
 				>
 					<span :class="{ selected: selectedType === item[1] }">
 						{{ item[0] }}
@@ -83,5 +84,8 @@ export default {
 td {
 	height: 50px;
 	border-bottom: 1px solid gray;
+}
+.toggleHeader {
+	cursor: pointer;
 }
 </style>

@@ -109,6 +109,7 @@ export default {
 	margin: 0 10px 0 10px;
 	font-size: 20px;
 	color: #777;
+	cursor: pointer;
 }
 .seasonSelected {
 	border-bottom: solid 3px #057aff;
