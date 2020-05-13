@@ -1,19 +1,29 @@
 <template>
 	<div>
 		<table class="table">
-			<th>선수</th>
-			<th>승</th>
-			<th>패</th>
-			<th>세이브</th>
-			<th>평균자책</th>
-			<th>탈삼진</th>
-			<th>이닝</th>
-			<th>피안타</th>
-			<th>피홈런</th>
-			<th>볼넷</th>
-			<th>경기수</th>
+			<tr class="tableHeader">
+				<th>선수</th>
+				<th>팀</th>
+				<th
+					v-for="(item, index) in thData"
+					:key="index"
+					@click="sortData(item[1])"
+					class="toggleHeader"
+				>
+					<span :class="{ selected: selectedType === item[1] }">
+						{{ item[0] }}
+					</span>
+					<span>
+						<i
+							class="fas fa-sort-down"
+							:class="{ selected: selectedType === item[1] }"
+						></i>
+					</span>
+				</th>
+			</tr>
 			<tr v-for="item in pitcherData" :key="item.player_id">
 				<td>{{ item.name_display_first_last }}</td>
+				<td>{{ item.team_name }}</td>
 				<td>{{ item.w }}</td>
 				<td>{{ item.l }}</td>
 				<td>{{ item.sv }}</td>
@@ -31,7 +41,22 @@
 
 <script>
 export default {
-	props: ['pitcherData'],
+	props: ['pitcherData', 'thData'],
+	computed: {
+		selectedType() {
+			return this.$route.query.statType;
+		},
+	},
+	methods: {
+		sortData(statType) {
+			let season = this.$route.query.season;
+			if (season === undefined) {
+				season = new Date().getFullYear() - 1;
+			}
+			this.$router.push({ query: { season, statType } });
+			this.$emit('refresh');
+		},
+	},
 };
 </script>
 
@@ -39,10 +64,7 @@ export default {
 .table {
 	width: 100%;
 	text-align: center;
-	border-top-color: rgb(119, 119, 132);
-	border-right-color: rgb(224, 224, 224);
-	border-left-color: rgb(224, 224, 224);
-	border-bottom-color: rgb(212, 212, 212);
+	font-size: 0.8rem;
 	border-collapse: collapse;
 	margin: 30px 0 100px 0;
 }
@@ -56,5 +78,8 @@ export default {
 td {
 	height: 50px;
 	border-bottom: 1px solid gray;
+}
+.toggleHeader {
+	cursor: pointer;
 }
 </style>

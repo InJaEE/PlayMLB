@@ -67,10 +67,7 @@ export default {
 .table {
 	width: 100%;
 	text-align: center;
-	border-top-color: rgb(119, 119, 132);
-	border-right-color: rgb(224, 224, 224);
-	border-left-color: rgb(224, 224, 224);
-	border-bottom-color: rgb(212, 212, 212);
+	font-size: 0.8rem;
 	border-collapse: collapse;
 	margin: 30px 0 100px 0;
 }

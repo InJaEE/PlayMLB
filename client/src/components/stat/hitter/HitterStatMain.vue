@@ -9,9 +9,8 @@
 				<span
 					@click="toggleSeason(2019)"
 					:class="{ seasonSelected: toggleSeasonClass === 2019 }"
+					>2019</span
 				>
-					2019
-				</span>
 				<span
 					@click="toggleSeason(2018)"
 					:class="{ seasonSelected: toggleSeasonClass === 2018 }"
@@ -43,7 +42,7 @@ export default {
 	data() {
 		return {
 			isLoading: false,
-			hitterList: '',
+			hitterList: {},
 			season: this.$route.query.season || new Date().getFullYear() - 1,
 			statType: this.$route.query.statType || 'hr',
 			thList: [
@@ -86,15 +85,9 @@ export default {
 			this.isLoading = false;
 		},
 		toggleSeason(path) {
-			let { season, statType } = this.$route.query;
-			if (season === undefined) {
-				season = new Date().getFullYear() - 1;
-			} else {
-				season = path;
-			}
+			let { statType } = this.$route.query;
 			if (statType === undefined) statType = 'hr';
-
-			this.$router.push({ query: { season, statType } });
+			this.$router.push({ query: { season: path, statType } });
 			this.fetchHitterRank();
 		},
 	},
