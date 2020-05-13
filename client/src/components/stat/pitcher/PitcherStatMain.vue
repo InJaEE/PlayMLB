@@ -47,7 +47,7 @@ export default {
 			statType: 'era',
 			thList: [
 				['승', 'w'],
-				['패', 'k'],
+				['패', 'l'],
 				['세이브', 'sv'],
 				['평균자책', 'era'],
 				['탈삼진', 'so'],
