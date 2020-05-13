@@ -1,17 +1,22 @@
 <template>
 	<div>
-		<league-menu></league-menu>
-		<div class="league">
-			<h3>동부지구</h3>
-			<info-team-list :teamList="getLeagueClub('e')"></info-team-list>
+		<div v-if="isLoading">
+			<loading-spinner></loading-spinner>
 		</div>
-		<div class="league">
-			<h3>중부지구</h3>
-			<info-team-list :teamList="getLeagueClub('c')"></info-team-list>
-		</div>
-		<div class="league">
-			<h3>서부지구</h3>
-			<info-team-list :teamList="getLeagueClub('w')"></info-team-list>
+		<div v-else>
+			<league-menu></league-menu>
+			<div class="league">
+				<h3>동부지구</h3>
+				<info-team-list :teamList="getLeagueClub('e')"></info-team-list>
+			</div>
+			<div class="league">
+				<h3>중부지구</h3>
+				<info-team-list :teamList="getLeagueClub('c')"></info-team-list>
+			</div>
+			<div class="league">
+				<h3>서부지구</h3>
+				<info-team-list :teamList="getLeagueClub('w')"></info-team-list>
+			</div>
 		</div>
 	</div>
 </template>
@@ -19,15 +24,22 @@
 <script>
 import LeagueMenu from '../common/LeagueMenu.vue';
 import InfoTeamList from './InfoTeamList.vue';
+import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 
 export default {
 	components: {
 		LeagueMenu,
 		InfoTeamList,
+		LoadingSpinner,
+	},
+	data() {
+		return {
+			isLoading: false,
+		};
 	},
 	methods: {
 		getLeagueClub(leagueParam) {
-			let league = this.$route.params.type === 'nl' ? 'nl' : 'al';
+			let league = this.$route.params.league === 'nl' ? 'nl' : 'al';
 			league += leagueParam;
 			const storeAllClub = this.$store.getters.fetchedAllClub;
 			const filteredLeague = Object.entries(storeAllClub).filter(v => {
@@ -37,7 +49,11 @@ export default {
 		},
 	},
 	created() {
+		this.isLoading = true;
 		this.$store.dispatch('FETCH_ALL_CLUB', 2019);
+		setTimeout(() => {
+			this.isLoading = false;
+		}, 300);
 	},
 };
 </script>

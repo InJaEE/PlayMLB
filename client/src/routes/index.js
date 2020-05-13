@@ -34,6 +34,12 @@ const router = new VueRouter({
 				{
 					path: ':type',
 					name: 'info/type',
+					children: [
+						{
+							path: ':league',
+							name: 'info/type/league'
+						}
+					]
 				},
 			],
 		},

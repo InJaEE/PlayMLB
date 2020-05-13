@@ -49,9 +49,10 @@ export default {
 		},
 	},
 	methods: {
-		movePage(type) {
+		movePage(league) {
 			const routePath = this.$route.matched[0].path;
-			this.$router.push(`${routePath}/${type}`);
+			const typePath = this.$route.params.type || 'team';
+			this.$router.push(`${routePath}/${typePath}/${league}`);
 		},
 	},
 };

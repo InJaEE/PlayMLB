@@ -26,6 +26,9 @@ export default {
 		return {
 			firstValue: ['team', 'hitter'],
 			secondValue: ['player', 'pitcher'],
+
+			infoValue: ['team', 'player', 'al', 'nl'],
+			statValue: ['hitter', 'pitcher'],
 		};
 	},
 	computed: {
@@ -33,7 +36,9 @@ export default {
 			let routePath = this.$route.params.type;
 			if (
 				routePath === this.firstValue[this.currentPage] ||
-				routePath === undefined
+				routePath === undefined ||
+				routePath === 'al' ||
+				routePath === 'nl'
 			) {
 				return true;
 			} else {

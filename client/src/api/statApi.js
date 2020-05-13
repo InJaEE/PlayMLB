@@ -14,13 +14,13 @@ function getPlayer(playerCode) {
 
 function getPitcherRank(season, recordType) {
 	return instance.get(
-		`/named.leader_pitching_repeater.bam?sport_code='mlb'&results=10&game_type='R'&season='${season}'&sort_column='${recordType}'`,
+		`/named.leader_pitching_repeater.bam?sport_code='mlb'&results=20&game_type='R'&season='${season}'&sort_column='${recordType}'`,
 	);
 }
 
 function getHitterRank(season, recordType) {
 	return instance.get(
-		`/named.leader_hitting_repeater.bam?sport_code='mlb'&results=10&game_type='R'&season='${season}'&sort_column='${recordType}'`,
+		`/named.leader_hitting_repeater.bam?sport_code='mlb'&results=20&game_type='R'&season='${season}'&sort_column='${recordType}'`,
 	);
 }
 

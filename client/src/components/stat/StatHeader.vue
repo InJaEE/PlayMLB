@@ -4,11 +4,6 @@
 			<span slot="team">타자</span>
 			<span slot="player">투수</span>
 		</header-toggle-menu>
-		<div class="year">
-			<span style="border-bottom: solid 3px #057aff;">2019</span>
-			<span>2018</span>
-			<span>2017</span>
-		</div>
 	</div>
 </template>
 
@@ -18,13 +13,8 @@ export default {
 	components: {
 		HeaderToggleMenu,
 	},
+	created() {},
 };
 </script>
 
-<style scoped>
-.year span {
-	margin: 0 10px 0 10px;
-	font-size: 20px;
-	color: #777;
-}
-</style>
+<style scoped></style>

@@ -39,5 +39,22 @@ export default {
 .table {
 	width: 100%;
 	text-align: center;
+	border-top-color: rgb(119, 119, 132);
+	border-right-color: rgb(224, 224, 224);
+	border-left-color: rgb(224, 224, 224);
+	border-bottom-color: rgb(212, 212, 212);
+	border-collapse: collapse;
+	margin: 30px 0 100px 0;
+}
+.tableHeader {
+	background-color: #f7f7f7;
+	padding: 10px 0;
+}
+.selected {
+	color: blue;
+}
+td {
+	height: 50px;
+	border-bottom: 1px solid gray;
 }
 </style>

@@ -1,20 +1,24 @@
-import { getAllClub } from '@/api/statApi';
+import { getAllClub, getHitterRank, getPitcherRank } from '@/api/statApi';
 
 const state = {
 	allClub: {},
-	ALteam: [],
-	NLteam: [],
-	player: {},
+	hitterRank: {},
+	pitcherRank: {},
 };
 const getters = {
 	fetchedAllClub: state => state.allClub,
+	fetchedHitterRank: state => state.hitterRank,
+	fetchedPitcherRank: state => state.pitcherRank,
 };
 const mutations = {
 	SET_ALL_CLUB(state, data) {
 		state.allClub = data;
 	},
-	SET_ONE_PLAYER(state, data) {
-		state.player = data;
+	SET_HITTER_RANK(state, data) {
+		state.hitterRank = data;
+	},
+	SET_PITCHER_RANK(state, data) {
+		state.pitcherRank = data;
 	},
 };
 const actions = {
@@ -27,15 +31,26 @@ const actions = {
 			console.error(err);
 		}
 	},
-	// async FETCH_ONE_PLAYER({ commit }, code) {
-	// 	try {
-	// 		const res = await getPlayer(code);
-	// 		commit('SET_ONE_PLAYER', res.data.player_info.queryResults.row);
-	// 		return res;
-	// 	} catch (err) {
-	// 		console.error(err);
-	// 	}
-	// },
+	async FETCH_HITTER({ commit }, { season, statType }) {
+		try {
+			const res = await getHitterRank(season, statType);
+			commit(
+				'SET_HITTER_RANK',
+				res.data.leader_hitting_repeater.leader_hitting_mux.queryResults.row,
+			);
+			return res;
+		} catch (err) {
+			console.error(err);
+		}
+	},
+	async FETCH_PITCHER({ commit }, { season, statType }) {
+		try {
+			const res = await getPitcherRank(season, statType);
+			commit('SET_PITCHER_RANK', res.data);
+		} catch (err) {
+			console.error(err);
+		}
+	},
 };
 
 export default {

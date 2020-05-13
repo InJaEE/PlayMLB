@@ -12,8 +12,8 @@
 
 <script>
 import StatHeader from '@/components/stat/StatHeader.vue';
-import HitterStatMain from '@/components/stat/HitterStatMain.vue';
-import PitcherStatMain from '@/components/stat/PitcherStatMain.vue';
+import HitterStatMain from '@/components/stat/hitter/HitterStatMain.vue';
+import PitcherStatMain from '@/components/stat/pitcher/PitcherStatMain.vue';
 export default {
 	components: {
 		StatHeader,
