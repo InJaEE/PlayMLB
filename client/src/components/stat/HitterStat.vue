@@ -22,21 +22,21 @@
 					>2017</span
 				>
 			</div>
-			<hitter-stat-list
-				:hitterData="hitterList"
+			<player-stat-list
+				:playerData="hitterList"
 				:thData="thList"
 				@refresh="fetchHitterRank"
-			></hitter-stat-list>
+			></player-stat-list>
 		</div>
 	</div>
 </template>
 
 <script>
-import HitterStatList from './HitterStatList.vue';
+import PlayerStatList from './common/PlayerStatList.vue';
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 export default {
 	components: {
-		HitterStatList,
+		PlayerStatList,
 		LoadingSpinner,
 	},
 	data() {

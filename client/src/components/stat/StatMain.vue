@@ -2,23 +2,23 @@
 	<div class="contents">
 		<stat-header></stat-header>
 		<div v-if="currentPage">
-			<pitcher-stat-main></pitcher-stat-main>
+			<pitcher-stat></pitcher-stat>
 		</div>
 		<div v-else>
-			<hitter-stat-main></hitter-stat-main>
+			<hitter-stat></hitter-stat>
 		</div>
 	</div>
 </template>
 
 <script>
 import StatHeader from '@/components/stat/StatHeader.vue';
-import HitterStatMain from '@/components/stat/hitter/HitterStatMain.vue';
-import PitcherStatMain from '@/components/stat/pitcher/PitcherStatMain.vue';
+import HitterStat from '@/components/stat/HitterStat.vue';
+import PitcherStat from '@/components/stat/PitcherStat.vue';
 export default {
 	components: {
 		StatHeader,
-		HitterStatMain,
-		PitcherStatMain,
+		HitterStat,
+		PitcherStat,
 	},
 	computed: {
 		currentPage() {
