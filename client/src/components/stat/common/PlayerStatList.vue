@@ -81,9 +81,7 @@ export default {
 		},
 		hitterORpitcher() {
 			const playerType =
-				this.$route.params.type === 'hitter' || undefined
-					? 'hitter'
-					: 'pitcher';
+				this.$route.params.type === 'hitter' || {} ? 'hitter' : 'pitcher';
 			return playerType;
 		},
 	},
