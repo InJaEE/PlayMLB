@@ -32,11 +32,6 @@ export default {
 		InfoTeamList,
 		LoadingSpinner,
 	},
-	data() {
-		return {
-			isLoading: false,
-		};
-	},
 	computed: {
 		eastClubList() {
 			return this.getLeagueClub('e');
