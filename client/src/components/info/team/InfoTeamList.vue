@@ -20,7 +20,9 @@
 
 <script>
 export default {
-	props: ['teamList'],
+	props: {
+		teamList: Array,
+	},
 };
 </script>
 

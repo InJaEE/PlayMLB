@@ -74,7 +74,10 @@
 
 <script>
 export default {
-	props: ['playerData', 'thData'],
+	props: {
+		playerData: Array,
+		thData: Array,
+	},
 	computed: {
 		selectedType() {
 			return this.$route.query.statType;

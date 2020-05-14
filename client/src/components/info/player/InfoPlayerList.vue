@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import InfoInput from './InfoInput.vue';
+import InfoInput from '../InfoInput.vue';
 import InfoPlayerCard from './InfoPlayerCard.vue';
 export default {
 	components: {

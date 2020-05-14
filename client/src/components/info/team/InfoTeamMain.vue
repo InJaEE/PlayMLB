@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import LeagueMenu from '../common/LeagueMenu.vue';
+import LeagueMenu from '@/components/common/LeagueMenu.vue';
 import InfoTeamList from './InfoTeamList.vue';
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 
