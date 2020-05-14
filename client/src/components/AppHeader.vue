@@ -55,7 +55,6 @@ export default {
 		toggleMenu() {
 			const name = this.$route.name === null ? '' : this.$route.name;
 			return name;
-			//return this.$route.matched[0].path;
 		},
 	},
 };

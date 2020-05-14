@@ -10,7 +10,7 @@
 				@blur="focusInputBox"
 				@keyup.enter="search"
 				ref="input"
-				v-model="inputData"
+				v-model="searchWord"
 				maxlength="15"
 			/>
 			<i class="fas fa-search searchBtn" @click="search"></i>
@@ -22,13 +22,23 @@
 export default {
 	data() {
 		return {
-			inputData: '',
+			searchWord: '',
 			isSearchFocus: false,
 		};
 	},
 	methods: {
-		search() {
-			alert('HI');
+		async search() {
+			this.$store.commit('SET_SEARCH_WORD', this.searchWord);
+			await this.$store.dispatch(
+				'FETCH_PLAYER_ID',
+				this.$store.getters.fetchedSearchWord,
+			);
+
+			this.$store.dispatch(
+				'FETCH_PLAYERS_DATA',
+				this.$store.getters.fetchedPlayerIdList,
+			);
+			this.$router.push({ query: { keyword: this.searchWord } });
 		},
 		focusInputBox() {
 			this.isSearchFocus = !this.isSearchFocus;

@@ -6,9 +6,15 @@ function getAllClub(season) {
 	);
 }
 
-function getPlayer(playerCode) {
+function getPlayers(name) {
 	return instance.get(
-		`/named.player_info.bam?sport_code='mlb'&player_id='${playerCode}'`,
+		`/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${name}%25'`,
+	);
+}
+
+function getPlayerStat(playerId) {
+	return instance.get(
+		`/named.player_info.bam?sport_code='mlb'&player_id='${playerId}'`,
 	);
 }
 
@@ -24,4 +30,4 @@ function getHitterRank(season, recordType) {
 	);
 }
 
-export { getAllClub, getPlayer, getPitcherRank, getHitterRank };
+export { getAllClub, getPlayers, getPlayerStat, getPitcherRank, getHitterRank };

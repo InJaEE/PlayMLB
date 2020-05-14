@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import HeaderToggleMenu from '../common/HeaderToggleMenu.vue';
+import HeaderToggleMenu from '@/components/common/HeaderToggleMenu.vue';
 export default {
 	components: {
 		HeaderToggleMenu,
