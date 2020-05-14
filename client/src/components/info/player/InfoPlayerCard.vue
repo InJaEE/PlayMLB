@@ -21,22 +21,17 @@
 				</span>
 			</div>
 		</div>
-		<h5>{{ testPlayerId }}</h5>
-		<h3>
-			{{ searchResult }}
+		<h3 v-for="(item, index) in playerList" :key="index">
+			{{ index + 1 }}
+			{{ item.이름 }}
 		</h3>
 	</div>
 </template>
 
 <script>
 export default {
-	computed: {
-		testPlayerId() {
-			return this.$store.getters.fetchedPlayerIdList;
-		},
-		searchResult() {
-			return this.$store.getters.fetchedPlayersInfo;
-		},
+	props: {
+		playerList: Array,
 	},
 };
 </script>
