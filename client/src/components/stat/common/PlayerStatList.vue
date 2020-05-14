@@ -80,9 +80,11 @@ export default {
 			return this.$route.query.statType;
 		},
 		hitterORpitcher() {
-			const playerType =
-				this.$route.params.type === 'hitter' || {} ? 'hitter' : 'pitcher';
-			return playerType;
+			let param = this.$route.params.type;
+			if (param === undefined) {
+				param = 'hitter';
+			}
+			return param;
 		},
 	},
 	methods: {

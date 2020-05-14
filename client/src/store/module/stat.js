@@ -46,8 +46,6 @@ const actions = {
 	async FETCH_PITCHER({ commit }, { season, statType }) {
 		try {
 			const res = await getPitcherRank(season, statType);
-			console.log(res.data);
-
 			commit(
 				'SET_PITCHER_RANK',
 				res.data.leader_pitching_repeater.leader_pitching_mux.queryResults.row,
