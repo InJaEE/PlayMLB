@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<info-input></info-input>
-		<info-player-card></info-player-card>
+		<info-player-card :playerList="searchResult"></info-player-card>
 	</div>
 </template>
 
@@ -12,6 +12,14 @@ export default {
 	components: {
 		InfoInput,
 		InfoPlayerCard,
+	},
+	computed: {
+		testPlayerId() {
+			return this.$store.getters.fetchedPlayerIdList;
+		},
+		searchResult() {
+			return this.$store.getters.fetchedPlayersInfo;
+		},
 	},
 };
 </script>
