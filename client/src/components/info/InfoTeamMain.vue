@@ -1,21 +1,21 @@
 <template>
 	<div>
-		<div v-if="isLoading">
+		<div v-if="computeLoading">
 			<loading-spinner></loading-spinner>
 		</div>
 		<div v-else>
 			<league-menu></league-menu>
 			<div class="league">
 				<h3>동부지구</h3>
-				<info-team-list :teamList="getLeagueClub('e')"></info-team-list>
+				<info-team-list :teamList="eastClubList"></info-team-list>
 			</div>
 			<div class="league">
 				<h3>중부지구</h3>
-				<info-team-list :teamList="getLeagueClub('c')"></info-team-list>
+				<info-team-list :teamList="centralClubList"></info-team-list>
 			</div>
 			<div class="league">
 				<h3>서부지구</h3>
-				<info-team-list :teamList="getLeagueClub('w')"></info-team-list>
+				<info-team-list :teamList="westClubList"></info-team-list>
 			</div>
 		</div>
 	</div>
@@ -37,6 +37,27 @@ export default {
 			isLoading: false,
 		};
 	},
+	computed: {
+		eastClubList() {
+			return this.getLeagueClub('e');
+		},
+		centralClubList() {
+			return this.getLeagueClub('c');
+		},
+		westClubList() {
+			return this.getLeagueClub('w');
+		},
+		computeLoading() {
+			if (
+				this.eastClubList.length !== 0 &&
+				this.centralClubList.length !== 0 &&
+				this.westClubList.length !== 0
+			) {
+				return false;
+			}
+			return true;
+		},
+	},
 	methods: {
 		getLeagueClub(leagueParam) {
 			let league = this.$route.params.league === 'nl' ? 'nl' : 'al';
@@ -51,9 +72,6 @@ export default {
 	created() {
 		this.isLoading = true;
 		this.$store.dispatch('FETCH_ALL_CLUB', 2019);
-		setTimeout(() => {
-			this.isLoading = false;
-		}, 300);
 	},
 };
 </script>
