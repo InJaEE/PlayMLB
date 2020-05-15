@@ -12,6 +12,12 @@ function getPlayers(name) {
 	);
 }
 
+function getPlayer(playerId) {
+	return instance.get(
+		`/named.player_info.bam?sport_code='mlb'&player_id='${playerId}'`,
+	);
+}
+
 function getPlayerStat(playerId) {
 	return instance.get(
 		`/named.player_info.bam?sport_code='mlb'&player_id='${playerId}'`,
@@ -44,6 +50,7 @@ function getPitcherSeasonStat(season, playerId) {
 export {
 	getAllClub,
 	getPlayers,
+	getPlayer,
 	getPlayerStat,
 	getPitcherRank,
 	getHitterRank,
