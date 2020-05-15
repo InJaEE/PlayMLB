@@ -55,7 +55,7 @@ export default {
 	},
 	methods: {
 		getLeagueClub(leagueParam) {
-			let league = this.$route.params.league === 'nl' ? 'nl' : 'al';
+			let league = this.$route.params.detail === 'nl' ? 'nl' : 'al';
 			league += leagueParam;
 			const storeAllClub = this.$store.getters.fetchedAllClub;
 			const filteredLeague = Object.entries(storeAllClub).filter(v => {

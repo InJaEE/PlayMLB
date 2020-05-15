@@ -36,10 +36,10 @@ const router = new VueRouter({
 					name: 'info/type',
 					children: [
 						{
-							path: ':league',
-							name: 'info/type/league'
-						}
-					]
+							path: ':detail',
+							name: 'info/type/detail',
+						},
+					],
 				},
 			],
 		},

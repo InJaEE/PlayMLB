@@ -1,30 +1,46 @@
 <template>
-	<div class="card">
-		<div>
-			<img
-				class="player_img"
-				:src="`https://securea.mlb.com/mlb/images/players/head_shot/545361.jpg`"
-				alt="player_img"
-			/>
-			<div>
-				<span class="player team">
+	<div>
+		<div class="card" v-for="(item, index) in playerList" :key="index">
+			<div class="card_wrapper">
+				<div class="img_wrapper">
 					<img
-						src="https://www.mlbstatic.com/team-logos/team-cap-on-light/108.svg"
-						alt=""
+						class="player_img"
+						:src="
+							`https://securea.mlb.com/mlb/images/players/head_shot/${item.playerId}.jpg`
+						"
+						alt="player_img"
+						onerror="this.src='https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg'"
 					/>
-				</span>
-				<span class="player name">
-					Mike Trout
-				</span>
-				<span class="player">
-					스탯
-				</span>
+				</div>
+				<div class="data_wrapper">
+					<router-link
+						:to="`/info/player/${item.playerId}`"
+						@click.native="setPlayerDetail(item)"
+					>
+						<div class="name_wrapper">
+							<span class="player team">
+								<img
+									:src="
+										`https://www.mlbstatic.com/team-logos/team-cap-on-light/${item.teamId}.svg`
+									"
+									alt="team_img"
+								/>
+							</span>
+							<h2 class="player name">
+								{{ item.name }} #{{ item.backNumber || 'N/A' }}
+							</h2>
+						</div>
+					</router-link>
+					<div class="player_info">
+						<span>
+							포지션: {{ item.position || 'N/A' }} | 나이:
+							{{ item.age || 'N/A' }} | 출생:
+							{{ item.country || 'N/A' }}
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
-		<h3 v-for="(item, index) in playerList" :key="index">
-			{{ index + 1 }}
-			{{ item.이름 }}
-		</h3>
 	</div>
 </template>
 
@@ -33,33 +49,71 @@ export default {
 	props: {
 		playerList: Array,
 	},
+	methods: {
+		setPlayerDetail(item) {
+			console.log('#', item);
+
+			this.$store.commit('SET_PLAYER_DETAIL', item);
+		},
+	},
 };
 </script>
 
 <style scoped>
 .card {
+	border-radius: 20px 20px;
+	border: 1px solid black;
+	position: relative;
 	width: 50%;
 	margin: 0 auto;
+	overflow: hidden;
+	margin-bottom: 30px;
 }
+/*
+.card .card_wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 10%;
+}
+*/
 .player {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	display: block;
+	margin-left: 20px;
+	margin-top: 30px;
 }
 .name {
 	text-align: left;
-	padding-left: 10px;
 }
 .team {
 	width: 30px;
 	text-align: left;
 }
-.player_img {
-	width: 100px;
-	height: 150px;
+.img_wrapper {
+	width: 20%;
 	float: left;
-	border-radius: 20px 20px;
-	margin-right: 20px;
+}
+.data_wrapper {
+	width: 80%;
+	float: right;
+}
+.player_img {
+	display: flex;
+	width: 100%;
+	border-radius: 20px 0 0 20px;
+	min-height: 137px;
+	min-width: 50px;
+}
+.name_wrapper {
+	display: flex;
+}
+.player_info {
+	display: grid;
+	margin: 20px 20px;
+	font-size: 20px;
 }
 </style>

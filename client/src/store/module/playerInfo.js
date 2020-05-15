@@ -4,11 +4,13 @@ const state = {
 	searchWord: '',
 	playerIdList: [],
 	playersInfo: [],
+	playerDetail: {},
 };
 const getters = {
 	fetchedSearchWord: state => state.searchWord,
 	fetchedPlayerIdList: state => state.playerIdList,
 	fetchedPlayersInfo: state => state.playersInfo,
+	fetchedPlayerDetail: state => state.playerDetail,
 };
 const mutations = {
 	SET_SEARCH_WORD(state, data) {
@@ -19,6 +21,9 @@ const mutations = {
 	},
 	SET_PLAYERS_INFO(state, data) {
 		state.playersInfo = data;
+	},
+	SET_PLAYER_DETAIL(state, data) {
+		state.playerDetail = data;
 	},
 };
 const actions = {
@@ -48,15 +53,25 @@ const actions = {
 		try {
 			playerList.forEach(async v => {
 				const res = await getPlayerStat(v);
-
 				const data = res.data.player_info.queryResults.row;
 				const playerInfo = {
-					국적: data.birth_country,
-					이름: data.name_display_first_last,
-					나이: data.age,
-					데뷔날짜: data.pro_debut_data,
-					생일: data.birth_date,
-					등번호: data.jersey_number,
+					country: data.birth_country,
+					birthCity: data.birth_city,
+					name: data.name_display_first_last,
+					age: data.age,
+					twitter: data.twitter_id,
+					debutDate: data.pro_debut_data,
+					birthDate: data.birth_date,
+					backNumber: data.jersey_number,
+					playerId: data.player_id,
+					position: data.primary_position_txt,
+					batsHand: data.bats,
+					throwsHand: data.throws,
+					teamId: data.team_id,
+					teamName: data.team_name,
+					highSchool: data.high_school,
+					nickname: data.name_nick,
+					college: data.college,
 				};
 
 				result.push(playerInfo);

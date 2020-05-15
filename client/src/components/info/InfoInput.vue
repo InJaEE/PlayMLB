@@ -4,7 +4,7 @@
 			<input
 				type="text"
 				id="username"
-				placeholder="검색어"
+				placeholder="선수 이름을 입력해주세요."
 				class="input_row"
 				@focus="focusInputBox"
 				@blur="focusInputBox"
@@ -28,6 +28,11 @@ export default {
 	},
 	methods: {
 		async search() {
+			if (this.searchWord.length < 3) {
+				alert('검색어는 3글자 이상 입력해주세요.');
+				return;
+			}
+
 			this.$store.commit('SET_SEARCH_WORD', this.searchWord);
 			await this.$store.dispatch(
 				'FETCH_PLAYER_ID',
@@ -38,7 +43,10 @@ export default {
 				'FETCH_PLAYERS_DATA',
 				this.$store.getters.fetchedPlayerIdList,
 			);
-			this.$router.push({ query: { keyword: this.searchWord } });
+			this.$router.push({
+				path: '/info/player',
+				query: { keyword: this.searchWord },
+			});
 		},
 		focusInputBox() {
 			this.isSearchFocus = !this.isSearchFocus;
