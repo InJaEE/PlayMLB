@@ -21,10 +21,11 @@ export default {
 	},
 	methods: {
 		moveToTwitter(twitterURL) {
-			console.log(`www.twitter.com/${twitterURL}`);
-			//const path = this.$router.resolve(`/www.twitter.com/${twitterURL}`);
 			window.open(`www.twitter.com/${twitterURL}`, '_blank');
 		},
+	},
+	created() {
+		console.log('created');
 	},
 };
 </script>

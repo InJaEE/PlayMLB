@@ -51,8 +51,6 @@ export default {
 	},
 	methods: {
 		setPlayerDetail(item) {
-			console.log('#', item);
-
 			this.$store.commit('SET_PLAYER_DETAIL', item);
 		},
 	},

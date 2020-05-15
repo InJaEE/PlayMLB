@@ -30,4 +30,23 @@ function getHitterRank(season, recordType) {
 	);
 }
 
-export { getAllClub, getPlayers, getPlayerStat, getPitcherRank, getHitterRank };
+function getHitterSeasonStat(season, playerId) {
+	return instance.get(
+		`/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='R'&season='${season}'&player_id='${playerId}'`,
+	);
+}
+function getPitcherSeasonStat(season, playerId) {
+	return instance.get(
+		`/named.sport_pitching_tm.bam?league_list_id='mlb'&game_type='R'&season='${season}'&player_id='${playerId}'`,
+	);
+}
+
+export {
+	getAllClub,
+	getPlayers,
+	getPlayerStat,
+	getPitcherRank,
+	getHitterRank,
+	getHitterSeasonStat,
+	getPitcherSeasonStat,
+};
