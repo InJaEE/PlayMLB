@@ -13,10 +13,7 @@
 					/>
 				</div>
 				<div class="data_wrapper">
-					<router-link
-						:to="`/info/player/${item.playerId}`"
-						@click.native="setPlayerDetail(item)"
-					>
+					<router-link :to="`/info/player/${item.playerId}`">
 						<div class="name_wrapper">
 							<span class="player team">
 								<img
@@ -49,11 +46,6 @@ export default {
 	props: {
 		playerList: Array,
 	},
-	methods: {
-		setPlayerDetail(item) {
-			this.$store.commit('SET_PLAYER_DETAIL', item);
-		},
-	},
 };
 </script>
 
@@ -67,15 +59,6 @@ export default {
 	overflow: hidden;
 	margin-bottom: 30px;
 }
-/*
-.card .card_wrapper {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 10%;
-}
-*/
 .player {
 	overflow: hidden;
 	text-overflow: ellipsis;

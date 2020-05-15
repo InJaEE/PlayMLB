@@ -32,14 +32,15 @@ export default {
 				alert('검색어는 3글자 이상 입력해주세요.');
 				return;
 			}
-
+			// 검색어 store에 입력
 			this.$store.commit('SET_SEARCH_WORD', this.searchWord);
+			// 검색어로 선수ID를 검색하여 store에 저장
 			await this.$store.dispatch(
 				'FETCH_PLAYER_ID',
 				this.$store.getters.fetchedSearchWord,
 			);
-
-			this.$store.dispatch(
+			// store에 저장된 선수ID로 선수들의 데이터를 store에 저장
+			await this.$store.dispatch(
 				'FETCH_PLAYERS_DATA',
 				this.$store.getters.fetchedPlayerIdList,
 			);
