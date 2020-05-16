@@ -121,4 +121,10 @@ li {
 	margin: 3px 3px;
 	text-align: left;
 }
+a:visited {
+	color: blue;
+}
+a:active {
+	color: blue;
+}
 </style>

@@ -11,7 +11,9 @@
 						"
 						:alt="item[1].name_display_full"
 					/><br />
-					<h4>{{ item[1].name_display_full }}</h4>
+					<h4 @click="moveToClubPage(item[1].name)" class="urlLink">
+						{{ item[1].name_display_full }}
+					</h4>
 				</div>
 			</li>
 		</ul>
@@ -22,6 +24,12 @@
 export default {
 	props: {
 		teamList: Array,
+	},
+	methods: {
+		moveToClubPage(url) {
+			url = url.toLowerCase().replace(/(\s*)/g, '');
+			window.open(`https://www.mlb.com/${url}`, '_blank');
+		},
 	},
 };
 </script>
@@ -37,5 +45,9 @@ li {
 .card {
 	margin: 0 10px;
 	width: 100%;
+}
+.urlLink {
+	cursor: pointer;
+	color: #2b2ba5;
 }
 </style>
