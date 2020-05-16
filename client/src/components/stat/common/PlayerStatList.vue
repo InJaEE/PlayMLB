@@ -33,9 +33,11 @@
 							alt=""
 						/>
 						<div>
-							<span class="player name">
-								{{ item.name_display_first_last }}</span
-							>
+							<router-link :to="`/info/player/${item.player_id}`">
+								<span class="player name">
+									{{ item.name_display_first_last }}</span
+								>
+							</router-link>
 							<span class="player team">{{ item.team_name }}</span>
 						</div>
 					</div>

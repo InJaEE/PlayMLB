@@ -84,6 +84,7 @@ export default {
 		},
 	},
 	created() {
+		this.$store.commit('RESET_PLAYER_DETAIL');
 		this.$store.dispatch('FETCH_PLAYER_DATA', this.$route.params.detail);
 	},
 };

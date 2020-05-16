@@ -40,13 +40,18 @@ export default {
 	async created() {
 		this.$store.commit('RESET_PLAYER_LIST');
 		// 새로고침했을때 query값으로 데이터 불러오기
-		if (!isEmpty(this.$route.query)) {
-			const { keyword } = this.$route.query;
-			await this.$store.dispatch('FETCH_PLAYER_ID', keyword);
-			await this.$store.dispatch(
-				'FETCH_PLAYERS_DATA',
-				this.$store.getters.fetchedPlayerIdList,
-			);
+		try {
+			if (!isEmpty(this.$route.query)) {
+				const { keyword } = this.$route.query;
+				await this.$store.dispatch('FETCH_PLAYER_ID', keyword);
+				await this.$store.dispatch(
+					'FETCH_PLAYERS_DATA',
+					this.$store.getters.fetchedPlayerIdList,
+				);
+			}
+		} catch (err) {
+			//console.error(err);
+			this.$router.push('/info/player');
 		}
 	},
 };
