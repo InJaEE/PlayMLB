@@ -152,4 +152,10 @@ td {
 	height: 25px;
 	float: left;
 }
+a:visited {
+	color: blue;
+}
+a:active {
+	color: blue;
+}
 </style>
