@@ -61,8 +61,6 @@ export default {
 			const filteredLeague = Object.entries(storeAllClub).filter(v => {
 				return v[1].division_abbrev.toLowerCase() === league;
 			});
-			console.log(filteredLeague);
-
 			return filteredLeague;
 		},
 	},
