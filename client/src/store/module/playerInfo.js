@@ -46,6 +46,9 @@ const mutations = {
 		state.playerIdList = [];
 		state.playersInfo = [];
 	},
+	RESET_PLAYER_DETAIL(state) {
+		state.playerDetail = [];
+	},
 };
 const actions = {
 	// 검색 후 검색결과의 선수ID를 담아둔다.
