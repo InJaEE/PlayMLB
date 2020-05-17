@@ -34,6 +34,7 @@ export default {
 				this.errLog = '검색어는 3글자 이상 입력해주세요.';
 				return;
 			}
+			this.errLog = '';
 			// 로딩
 			this.$store.commit('SET_LOADING', true);
 

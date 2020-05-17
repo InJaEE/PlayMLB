@@ -1,9 +1,6 @@
 <template>
 	<div>
-		<div v-if="loadingCheck">
-			<loading-spinner></loading-spinner>
-		</div>
-		<div class="player_card" v-else>
+		<div class="player_card">
 			<div class="player_img">
 				<img
 					:src="
@@ -75,11 +72,7 @@
 </template>
 
 <script>
-import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 export default {
-	components: {
-		LoadingSpinner,
-	},
 	computed: {
 		loadingCheck() {
 			return this.$store.getters.getLoading;
@@ -96,12 +89,20 @@ export default {
 			e.target.src =
 				'https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg';
 		},
+		async createdLogic() {
+			this.$store.commit('SET_LOADING', true);
+			this.$store.commit('RESET_PLAYER_DETAIL');
+			await this.$store.dispatch(
+				'FETCH_PLAYER_DATA',
+				this.$route.params.detail,
+			);
+			this.$store.commit('SET_LOADING', false);
+		},
 	},
-	async created() {
-		this.$store.commit('SET_LOADING', true);
-		this.$store.commit('RESET_PLAYER_DETAIL');
-		await this.$store.dispatch('FETCH_PLAYER_DATA', this.$route.params.detail);
-		this.$store.commit('SET_LOADING', false);
+	created() {
+		console.log('created');
+
+		this.createdLogic();
 	},
 };
 </script>
@@ -111,7 +112,9 @@ export default {
 	overflow: hidden;
 	border: 1px solid #cfcfcf;
 	padding: 10px 20px;
+	margin: 0 auto;
 	margin-top: 10px;
+	width: 50%;
 }
 .player_card .player_img {
 	float: left;
