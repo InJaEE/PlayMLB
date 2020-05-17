@@ -9,6 +9,9 @@ function formatLb(lb) {
 }
 
 function formatDate(value) {
+	if (value === '') {
+		return '-';
+	}
 	const date = new Date(value);
 	const year = date.getFullYear();
 	let month = date.getMonth() + 1;

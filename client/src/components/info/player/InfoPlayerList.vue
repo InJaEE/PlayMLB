@@ -1,6 +1,9 @@
 <template>
 	<div>
-		<div>
+		<div v-if="isLoading">
+			<loading-spinner></loading-spinner>
+		</div>
+		<div v-else>
 			<info-input></info-input>
 			<info-player-card
 				:playerList="searchResult"
@@ -15,26 +18,29 @@
 import InfoInput from '../InfoInput.vue';
 import InfoPlayerCard from './InfoPlayerCard.vue';
 import InfoPlayerDetail from './InfoPlayerDetail.vue';
+import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 import { isEmpty } from '@/utils/check';
 export default {
 	components: {
 		InfoInput,
 		InfoPlayerCard,
 		InfoPlayerDetail,
+		LoadingSpinner,
 	},
-
+	data() {
+		return {
+			isLoading: false,
+		};
+	},
 	computed: {
+		loadingCheck() {
+			return this.$store.getters.getLoading;
+		},
 		isList() {
 			return this.$route.params.detail === undefined ? true : false;
 		},
 		searchResult() {
 			return this.$store.getters.fetchedPlayersInfo;
-		},
-	},
-	methods: {
-		toggleLoading() {
-			console.log(this.isLoading);
-			this.isLoading = !this.isLoading;
 		},
 	},
 	async created() {
@@ -50,7 +56,6 @@ export default {
 				);
 			}
 		} catch (err) {
-			//console.error(err);
 			this.$router.push('/info/player');
 		}
 	},

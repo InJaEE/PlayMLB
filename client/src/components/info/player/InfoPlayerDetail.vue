@@ -1,13 +1,16 @@
 <template>
 	<div>
-		<div class="player_card">
+		<div v-if="loadingCheck">
+			<loading-spinner></loading-spinner>
+		</div>
+		<div class="player_card" v-else>
 			<div class="player_img">
 				<img
 					:src="
 						`https://securea.mlb.com/mlb/images/players/head_shot/${playerDetail.playerId}.jpg`
 					"
 					:alt="playerDetail.name"
-					onerror="this.src='https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg'"
+					@error="imgError"
 				/>
 			</div>
 			<ul>
@@ -72,8 +75,15 @@
 </template>
 
 <script>
+import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 export default {
+	components: {
+		LoadingSpinner,
+	},
 	computed: {
+		loadingCheck() {
+			return this.$store.getters.getLoading;
+		},
 		playerDetail() {
 			return this.$store.getters.fetchedPlayerDetail;
 		},
@@ -82,10 +92,16 @@ export default {
 		moveToTwitter(twitterURL) {
 			window.open(`www.twitter.com/${twitterURL}`, '_blank');
 		},
+		imgError(e) {
+			e.target.src =
+				'https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg';
+		},
 	},
-	created() {
+	async created() {
+		this.$store.commit('SET_LOADING', true);
 		this.$store.commit('RESET_PLAYER_DETAIL');
-		this.$store.dispatch('FETCH_PLAYER_DATA', this.$route.params.detail);
+		await this.$store.dispatch('FETCH_PLAYER_DATA', this.$route.params.detail);
+		this.$store.commit('SET_LOADING', false);
 	},
 };
 </script>
