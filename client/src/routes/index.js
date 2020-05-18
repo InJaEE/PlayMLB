@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from '@/store';
 
 Vue.use(VueRouter);
 
@@ -38,6 +39,14 @@ const router = new VueRouter({
 						{
 							path: ':detail',
 							name: 'info/type/detail',
+							// beforeEnter: (to, from, next) => {
+							// 	const playerId = to.params.detail;
+							// 	if (playerId !== 'al' && playerId !== 'nl') {
+							// 		store.commit('RESET_PLAYER_DETAIL');
+							// 		store.dispatch('FETCH_PLAYER_DATA', playerId);
+							// 	}
+							// 	next();
+							// },
 						},
 					],
 				},
@@ -60,6 +69,13 @@ const router = new VueRouter({
 			component: () => import('@/views/AboutView.vue'),
 		},
 	],
+});
+
+router.beforeEach((to, from, next) => {
+	//console.log('#', to);
+	//console.log('$', from);
+	//console.log('%', next);
+	next();
 });
 
 export default router;

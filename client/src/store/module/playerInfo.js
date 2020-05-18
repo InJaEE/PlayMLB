@@ -4,6 +4,7 @@ import {
 	getHitterSeasonStat,
 	getPitcherSeasonStat,
 	getPlayer,
+	getHitterCareerStat,
 } from '@/api/statApi';
 import {
 	formatDate,
@@ -17,14 +18,14 @@ const state = {
 	playerIdList: [],
 	playersInfo: [],
 	playerDetail: [],
-	playerSesonStat: [],
+	playerSeasonStat: [],
 };
 const getters = {
 	fetchedSearchWord: state => state.searchWord,
 	fetchedPlayerIdList: state => state.playerIdList,
 	fetchedPlayersInfo: state => state.playersInfo,
 	fetchedPlayerDetail: state => state.playerDetail,
-	fetchedPlayerSesonStat: state => state.playerSesonStat,
+	fetchedPlayerSeasonStat: state => state.playerSeasonStat,
 };
 const mutations = {
 	SET_SEARCH_WORD(state, data) {
@@ -144,31 +145,78 @@ const actions = {
 		return data;
 	},
 
-	FETCH_HITTER_SEASON_STAT({ commit }, { playerId, to, from }) {
+	async FETCH_HITTER_SEASON_STAT({ commit, dispatch }, { playerId, from, to }) {
 		const result = [];
 		try {
-			for (let i = to; i <= from; i++) {
-				const res = getHitterSeasonStat(i, playerId);
+			for (let i = from; i <= to; i++) {
+				const res = await getHitterSeasonStat(i, playerId);
 				const data = res.data.sport_hitting_tm.queryResults.row;
+				if (data === undefined) continue;
 				result.push(data);
 			}
+			const careerStat = await dispatch('FETCH_HITTER_CAREER_STAT', playerId);
+			result.push(careerStat);
 			commit('SET_PLAYER_SEASON_STAT', result);
 		} catch (err) {
 			console.error(err);
 		}
 	},
-	FETCH_PITCHER_SEASON_STAT({ commit }, { playerId, to, from }) {
+
+	// FIXME: 타자처럼 커리어 전체 스탯을 가져오는 API 사용해도됨
+	async FETCH_PITCHER_SEASON_STAT({ commit }, { playerId, from, to }) {
 		const result = [];
+		const statAvg = {
+			season: 'Total',
+			team_short: '-',
+			w: 0,
+			l: 0,
+			sv: 0,
+			er: 0,
+			era: 0,
+			so: 0,
+			ip: 0,
+			h: 0,
+			hr: 0,
+			bb: 0,
+			g: 0,
+		};
 		try {
-			for (let i = to; i <= from; i++) {
-				const res = getPitcherSeasonStat(i, playerId);
-				const data = res.data.sport_pitching_tm.queryResults.row;
+			for (let i = from; i <= to; i++) {
+				const res = await getPitcherSeasonStat(i, playerId);
+				let data = res.data.sport_pitching_tm.queryResults.row;
+				console.log(data);
+
+				if (data === undefined) continue;
+				//////////////////////////////////
+				statAvg.w += Number(data.w);
+				statAvg.l += Number(data.l);
+				statAvg.sv += Number(data.sv);
+				statAvg.er += Number(data.er);
+				statAvg.so += Number(data.so);
+				statAvg.ip += Number(data.ip);
+				statAvg.h += Number(data.h);
+				statAvg.hr += Number(data.hr);
+				statAvg.bb += Number(data.bb);
+				statAvg.g += Number(data.g);
+				//////////////////////////////////
 				result.push(data);
 			}
+
+			statAvg.era = ((statAvg.er * 9) / statAvg.ip).toFixed(2);
+
+			result.push(statAvg);
 			commit('SET_PLAYER_SEASON_STAT', result);
 		} catch (err) {
 			console.error(err);
 		}
+	},
+	async FETCH_HITTER_CAREER_STAT(store, playerId) {
+		const res = await getHitterCareerStat(playerId);
+		const data = res.data.sport_career_hitting.queryResults.row;
+
+		data.season = 'Total';
+		data.team_short = '-';
+		return data;
 	},
 };
 

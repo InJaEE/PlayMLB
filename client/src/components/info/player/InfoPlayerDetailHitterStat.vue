@@ -1,0 +1,106 @@
+<template>
+	<div>
+		<div class="stat_wrapper">
+			<table class="table">
+				<thead class="tableHeader">
+					<tr>
+						<th v-for="item in thList" :key="item">
+							<span>{{ item }}</span>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item, index) in stat" :key="index">
+						<td>{{ item.season }}</td>
+						<td>{{ item.team_short }}</td>
+						<td>{{ item.ab }}</td>
+						<td>{{ item.avg }}</td>
+						<td>{{ item.rbi }}</td>
+						<td>{{ item.hr }}</td>
+						<td>{{ item.sb }}</td>
+						<td>{{ item.r }}</td>
+						<td>{{ item.h }}</td>
+						<td>{{ item.d }}</td>
+						<td>{{ item.t }}</td>
+						<td>{{ item.bb }}</td>
+						<td>{{ item.so }}</td>
+						<td>{{ item.obp }}</td>
+						<td>{{ item.g }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</template>
+
+<script>
+export default {
+	props: ['stat'],
+	data() {
+		return {
+			thList: [
+				'시즌',
+				'팀',
+				'타수',
+				'타율',
+				'타점',
+				'홈런',
+				'도루',
+				'득점',
+				'안타',
+				'2루타',
+				'3루타',
+				'볼넷',
+				'삼진',
+				'출루율',
+				'경기수',
+			],
+		};
+	},
+	// async created() {
+	// 	console.log('@', debutDate);
+
+	// 	const playerId = this.$route.params.detail;
+	// 	const debutDate = new Date(
+	// 		// this.$store.getters.fetchedPlayerDetail.debutDate,
+	// 		this.debutDate,
+	// 	).getFullYear();
+	// 	console.log(
+	// 		'#DebutDate',
+	// 		this.$store.getters.fetchedPlayerDetail.debutDate,
+	// 	);
+	// 	console.log('DebutDate', debutDate);
+
+	// 	await this.$store.dispatch('FETCH_HITTER_SEASON_STAT', {
+	// 		playerId,
+	// 		//from: 2015,
+	// 		from: debutDate,
+	// 		to: new Date().getFullYear() - 1,
+	// 		//to: new Date().getFullYear() - 1,
+	// 	});
+
+	// 	this.seasonStat = this.$store.getters.fetchedPlayerSesonStat;
+	// },
+};
+</script>
+
+<style scoped>
+.stat_wrapper {
+	width: 70%;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+.table {
+	border-collapse: collapse;
+	width: 100%;
+}
+td {
+	height: 50px;
+	border-bottom: 1px solid #f4f4f4;
+}
+.tableHeader {
+	background-color: #f7f7f7;
+	border-top: 1px solid #f4f4f4;
+	border-bottom: 1px solid gray;
+}
+</style>
