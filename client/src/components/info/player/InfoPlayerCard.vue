@@ -51,7 +51,6 @@ export default {
 
 <style scoped>
 .card {
-	border-radius: 20px 20px;
 	border: 1px solid black;
 	position: relative;
 	width: 50%;
@@ -85,12 +84,13 @@ export default {
 .player_img {
 	display: flex;
 	width: 100%;
-	border-radius: 20px 0 0 20px;
+	padding: 10px 20px;
 	min-height: 137px;
 	min-width: 50px;
 }
 .name_wrapper {
 	display: flex;
+	margin-left: 30px;
 }
 .player_info {
 	display: grid;

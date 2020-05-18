@@ -141,6 +141,7 @@ const actions = {
 		};
 		result.push(playerInfo);
 		commit('SET_PLAYER_DETAIL', result[0]);
+		return data;
 	},
 
 	FETCH_HITTER_SEASON_STAT({ commit }, { playerId, to, from }) {
