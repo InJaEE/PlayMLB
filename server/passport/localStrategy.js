@@ -11,4 +11,4 @@ const local = function(passport){
     }));
 };
 
-module.exports = local;2
+module.exports = local;

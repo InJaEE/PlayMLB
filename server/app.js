@@ -19,7 +19,7 @@ mongoose.connect(
     .then(() => console.log('DataBase Connected!!!'))
     .catch(err => console.error(err));
 
-app.set('port', 8008);
+app.set('port', 3000);
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));

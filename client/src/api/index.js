@@ -4,4 +4,8 @@ const instance = axios.create({
 	baseURL: 'https://lookup-service-prod.mlb.com/json/',
 });
 
-export { instance };
+const userInstance = axios.create({
+	baseURL: 'http://localhost:3000/',
+});
+
+export { instance, userInstance };

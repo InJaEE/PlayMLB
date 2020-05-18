@@ -184,7 +184,6 @@ const actions = {
 			for (let i = from; i <= to; i++) {
 				const res = await getPitcherSeasonStat(i, playerId);
 				let data = res.data.sport_pitching_tm.queryResults.row;
-				console.log(data);
 
 				if (data === undefined) continue;
 				//////////////////////////////////

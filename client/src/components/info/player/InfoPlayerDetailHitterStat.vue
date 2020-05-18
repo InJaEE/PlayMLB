@@ -57,30 +57,6 @@ export default {
 			],
 		};
 	},
-	// async created() {
-	// 	console.log('@', debutDate);
-
-	// 	const playerId = this.$route.params.detail;
-	// 	const debutDate = new Date(
-	// 		// this.$store.getters.fetchedPlayerDetail.debutDate,
-	// 		this.debutDate,
-	// 	).getFullYear();
-	// 	console.log(
-	// 		'#DebutDate',
-	// 		this.$store.getters.fetchedPlayerDetail.debutDate,
-	// 	);
-	// 	console.log('DebutDate', debutDate);
-
-	// 	await this.$store.dispatch('FETCH_HITTER_SEASON_STAT', {
-	// 		playerId,
-	// 		//from: 2015,
-	// 		from: debutDate,
-	// 		to: new Date().getFullYear() - 1,
-	// 		//to: new Date().getFullYear() - 1,
-	// 	});
-
-	// 	this.seasonStat = this.$store.getters.fetchedPlayerSesonStat;
-	// },
 };
 </script>
 
@@ -89,6 +65,7 @@ export default {
 	width: 70%;
 	margin: 0 auto;
 	margin-top: 20px;
+	margin-bottom: 50px;
 }
 .table {
 	border-collapse: collapse;

@@ -59,6 +59,7 @@ export default {
 	width: 70%;
 	margin: 0 auto;
 	margin-top: 20px;
+	margin-bottom: 50px;
 }
 .table {
 	border-collapse: collapse;
