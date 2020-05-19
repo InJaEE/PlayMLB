@@ -1,5 +1,5 @@
 <template>
-	<div>About</div>
+	<div>https://github.com/InJaEE/PlayMLB</div>
 </template>
 
 <script>

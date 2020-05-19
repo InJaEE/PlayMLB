@@ -1,11 +1,11 @@
 import { userInstance } from './';
 
-function registerUser(userData) {
-	return userInstance('signup', userData);
+function signupUser(userData) {
+	return userInstance.post('signup', userData);
 }
 
 function loginUser(userData) {
-	return userInstance('login', userData);
+	return userInstance.post('login', userData);
 }
 
-export { registerUser, loginUser };
+export { signupUser, loginUser };
