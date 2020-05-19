@@ -151,7 +151,15 @@ const actions = {
 			for (let i = from; i <= to; i++) {
 				const res = await getHitterSeasonStat(i, playerId);
 				const data = res.data.sport_hitting_tm.queryResults.row;
+
 				if (data === undefined) continue;
+				if (data.length > 1) {
+					data.forEach(v => {
+						result.push(v);
+					});
+					continue;
+				}
+
 				result.push(data);
 			}
 			const careerStat = await dispatch('FETCH_HITTER_CAREER_STAT', playerId);
@@ -186,6 +194,12 @@ const actions = {
 				let data = res.data.sport_pitching_tm.queryResults.row;
 
 				if (data === undefined) continue;
+				if (data.length > 1) {
+					data.forEach(v => {
+						result.push(v);
+					});
+					continue;
+				}
 				//////////////////////////////////
 				statAvg.w += Number(data.w);
 				statAvg.l += Number(data.l);
