@@ -32,35 +32,15 @@
 					<button type="submit" class="btn">로그인</button>
 				</div>
 			</form>
-			<div>
-				<!--<button class="kakaoBtn" @click="kakaoLogin">카카오로 로그인</button>-->
-				<KakaoLogin
-					:api-key="kakaoKey"
-					image="kakao_account_login_btn_medium_wide"
-					:on-success="onSuccess"
-					:on-failure="onFailure"
-				/>
-			</div>
 		</div>
+		<a id="kakao-login-btn"></a>
 	</div>
 </template>
 
 <script>
 import { loginUser } from '@/api/userApi';
-import KakaoLogin from 'vue-kakao-login';
 
-let onSuccess = async data => {
-	console.log(data);
-	console.log('success');
-};
-let onFailure = data => {
-	console.log(data);
-	console.log('failure');
-};
 export default {
-	components: {
-		KakaoLogin,
-	},
 	data() {
 		return {
 			kakaoKey: process.env.VUE_APP_KAKAO_JS_KEY,
@@ -72,8 +52,6 @@ export default {
 		};
 	},
 	methods: {
-		onSuccess,
-		onFailure,
 		focusIdInputBox() {
 			this.isIdFocus = !this.isIdFocus;
 		},
@@ -96,9 +74,33 @@ export default {
 			const res = await loginUser(userData);
 			console.log(res);
 		},
-		kakaoLogin() {
-			alert('준비중입니다.');
-		},
+	},
+	mounted() {
+		const vm = this;
+		if (!Kakao.isInitialized()) {
+			Kakao.init(this.kakaoKey);
+		}
+
+		Kakao.Auth.createLoginButton({
+			container: '#kakao-login-btn',
+			success: function(authObj) {
+				console.log('#', authObj);
+
+				Kakao.API.request({
+					url: '/v2/user/me',
+					success(res) {
+						console.log(res);
+						vm.$router.push('/');
+					},
+					fail(err) {
+						console.error(JSON.stringify(err));
+					},
+				});
+			},
+			fail(err) {
+				console.error('failed to login: ', JSON.stringify(err));
+			},
+		});
 	},
 };
 </script>

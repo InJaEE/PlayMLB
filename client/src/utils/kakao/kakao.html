@@ -1,43 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <!-- <script>
-        console.log(Kakao);
-        console.log(Kakao.isInitialized());
-        Kakao.init('');
-        
-        console.log(Kakao.isInitialized());
-        console.log(Kakao.Auth);
-        
-    </script> -->
-
-
-
-<a id="custom-login-btn" href="javascript:loginWithKakao()">
-    <img
-      src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
-      width="222"
-    />
-  </a>
-  <script type="text/javascript">
-    // input your appkey
-    Kakao.init('')
-    function loginWithKakao() {
-      Kakao.Auth.login({
-        success: function(authObj) {
-          alert(JSON.stringify(authObj))
+<a id="kakao-login-btn"></a>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript">
+  // input your appkey
+  Kakao.init('c089c8172def97eb00c07217cae17495')
+  console.log("ASd");
+  
+  Kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function(authObj) {
+      Kakao.API.request({
+        url: '/v2/user/me',
+        success: function(res) {
+          alert(JSON.stringify(res))
         },
-        fail: function(err) {
-          alert(JSON.stringify(err))
+        fail: function(error) {
+          alert(
+            'login success, but failed to request user information: ' +
+              JSON.stringify(error)
+          )
         },
       })
-    }
-  </script>
-</body>
-</html>
+    },
+    fail: function(err) {
+      alert('failed to login: ' + JSON.stringify(err))
+    },
+  })
+</script>
