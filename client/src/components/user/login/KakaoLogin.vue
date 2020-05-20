@@ -25,12 +25,9 @@ export default {
 		Kakao.Auth.createLoginButton({
 			container: '#kakao-login-btn',
 			success(authObj) {
-				console.log('#', authObj);
-
 				Kakao.API.request({
 					url: '/v2/user/me',
 					success(res) {
-						console.log(res);
 						vm.kakaoLogin(res);
 					},
 					fail(err) {

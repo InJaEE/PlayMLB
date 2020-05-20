@@ -62,7 +62,15 @@ const actions = {
 		console.log('!!!', userData);
 
 		const res = await kakaoLoginUser(userData);
-		console.log(res);
+		console.log('***', res);
+		const user = {
+			username: res.data.user.username,
+			nickname: res.data.user.nickname,
+			token: res.data.token,
+		};
+		commit('SET_USER_DATA', user);
+		saveAuthToCookie(res.data.token);
+		saveUserToCookie(res.data.user.nickname);
 	},
 };
 export default {

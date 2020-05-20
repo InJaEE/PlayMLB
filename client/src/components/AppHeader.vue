@@ -41,6 +41,9 @@
 			</div>
 			<div class="navigations">
 				<template v-if="this.$store.getters.isLogin">
+					<span class="user_name">
+						{{ this.$store.getters.getUserData.nickname }}님
+					</span>
 					<span>
 						<router-link to="/userinfo">회원정보</router-link>
 					</span>
@@ -112,5 +115,8 @@ img {
 }
 .selected {
 	border-bottom: 5px solid #057aff;
+}
+.user_name {
+	font-size: 12px;
 }
 </style>
