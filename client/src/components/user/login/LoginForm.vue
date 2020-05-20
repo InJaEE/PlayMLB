@@ -33,17 +33,18 @@
 				</div>
 			</form>
 		</div>
-		<a id="kakao-login-btn"></a>
+		<kakao-login></kakao-login>
 	</div>
 </template>
 
 <script>
-import { loginUser } from '@/api/userApi';
-
+import KakaoLogin from './KakaoLogin.vue';
 export default {
+	components: {
+		KakaoLogin,
+	},
 	data() {
 		return {
-			kakaoKey: process.env.VUE_APP_KAKAO_JS_KEY,
 			username: '',
 			password: '',
 			isIdFocus: false,
@@ -71,36 +72,13 @@ export default {
 				username,
 				password,
 			};
-			const res = await loginUser(userData);
-			console.log(res);
+			try {
+				await this.$store.dispatch('LOGIN_USER', userData);
+				this.$router.push('/');
+			} catch (err) {
+				alert('로그인 실패');
+			}
 		},
-	},
-	mounted() {
-		const vm = this;
-		if (!Kakao.isInitialized()) {
-			Kakao.init(this.kakaoKey);
-		}
-
-		Kakao.Auth.createLoginButton({
-			container: '#kakao-login-btn',
-			success: function(authObj) {
-				console.log('#', authObj);
-
-				Kakao.API.request({
-					url: '/v2/user/me',
-					success(res) {
-						console.log(res);
-						vm.$router.push('/');
-					},
-					fail(err) {
-						console.error(JSON.stringify(err));
-					},
-				});
-			},
-			fail(err) {
-				console.error('failed to login: ', JSON.stringify(err));
-			},
-		});
 	},
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<img src="@/assets/scherzer.jpg" alt="" />
+	<img class="contents" src="@/assets/scherzer.jpg" alt="" />
 </template>
 
 <script>

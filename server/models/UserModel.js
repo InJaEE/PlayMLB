@@ -5,6 +5,7 @@ const user = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
+        unique: true,
     },
     password: {
         type: String,
@@ -13,9 +14,11 @@ const user = new mongoose.Schema({
     nickname: {
         type: String,
         required: true,
+        unique: true,
     },
     provider: {
         type: String,
+        default: 'local',
     },
     snsId: {
         type: String,

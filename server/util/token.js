@@ -9,7 +9,6 @@ const newToken = user => {
     });
 };
 
-
 module.exports = {
     newToken,
 }

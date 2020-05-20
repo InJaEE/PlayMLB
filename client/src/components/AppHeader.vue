@@ -40,7 +40,15 @@
 				</div>
 			</div>
 			<div class="navigations">
-				<template>
+				<template v-if="this.$store.getters.isLogin">
+					<span>
+						<router-link to="/userinfo">회원정보</router-link>
+					</span>
+					<span @click="logout">
+						<a style="cursor:pointer">로그아웃</a>
+					</span>
+				</template>
+				<template v-else>
 					<router-link to="/login">로그인</router-link>
 					<router-link to="/signup">회원가입</router-link>
 				</template>
@@ -55,6 +63,12 @@ export default {
 		toggleMenu() {
 			const name = this.$route.name === null ? '' : this.$route.name;
 			return name;
+		},
+	},
+	methods: {
+		logout() {
+			this.$store.commit('LOGOUT_USER');
+			alert('로그아웃 되었습니다.');
 		},
 	},
 };

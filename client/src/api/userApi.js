@@ -8,4 +8,8 @@ function loginUser(userData) {
 	return userInstance.post('login', userData);
 }
 
-export { signupUser, loginUser };
+function kakaoLoginUser(userData) {
+	return userInstance.post('kakao', userData);
+}
+
+export { signupUser, loginUser, kakaoLoginUser };
