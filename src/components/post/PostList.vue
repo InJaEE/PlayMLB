@@ -1,6 +1,11 @@
 <template>
 	<div>
-		<a-table :columns="columns" :data-source="posts"></a-table>
+		<a-table
+			:columns="columns"
+			:data-source="posts"
+			:loding="this.$store.getters.getLoding"
+			:expandRowByClick="true"
+		></a-table>
 	</div>
 </template>
 
@@ -11,19 +16,22 @@ const columns = [
 		dataIndex: 'key',
 		width: '10%',
 		key: 'number',
+		align: 'center',
 	},
 	{
 		title: '제목',
 		dataIndex: 'title',
 		width: '40%',
 		key: 'title',
-		//scopedSlots: { customRender: 'title' },
+		align: 'center',
+		scopedSlots: { customRender: '<a href="/test></a>' },
 	},
 	{
 		title: '조회수',
 		dataIndex: 'views',
 		width: '10%',
 		key: 'views',
+		align: 'center',
 		//scopedSlots: { customRender: 'view' },
 	},
 	{
@@ -31,6 +39,7 @@ const columns = [
 		dataIndex: 'writer',
 		width: '10%',
 		key: 'writer',
+		align: 'center',
 		//scopedSlots: { customRender: 'writer' },
 	},
 	{
@@ -38,6 +47,7 @@ const columns = [
 		dataIndex: 'created',
 		width: '10%',
 		key: 'created',
+		align: 'center',
 		//scopedSlots: { customRender: 'created' },
 	},
 	{
@@ -45,6 +55,7 @@ const columns = [
 		dataIndex: 'recommend',
 		width: '10%',
 		key: 'recommend',
+		align: 'center',
 		//scopedSlots: { customRender: 'recommend' },
 	},
 ];
@@ -65,7 +76,7 @@ export default {
 			posts.forEach(v => {
 				const obj = {
 					key: v.number,
-					title: v.title,
+					title: `<a href="/test">${v.title}</a>`,
 					views: v.views,
 					writer: v.writer,
 					created: v.createdAt,
