@@ -67,10 +67,10 @@ const router = new VueRouter({
 				auth: true,
 			},
 		},
-		{
-			path: '*',
-			redirect: '/',
-		},
+		// {
+		// 	path: '*',
+		// 	redirect: '/',
+		// },
 	],
 });
 

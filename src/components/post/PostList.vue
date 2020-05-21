@@ -3,13 +3,13 @@
 		<a-table
 			:columns="columns"
 			:data-source="posts"
-			:loding="this.$store.getters.getLoding"
-			:expandRowByClick="true"
+			:customRow="customRow"
 		></a-table>
 	</div>
 </template>
 
 <script>
+import { formatFullDate } from '@/utils/filters';
 const columns = [
 	{
 		title: '번호',
@@ -24,7 +24,6 @@ const columns = [
 		width: '40%',
 		key: 'title',
 		align: 'center',
-		scopedSlots: { customRender: '<a href="/test></a>' },
 	},
 	{
 		title: '조회수',
@@ -32,7 +31,6 @@ const columns = [
 		width: '10%',
 		key: 'views',
 		align: 'center',
-		//scopedSlots: { customRender: 'view' },
 	},
 	{
 		title: '글쓴이',
@@ -40,15 +38,13 @@ const columns = [
 		width: '10%',
 		key: 'writer',
 		align: 'center',
-		//scopedSlots: { customRender: 'writer' },
 	},
 	{
-		title: '생성일',
+		title: '작성일',
 		dataIndex: 'created',
 		width: '10%',
 		key: 'created',
 		align: 'center',
-		//scopedSlots: { customRender: 'created' },
 	},
 	{
 		title: '추천',
@@ -56,17 +52,12 @@ const columns = [
 		width: '10%',
 		key: 'recommend',
 		align: 'center',
-		//scopedSlots: { customRender: 'recommend' },
 	},
 ];
 export default {
 	data() {
 		return {
 			columns,
-			data: [
-				{ title: 'TITLE', created: '2', key: '1' },
-				{ title: '1', created: '2', recommend: '30', key: '2' },
-			],
 			posts: [],
 		};
 	},
@@ -76,15 +67,29 @@ export default {
 			posts.forEach(v => {
 				const obj = {
 					key: v.number,
-					title: `<a href="/test">${v.title}</a>`,
+					title: v.title,
 					views: v.views,
 					writer: v.writer,
-					created: v.createdAt,
+					created: formatFullDate(v.createdAt),
 					recommend: v.recommend,
 				};
 				data.push(obj);
 			});
+			data.sort((a, b) => {
+				return b.key - a.key;
+			});
 			this.posts = data;
+		},
+		customRow(record, index) {
+			const vm = this;
+			return {
+				on: {
+					click() {
+						console.log('record: ', record, ' index:', index);
+						vm.$router.push(`/post/${record.key}`);
+					},
+				},
+			};
 		},
 	},
 	async created() {

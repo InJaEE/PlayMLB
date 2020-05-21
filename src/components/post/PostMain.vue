@@ -11,6 +11,12 @@ export default {
 	components: {
 		PostList,
 	},
+	created() {
+		// this.$store.commit('SET_LOADING', true);
+		// setTimeout(() => {
+		// 	this.$store.commit('SET_LOADING', false);
+		// }, 3000);
+	},
 };
 </script>
 
