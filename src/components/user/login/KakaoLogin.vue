@@ -6,7 +6,6 @@
 export default {
 	methods: {
 		kakaoLogin(data) {
-			console.log('!@#', data);
 			const userData = {
 				username: data.kakao_account.email,
 				nickname: data.kakao_account.profile.nickname,
