@@ -1,16 +1,11 @@
 <template>
 	<div>
-		<div v-if="isLoading">
-			<loading-spinner></loading-spinner>
-		</div>
-		<div v-else>
-			<info-input></info-input>
-			<info-player-card
-				:playerList="searchResult"
-				v-if="isList"
-			></info-player-card>
-			<info-player-detail v-else></info-player-detail>
-		</div>
+		<info-input></info-input>
+		<info-player-card
+			:playerList="searchResult"
+			v-if="isList"
+		></info-player-card>
+		<info-player-detail v-else></info-player-detail>
 	</div>
 </template>
 
@@ -18,19 +13,12 @@
 import InfoInput from '../InfoInput.vue';
 import InfoPlayerCard from './InfoPlayerCard.vue';
 import InfoPlayerDetail from './InfoPlayerDetail.vue';
-import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 import { isEmpty } from '@/utils/check';
 export default {
 	components: {
 		InfoInput,
 		InfoPlayerCard,
 		InfoPlayerDetail,
-		LoadingSpinner,
-	},
-	data() {
-		return {
-			isLoading: false,
-		};
 	},
 	computed: {
 		loadingCheck() {

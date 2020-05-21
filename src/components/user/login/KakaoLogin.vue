@@ -5,13 +5,15 @@
 <script>
 export default {
 	methods: {
-		kakaoLogin(data) {
+		async kakaoLogin(data) {
+			this.$store.commit('SET_LOADING', true);
 			const userData = {
 				username: data.kakao_account.email,
 				nickname: data.kakao_account.profile.nickname,
 				snsId: data.id,
 			};
-			this.$store.dispatch('KAKAO_LOGIN_USER', userData);
+			await this.$store.dispatch('KAKAO_LOGIN_USER', userData);
+			this.$store.commit('SET_LOADING', false);
 			this.$router.push('/');
 		},
 	},

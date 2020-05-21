@@ -4,6 +4,7 @@ import {
 	saveUserToCookie,
 	getAuthFromCookie,
 	getUserFromCookie,
+	deleteCookie,
 } from '@/utils/cookies';
 
 const state = {
@@ -31,6 +32,8 @@ const mutations = {
 		state.token = userData.token;
 	},
 	LOGOUT_USER(state) {
+		deleteCookie('til_user');
+		deleteCookie('til_auth');
 		state.username = '';
 		state.nickname = '';
 		state.token = '';
@@ -48,6 +51,8 @@ const actions = {
 					token: res.data.token,
 				};
 				context.commit('SET_USER_DATA', user);
+				console.log('#', res.data);
+
 				saveAuthToCookie(res.data.token);
 				saveUserToCookie(res.data.user.nickname);
 			} else if (res.status === 401) {
@@ -55,14 +60,14 @@ const actions = {
 			}
 		} catch (err) {
 			console.error(err);
+			alert('서버와의 연결이 끊어졌습니다.');
 			throw err;
 		}
 	},
 	async KAKAO_LOGIN_USER({ commit }, userData) {
-		console.log('!!!', userData);
-
+		//console.log('!!!', userData);
 		const res = await kakaoLoginUser(userData);
-		console.log('***', res);
+		//console.log('***', res);
 		const user = {
 			username: res.data.user.username,
 			nickname: res.data.user.nickname,

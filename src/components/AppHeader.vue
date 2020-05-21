@@ -64,14 +64,16 @@
 export default {
 	computed: {
 		toggleMenu() {
-			const name = this.$route.name === null ? '' : this.$route.name;
-			return name;
+			return this.$route.name == undefined ? '' : this.$route.name;
 		},
 	},
 	methods: {
 		logout() {
+			this.$store.commit('SET_LOADING', true);
 			this.$store.commit('LOGOUT_USER');
-			alert('로그아웃 되었습니다.');
+			this.$store.commit('SET_LOADING', false);
+			//alert('로그아웃 되었습니다.');
+			this.$router.push('/main');
 		},
 	},
 };

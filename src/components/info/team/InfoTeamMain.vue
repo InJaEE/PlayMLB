@@ -1,22 +1,17 @@
 <template>
 	<div>
-		<div v-if="computeLoading">
-			<loading-spinner></loading-spinner>
+		<league-menu></league-menu>
+		<div class="league">
+			<h3>동부지구</h3>
+			<info-team-list :teamList="eastClubList"></info-team-list>
 		</div>
-		<div v-else>
-			<league-menu></league-menu>
-			<div class="league">
-				<h3>동부지구</h3>
-				<info-team-list :teamList="eastClubList"></info-team-list>
-			</div>
-			<div class="league">
-				<h3>중부지구</h3>
-				<info-team-list :teamList="centralClubList"></info-team-list>
-			</div>
-			<div class="league">
-				<h3>서부지구</h3>
-				<info-team-list :teamList="westClubList"></info-team-list>
-			</div>
+		<div class="league">
+			<h3>중부지구</h3>
+			<info-team-list :teamList="centralClubList"></info-team-list>
+		</div>
+		<div class="league">
+			<h3>서부지구</h3>
+			<info-team-list :teamList="westClubList"></info-team-list>
 		</div>
 	</div>
 </template>
@@ -24,13 +19,16 @@
 <script>
 import LeagueMenu from '@/components/common/LeagueMenu.vue';
 import InfoTeamList from './InfoTeamList.vue';
-import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 
 export default {
 	components: {
 		LeagueMenu,
 		InfoTeamList,
-		LoadingSpinner,
+	},
+	data() {
+		return {
+			isLoading: false,
+		};
 	},
 	computed: {
 		eastClubList() {
@@ -42,15 +40,14 @@ export default {
 		westClubList() {
 			return this.getLeagueClub('w');
 		},
-		computeLoading() {
-			if (
-				this.eastClubList.length !== 0 &&
-				this.centralClubList.length !== 0 &&
-				this.westClubList.length !== 0
-			) {
-				return false;
+	},
+	watch: {
+		isLoading(newV) {
+			if (newV) {
+				this.$store.commit('SET_LOADING', true);
+			} else if (!newV) {
+				this.$store.commit('SET_LOADING', false);
 			}
-			return true;
 		},
 	},
 	methods: {
@@ -64,9 +61,10 @@ export default {
 			return filteredLeague;
 		},
 	},
-	created() {
+	async created() {
 		this.isLoading = true;
-		this.$store.dispatch('FETCH_ALL_CLUB', 2019);
+		await this.$store.dispatch('FETCH_ALL_CLUB', 2019);
+		this.isLoading = false;
 	},
 };
 </script>

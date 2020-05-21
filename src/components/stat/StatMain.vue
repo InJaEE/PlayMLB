@@ -27,6 +27,9 @@ export default {
 			return headerToggleData;
 		},
 	},
+	mounted() {
+		this.$store.commit('SET_LOADING', false);
+	},
 };
 </script>
 

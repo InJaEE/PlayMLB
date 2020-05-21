@@ -39,14 +39,6 @@ const router = new VueRouter({
 						{
 							path: ':detail',
 							name: 'info/type/detail',
-							// beforeEnter: (to, from, next) => {
-							// 	const playerId = to.params.detail;
-							// 	if (playerId !== 'al' && playerId !== 'nl') {
-							// 		store.commit('RESET_PLAYER_DETAIL');
-							// 		store.dispatch('FETCH_PLAYER_DATA', playerId);
-							// 	}
-							// 	next();
-							// },
 						},
 					],
 				},
@@ -68,13 +60,26 @@ const router = new VueRouter({
 			name: 'about',
 			component: () => import('@/views/AboutView.vue'),
 		},
+		{
+			path: '/userInfo',
+			component: () => import('@/views/UserInfoView.vue'),
+			meta: {
+				auth: true,
+			},
+		},
+		{
+			path: '*',
+			redirect: '/',
+		},
 	],
 });
 
 router.beforeEach((to, from, next) => {
-	//console.log('#', to);
-	//console.log('$', from);
-	//console.log('%', next);
+	if (to.meta.auth && !store.getters.isLogin) {
+		alert('로그인이 필요합니다.');
+		next('/login');
+		return;
+	}
 	next();
 });
 
