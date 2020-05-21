@@ -23,9 +23,9 @@ const router = new VueRouter({
 			component: () => import('@/views/SignupView.vue'),
 		},
 		{
-			path: '/board',
-			name: 'board',
-			component: () => import('@/views/BoardView.vue'),
+			path: '/post',
+			name: 'post',
+			component: () => import('@/views/PostView.vue'),
 		},
 		{
 			path: '/info',

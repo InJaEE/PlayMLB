@@ -10,7 +10,7 @@
 					class="menuItem"
 					:class="{ selected: toggleMenu.includes('board') }"
 				>
-					<router-link to="/board">
+					<router-link to="/post">
 						게시판
 					</router-link>
 				</div>

@@ -5,7 +5,7 @@ let serverURL;
 if (process.env.NODE_ENV === 'production') {
 	serverURL = 'https://playmlb-server.herokuapp.com/';
 } else {
-	serverURL = 'http://127.0.0.1:3000';
+	serverURL = 'http://127.0.0.1:3000/';
 }
 
 const instance = axios.create({
