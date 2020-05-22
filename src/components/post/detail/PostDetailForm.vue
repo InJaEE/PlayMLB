@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<a-card title="애국가" :bordered="false" class="card">
-			<p>
+		<a-card title="애국가" :headStyle="head" :bordered="true" class="card">
+			<p class="contents">
 				애국가의 자취는 조선 후기 개화기와 갑오개혁 직후까지 올라간다. 1896년
 				당시 독립문 정초식에서 배재학당 학생들에 의해 그 유명한 스코틀랜드 민요
 				올드 랭 사인의 멜로디로 불린 작사 미상인 애국가가 최초의 애국가로
@@ -15,13 +15,57 @@
 				연주되었고, 1909년에 이르러서는 일제의 애국 창가(唱歌)에 대한 단속으로
 				인해 7년만에 금지곡이 된 비운의 국가이다.
 			</p>
+			<div class="card_footer">
+				<span class="recommend">
+					<a-button>추천</a-button>
+				</span>
+			</div>
 		</a-card>
+		<div class="form_footer">
+			<span class="button_left">
+				<a-button>전체글</a-button>
+			</span>
+			<span class="button_right">
+				<span>
+					<a-button>수정</a-button>
+					<a-button type="danger">삭제</a-button>
+				</span>
+				<a-button type="primary">글쓰기</a-button>
+			</span>
+		</div>
 	</div>
 </template>
+
+<script>
+export default {
+	data() {
+		return {
+			head: {
+				fontWeight: 'bold',
+			},
+		};
+	},
+};
+</script>
 
 <style scoped>
 .card {
 	width: 100%;
-	margin: 50px 0;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+.contents {
+	margin-top: 10px;
+	margin-bottom: 50px;
+}
+.form_footer {
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #e8e8e8;
+}
+.button_right button {
+	margin: 0 2px;
 }
 </style>

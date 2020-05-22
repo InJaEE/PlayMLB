@@ -23,7 +23,7 @@ export default {
 
 <style scoped>
 .comment {
-	width: 50%;
+	width: 70%;
 	margin: 0 auto;
 }
 </style>

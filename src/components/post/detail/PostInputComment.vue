@@ -1,9 +1,10 @@
 <template>
 	<div>
 		<a-input-search
-			placeholder="input search text"
+			placeholder="댓글"
 			size="large"
 			@search="onSearch"
+			:disabled="!this.$store.getters.isLogin"
 		>
 			<a-button slot="enterButton">
 				등록
@@ -21,3 +22,4 @@ export default {
 	},
 };
 </script>
+<style scoped></style>
