@@ -25,14 +25,25 @@ function formatFullDate(value) {
 	const date = new Date(value);
 	const year = date.getFullYear();
 	let month = date.getMonth() + 1;
-	month = month > 9 ? month : `0${month}`;
 	let day = date.getDate();
-	day = day > 9 ? day : `0${day}`;
+	let createDate = `${year}.${month}.${day}`;
+
+	let now = new Date();
+	now = `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()}`;
+
+	if (createDate !== now) {
+		month = month > 9 ? month : `0${month}`;
+		day = day > 9 ? day : `0${day}`;
+		createDate = `${year}.${month}.${day}`;
+		return createDate;
+	}
+
 	let hours = date.getHours();
 	hours = hours > 9 ? hours : `0${hours}`;
 	let minutes = date.getMinutes();
 	minutes = minutes > 9 ? minutes : `0${minutes}`;
-	return `${year}.${month}.${day} ${hours}:${minutes}`;
+
+	return `${hours}:${minutes}`;
 }
 
 function formatPosition(value) {
@@ -69,7 +80,7 @@ function formatPosition(value) {
 			position = '포수';
 			break;
 		default:
-			position = '?';
+			position = '/';
 			break;
 	}
 	return position;

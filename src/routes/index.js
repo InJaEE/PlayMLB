@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '@/store';
+import post from './post';
 
 Vue.use(VueRouter);
 
 const router = new VueRouter({
 	mode: 'history',
 	routes: [
+		...post,
 		{
 			path: '/',
 			name: 'main',
@@ -22,11 +24,7 @@ const router = new VueRouter({
 			name: 'signup',
 			component: () => import('@/views/SignupView.vue'),
 		},
-		{
-			path: '/post',
-			name: 'post',
-			component: () => import('@/views/PostView.vue'),
-		},
+
 		{
 			path: '/info',
 			name: 'info',
@@ -67,10 +65,10 @@ const router = new VueRouter({
 				auth: true,
 			},
 		},
-		// {
-		// 	path: '*',
-		// 	redirect: '/',
-		// },
+		/*{
+			path: '*',
+			redirect: '/',
+		},*/
 	],
 });
 

@@ -26,7 +26,7 @@
 				<td class="inner">
 					<div>
 						<img
-							class="emblem"
+							class="emblem_img"
 							:src="
 								`https://www.mlbstatic.com/team-logos/team-cap-on-light/${item.team_id}.svg`
 							"
@@ -146,10 +146,10 @@ td {
 	padding-left: 10px;
 	text-align: left;
 }
-.emblem {
+.emblem_img {
 	padding-left: 20px;
-	width: 25px;
-	height: 25px;
+	width: 40px;
+	height: 40px;
 	float: left;
 }
 a:visited {

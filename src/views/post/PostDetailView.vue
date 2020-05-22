@@ -1,15 +1,14 @@
 <template>
 	<div class="contents">
-		<h1>게시판</h1>
-		<post-main></post-main>
+		<post-detail></post-detail>
 	</div>
 </template>
 
 <script>
-import PostMain from '@/components/post/PostMain.vue';
+import PostDetail from '@/components/post/PostDetail.vue';
 export default {
 	components: {
-		PostMain,
+		PostDetail,
 	},
 };
 </script>

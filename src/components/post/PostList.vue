@@ -4,7 +4,12 @@
 			:columns="columns"
 			:data-source="posts"
 			:customRow="customRow"
-		></a-table>
+			:pagination="pagination"
+		>
+		</a-table>
+		<a-button type="primary" @click="write" class="write_button"
+			>글쓰기</a-button
+		>
 	</div>
 </template>
 
@@ -59,6 +64,9 @@ export default {
 		return {
 			columns,
 			posts: [],
+			pagination: {
+				position: 'top',
+			},
 		};
 	},
 	methods: {
@@ -80,23 +88,31 @@ export default {
 			});
 			this.posts = data;
 		},
-		customRow(record, index) {
+		customRow(record) {
 			const vm = this;
 			return {
 				on: {
 					click() {
-						console.log('record: ', record, ' index:', index);
 						vm.$router.push(`/post/${record.key}`);
 					},
 				},
 			};
 		},
+		write() {
+			this.$router.push('/newPost');
+		},
 	},
 	async created() {
+		this.$store.commit('SET_LOADING', true);
 		await this.$store.dispatch('LOOKUP_POSTS');
 		this.setPosts(this.$store.getters.getPosts);
+		this.$store.commit('SET_LOADING', false);
 	},
 };
 </script>
 
-<style></style>
+<style scoped>
+.write_button {
+	margin-top: 50px;
+}
+</style>

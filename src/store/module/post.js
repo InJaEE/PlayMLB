@@ -21,15 +21,14 @@ const mutations = {
 };
 const actions = {
 	async CREATE_POST(context, data) {
-		const res = await createPost();
+		const res = await createPost(data);
+		console.log('#', res);
 	},
 	async LOOKUP_ONE_POST(context, data) {
 		const res = await lookupOnePost();
 	},
 	async LOOKUP_POSTS(context) {
 		const res = await lookupPosts();
-		console.log('@', res);
-
 		context.commit('SET_POSTS', res.data.posts);
 	},
 	async DELETE_POST(context, data) {
