@@ -7,7 +7,7 @@
 					<input
 						type="text"
 						id="username"
-						v-model="username"
+						v-model="userId"
 						placeholder="아이디"
 						class="input_row"
 						@focus="focusIdInputBox"
@@ -50,7 +50,7 @@ import { signupUser } from '@/api/userApi';
 export default {
 	data() {
 		return {
-			username: '',
+			userId: '',
 			nickname: '',
 			password: '',
 			logMessage: '',
@@ -70,9 +70,9 @@ export default {
 			this.isPwdFocus = !this.isPwdFocus;
 		},
 		async signup() {
-			let { username, nickname, password } = this;
-			if (username.trim() === '') {
-				console.log(username);
+			let { userId, nickname, password } = this;
+			if (userId.trim() === '') {
+				console.log(userId);
 
 				this.logMessage = '아이디를 입력해주세요.';
 
@@ -85,7 +85,7 @@ export default {
 				return;
 			}
 			const userData = {
-				username,
+				userId,
 				password,
 				nickname,
 			};

@@ -22,12 +22,12 @@ export default {
 	},
 	methods: {
 		async submitForm() {
-			console.log('!@', this.$store.getters.getUserData);
+			// console.log('!@', this.$store.getters.getUserData);
 
 			const submitData = {
 				title: this.title,
 				contents: this.contents,
-				writer: this.$store.getters.getUserData.nickname,
+				createdBy: this.$store.getters.getUserData.nickname,
 			};
 			await this.$store.dispatch('CREATE_POST', submitData);
 			this.$router.push('/post');

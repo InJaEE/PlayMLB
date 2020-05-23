@@ -1,29 +1,38 @@
 <template>
 	<div>
-		<a-card title="애국가" :headStyle="head" :bordered="true" class="card">
+		<a-card :bordered="true" class="card">
+			<span slot="title" class="header">
+				<div>
+					{{ formData.title }}
+				</div>
+				<div class="post_header">
+					<span class="header_left">
+						<span>작성자: {{ formData.writer }}</span> |
+						<span>작성일: {{ formData.createdAt }}</span>
+					</span>
+					<span class="header_right">
+						<span>조회수: {{ formData.views }} </span>
+					</span>
+				</div>
+			</span>
 			<p class="contents">
-				애국가의 자취는 조선 후기 개화기와 갑오개혁 직후까지 올라간다. 1896년
-				당시 독립문 정초식에서 배재학당 학생들에 의해 그 유명한 스코틀랜드 민요
-				올드 랭 사인의 멜로디로 불린 작사 미상인 애국가가 최초의 애국가로
-				여겨진다. 여기서 후렴 "무궁화 삼천리 화려강산 죠션 사람 죠션으로 길이
-				보죤하세" 라는 가사가 지금의 애국가 가사에서도 맥을 이어
-				변형(조선→대한)되어 쓰이고 있는 데서 확인할 수 있다. 이 때는 한 해에
-				수십개의 애국가가 쏟아져나왔다. 대한제국의 애국가는 1898년 가사가
-				기초되어 이때는 God Save the King에 맞춰 불렀다. 이후 1902년 완성한
-				에케르트 작곡의 "대한제국 애국가"가 공식적으로 대한제국의 애국가가
-				되었다. 이후 공식적으로는 1907년 순종 황제 즉위식에서 마지막으로
-				연주되었고, 1909년에 이르러서는 일제의 애국 창가(唱歌)에 대한 단속으로
-				인해 7년만에 금지곡이 된 비운의 국가이다.
+				{{ formData.contents }}
 			</p>
 			<div class="card_footer">
 				<span class="recommend">
-					<a-button>추천</a-button>
+					<a-button @click="clickRecommend">
+						<a-icon
+							type="fire"
+							theme="twoTone"
+							:twoToneColor="recommendColor"
+						/>추천
+					</a-button>
 				</span>
 			</div>
 		</a-card>
 		<div class="form_footer">
 			<span class="button_left">
-				<a-button>전체글</a-button>
+				<a-button @click="moveToPostList">전체글</a-button>
 			</span>
 			<span class="button_right">
 				<span>
@@ -37,13 +46,38 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
-	data() {
-		return {
-			head: {
-				fontWeight: 'bold',
-			},
-		};
+	computed: {
+		formData() {
+			const post = this.$store.getters.getPost;
+			return {
+				title: post.title,
+				contents: post.contents,
+				writer: post.createdBy,
+				views: post.views,
+				recommend: post.recommend,
+				createdAt: moment(post.createdAt).format('YY.MM.DD HH:mm'),
+			};
+		},
+		recommendColor() {
+			return this.$store.getters.getPost.isRecommend ? '#ff4d4f' : '#d9d9d9';
+		},
+	},
+	methods: {
+		moveToPostList() {
+			this.$router.push('/post');
+		},
+		async clickRecommend() {
+			const data = {
+				number: this.$route.params.postId,
+				userId: this.$store.getters.getUserData.userId,
+			};
+			await this.$store.dispatch('PRESS_RECOMMEND', data);
+			this.$store.commit('TOGGLE_RECOMMEND');
+
+			// this.isRecommend = !this.isRecommend;
+		},
 	},
 };
 </script>
@@ -53,8 +87,22 @@ export default {
 	width: 100%;
 	margin-top: 50px;
 	margin-bottom: 20px;
+	padding: 0 30px;
+}
+.header {
+	text-align: center;
+}
+.post_header {
+	font-size: 12px;
+}
+.header_left {
+	float: left;
+}
+.header_right {
+	float: right;
 }
 .contents {
+	text-align: left;
 	margin-top: 10px;
 	margin-bottom: 50px;
 }

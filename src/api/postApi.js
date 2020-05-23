@@ -9,7 +9,7 @@ function createPost(data) {
 }
 
 function lookupOnePost(postNumber) {
-	return userInstance.post(`/post/${postNumber}`);
+	return userInstance.get(`/post/${postNumber}`);
 }
 
 function deletePost(postNumber) {
@@ -19,5 +19,4 @@ function deletePost(postNumber) {
 function editPost(postNumber) {
 	return userInstance.put(`/post/${postNumber}`);
 }
-
 export { lookupPosts, createPost, lookupOnePost, deletePost, editPost };

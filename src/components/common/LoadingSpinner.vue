@@ -13,7 +13,7 @@ export default {};
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 240px;
+	height: 500px;
 }
 .spinner {
 	width: 50px;

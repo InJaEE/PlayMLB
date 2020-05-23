@@ -8,14 +8,14 @@ import {
 } from '@/utils/cookies';
 
 const state = {
-	username: '',
+	userId: '',
 	nickname: getUserFromCookie() || '',
 	token: getAuthFromCookie() || '',
 };
 const getters = {
 	getUserData(state) {
 		const userData = {
-			username: state.username,
+			userId: state.userId,
 			nickname: state.nickname,
 			token: state.token,
 		};
@@ -27,14 +27,14 @@ const getters = {
 };
 const mutations = {
 	SET_USER_DATA(state, userData) {
-		state.username = userData.username;
+		state.userId = userData.userId;
 		state.nickname = userData.nickname;
 		state.token = userData.token;
 	},
 	LOGOUT_USER(state) {
 		deleteCookie('til_user');
 		deleteCookie('til_auth');
-		state.username = '';
+		state.userId = '';
 		state.nickname = '';
 		state.token = '';
 	},
@@ -43,10 +43,12 @@ const actions = {
 	async LOGIN_USER(context, userData) {
 		try {
 			const res = await loginUser(userData);
+			console.log(res);
+
 			if (res.status === 200) {
 				console.log('Login Success');
 				const user = {
-					username: res.data.user.username,
+					userId: res.data.user.userId,
 					nickname: res.data.user.nickname,
 					token: res.data.token,
 				};
@@ -65,11 +67,11 @@ const actions = {
 		}
 	},
 	async KAKAO_LOGIN_USER({ commit }, userData) {
-		//console.log('!!!', userData);
 		const res = await kakaoLoginUser(userData);
-		//console.log('***', res);
+		console.log(res.data);
+
 		const user = {
-			username: res.data.user.username,
+			userId: res.data.user.userId,
 			nickname: res.data.user.nickname,
 			token: res.data.token,
 		};

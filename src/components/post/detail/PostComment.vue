@@ -1,34 +1,7 @@
 <template>
 	<a-comment>
-		<template slot="actions">
-			<span key="comment-basic-like">
-				<a-tooltip title="Like">
-					<a-icon
-						type="like"
-						:theme="action === 'liked' ? 'filled' : 'outlined'"
-						@click="like"
-					/>
-				</a-tooltip>
-				<span style="padding-left: '8px';cursor: 'auto'">
-					{{ likes }}
-				</span>
-			</span>
-			<span key="comment-basic-dislike">
-				<a-tooltip title="Dislike">
-					<a-icon
-						type="dislike"
-						:theme="action === 'disliked' ? 'filled' : 'outlined'"
-						@click="dislike"
-					/>
-				</a-tooltip>
-				<span style="padding-left: '8px';cursor: 'auto'">
-					{{ dislikes }}
-				</span>
-			</span>
-			<span key="comment-basic-reply-to">Reply to</span>
-		</template>
-		<a slot="author">Han Solo</a>
-		<p slot="content">
+		<a slot="author"><a-icon type="user" /> Han Solo</a>
+		<p slot="content" style="text-align:left">
 			We supply a series of design principles, practical patterns and high
 			quality design resources (Sketch and Axure), to help people create their
 			product prototypes beautifully and efficiently.

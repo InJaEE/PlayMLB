@@ -17,7 +17,7 @@
 import { formatFullDate } from '@/utils/filters';
 const columns = [
 	{
-		title: '번호',
+		title: '글번호',
 		dataIndex: 'key',
 		width: '10%',
 		key: 'number',
@@ -77,9 +77,9 @@ export default {
 					key: v.number,
 					title: v.title,
 					views: v.views,
-					writer: v.writer,
+					writer: v.createdBy,
 					created: formatFullDate(v.createdAt),
-					recommend: v.recommend,
+					recommend: v.recommend.length,
 				};
 				data.push(obj);
 			});
@@ -92,7 +92,7 @@ export default {
 			const vm = this;
 			return {
 				on: {
-					click() {
+					async click() {
 						vm.$router.push(`/post/${record.key}`);
 					},
 				},

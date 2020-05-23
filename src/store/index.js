@@ -5,6 +5,7 @@ import stat from './module/stat';
 import playerInfo from './module/playerInfo';
 import loading from './module/loading';
 import post from './module/post';
+import postAddon from './module/postAddon';
 
 vue.use(vuex);
 
@@ -15,6 +16,7 @@ export default new vuex.Store({
 		playerInfo,
 		loading,
 		post,
+		postAddon,
 	},
 	state: {
 		currentPage: '',

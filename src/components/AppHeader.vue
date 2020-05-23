@@ -73,7 +73,7 @@ export default {
 			this.$store.commit('LOGOUT_USER');
 			this.$store.commit('SET_LOADING', false);
 			//alert('로그아웃 되었습니다.');
-			this.$router.push('/main');
+			this.$router.push('/');
 		},
 	},
 };

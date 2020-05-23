@@ -8,7 +8,7 @@ export default {
 		async kakaoLogin(data) {
 			this.$store.commit('SET_LOADING', true);
 			const userData = {
-				username: data.kakao_account.email,
+				userId: data.kakao_account.email,
 				nickname: data.kakao_account.profile.nickname,
 				snsId: data.id,
 			};

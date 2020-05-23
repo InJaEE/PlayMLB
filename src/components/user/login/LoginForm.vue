@@ -7,7 +7,7 @@
 					<input
 						type="text"
 						id="username"
-						v-model="username"
+						v-model="userId"
 						placeholder="아이디"
 						class="input_row"
 						@focus="focusIdInputBox"
@@ -45,7 +45,7 @@ export default {
 	},
 	data() {
 		return {
-			username: '',
+			userId: '',
 			password: '',
 			isIdFocus: false,
 			isPwdFocus: false,
@@ -60,8 +60,8 @@ export default {
 			this.isPwdFocus = !this.isPwdFocus;
 		},
 		async localLogin() {
-			const { username, password } = this;
-			if (username.trim() === '') {
+			const { userId, password } = this;
+			if (userId.trim() === '') {
 				this.logMessage = '아이디를 입력해주세요.';
 				return;
 			} else if (password.trim() === '') {
@@ -69,7 +69,7 @@ export default {
 				return;
 			}
 			const userData = {
-				username,
+				userId,
 				password,
 			};
 			try {
