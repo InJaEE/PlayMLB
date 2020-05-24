@@ -13,6 +13,7 @@
 				:total="comments.length"
 				:pageSize="commentPageSize"
 				@change="changePage"
+				:hideOnSinglePage="true"
 			/>
 		</div>
 	</div>
@@ -36,11 +37,6 @@ export default {
 			commentPageSize: 5,
 		};
 	},
-	// watch: {
-	// 	currentCommentPage(n, v) {
-	// 		console.log(n, v);
-	// 	},
-	// },
 	computed: {},
 	methods: {
 		currentComment(index) {

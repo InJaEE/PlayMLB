@@ -51,6 +51,10 @@ const actions = {
 		} else {
 			post.isRecommend = false;
 		}
+		post.comments.sort((a, b) => {
+			return b.createdAt < a.createdAt ? -1 : b.createdAt > a.createdAt ? 1 : 0;
+		});
+
 		commit('SET_POST', post);
 	},
 	async LOOKUP_POSTS(context) {
