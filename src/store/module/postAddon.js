@@ -17,6 +17,7 @@ const actions = {
 	async CREATE_COMMENT(context, commentData) {
 		try {
 			const res = await createComment(commentData);
+			console.log('###', res);
 		} catch (err) {
 			console.error(err);
 		}

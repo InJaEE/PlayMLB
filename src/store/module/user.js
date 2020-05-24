@@ -1,14 +1,16 @@
 import { loginUser, kakaoLoginUser } from '@/api/userApi';
 import {
 	saveAuthToCookie,
+	saveIdToCookie,
 	saveUserToCookie,
 	getAuthFromCookie,
+	getIdFromCookie,
 	getUserFromCookie,
 	deleteCookie,
 } from '@/utils/cookies';
 
 const state = {
-	userId: '',
+	userId: getIdFromCookie() || '',
 	nickname: getUserFromCookie() || '',
 	token: getAuthFromCookie() || '',
 };
@@ -32,8 +34,9 @@ const mutations = {
 		state.token = userData.token;
 	},
 	LOGOUT_USER(state) {
-		deleteCookie('til_user');
-		deleteCookie('til_auth');
+		deleteCookie('playMLB_user');
+		deleteCookie('playMLB_id');
+		deleteCookie('playMLB_auth');
 		state.userId = '';
 		state.nickname = '';
 		state.token = '';
@@ -43,8 +46,6 @@ const actions = {
 	async LOGIN_USER(context, userData) {
 		try {
 			const res = await loginUser(userData);
-			console.log(res);
-
 			if (res.status === 200) {
 				console.log('Login Success');
 				const user = {
@@ -53,9 +54,9 @@ const actions = {
 					token: res.data.token,
 				};
 				context.commit('SET_USER_DATA', user);
-				console.log('#', res.data);
 
 				saveAuthToCookie(res.data.token);
+				saveIdToCookie(res.data.user.userId);
 				saveUserToCookie(res.data.user.nickname);
 			} else if (res.status === 401) {
 				console.log('Login Failed: Unauthorized');
@@ -68,8 +69,6 @@ const actions = {
 	},
 	async KAKAO_LOGIN_USER({ commit }, userData) {
 		const res = await kakaoLoginUser(userData);
-		console.log(res.data);
-
 		const user = {
 			userId: res.data.user.userId,
 			nickname: res.data.user.nickname,
@@ -77,6 +76,7 @@ const actions = {
 		};
 		commit('SET_USER_DATA', user);
 		saveAuthToCookie(res.data.token);
+		saveIdToCookie(res.data.user.userId);
 		saveUserToCookie(res.data.user.nickname);
 	},
 };

@@ -5,8 +5,9 @@
 			size="large"
 			@search="onSearch"
 			:disabled="!this.$store.getters.isLogin"
+			v-model="commentData"
 		>
-			<a-button slot="enterButton">
+			<a-button slot="enterButton" @click="onSearch">
 				등록
 			</a-button>
 		</a-input-search>
@@ -16,7 +17,9 @@
 <script>
 export default {
 	data() {
-		return {};
+		return {
+			commentData: '',
+		};
 	},
 	computed: {
 		computedPlaceHolder() {
@@ -28,7 +31,15 @@ export default {
 	},
 	methods: {
 		onSearch() {
-			alert('HELLO');
+			console.log(this.$store.getters.getUserData);
+
+			const submitData = {
+				number: this.$route.params.postId,
+				contents: this.commentData,
+				userId: this.$store.getters.getUserData.userId,
+				nickname: this.$store.getters.getUserData.nickname,
+			};
+			this.$store.dispatch('CREATE_COMMENT', submitData);
 		},
 	},
 };

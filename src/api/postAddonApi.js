@@ -1,7 +1,7 @@
 import { userInstance } from '.';
 
 function createComment(data) {
-	return userInstance.post('/postAddon/comment', data);
+	return userInstance.post('/postAddon/comments', data);
 }
 
 function pressRecommend(data) {

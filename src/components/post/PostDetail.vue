@@ -3,7 +3,17 @@
 		<post-detail-form></post-detail-form>
 		<div class="comment">
 			<post-input-comment></post-input-comment>
-			<post-comment></post-comment>
+			<div v-for="(item, index) in comments" :key="index">
+				<div v-if="currentComment(index)">
+					<post-comment :comment="item"></post-comment>
+				</div>
+			</div>
+			<a-pagination
+				:current="currentCommentPage"
+				:total="comments.length"
+				:pageSize="commentPageSize"
+				@change="changePage"
+			/>
 		</div>
 	</div>
 </template>
@@ -19,16 +29,34 @@ export default {
 		PostInputComment,
 		PostComment,
 	},
-	methods: {},
-	computed: {
-		commentData() {
-			return 0;
+	data() {
+		return {
+			comments: [],
+			currentCommentPage: 1,
+			commentPageSize: 5,
+		};
+	},
+	// watch: {
+	// 	currentCommentPage(n, v) {
+	// 		console.log(n, v);
+	// 	},
+	// },
+	computed: {},
+	methods: {
+		currentComment(index) {
+			return (
+				Math.floor(index / this.commentPageSize) + 1 === this.currentCommentPage
+			);
+		},
+		changePage(i) {
+			this.currentCommentPage = i;
 		},
 	},
 	async created() {
 		this.$store.commit('SET_LOADING', true);
 		this.$store.commit('RESET_POST');
 		await this.$store.dispatch('LOOKUP_ONE_POST', this.$route.params.postId);
+		this.comments = this.$store.getters.getPost.comments;
 		this.$store.commit('SET_LOADING', false);
 	},
 };

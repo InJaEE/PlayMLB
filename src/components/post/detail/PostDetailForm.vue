@@ -3,39 +3,50 @@
 		<a-card :bordered="true" class="card">
 			<span slot="title" class="header">
 				<div>
-					{{ formData.title }}
+					{{ postData.title }}
 				</div>
 				<div class="post_header">
 					<span class="header_left">
-						<span>작성자: {{ formData.writer }}</span> |
-						<span>작성일: {{ formData.createdAt }}</span>
+						<span>작성자: {{ postData.writer }}</span> |
+						<span>작성일: {{ postData.createdAt }}</span>
 					</span>
 					<span class="header_right">
-						<span>조회수: {{ formData.views }} </span>
+						<span>조회수: {{ postData.views }} </span>
 					</span>
 				</div>
 			</span>
 			<p class="contents">
-				{{ formData.contents }}
+				{{ postData.contents }}
 			</p>
 			<div class="card_footer">
 				<span class="recommend">
-					<a-button @click="clickRecommend">
+					<a-button
+						@click="clickRecommend"
+						shape="round"
+						:class="{ btnRecommend: isRecommend }"
+					>
 						<a-icon
 							type="fire"
 							theme="twoTone"
 							:twoToneColor="recommendColor"
-						/>추천
+						/>
+						<span :class="{ textRecommend: isRecommend }">
+							추천
+						</span>
 					</a-button>
 				</span>
 			</div>
 		</a-card>
 		<div class="form_footer">
 			<span class="button_left">
-				<a-button @click="moveToPostList">전체글</a-button>
+				<a-button @click="moveToPostList"
+					><a-icon type="left" />전체글</a-button
+				>
 			</span>
 			<span class="button_right">
-				<span>
+				<span
+					v-if="postData.writer === this.$store.getters.getUserData.nickname"
+				>
 					<a-button>수정</a-button>
 					<a-button type="danger">삭제</a-button>
 				</span>
@@ -48,8 +59,11 @@
 <script>
 import moment from 'moment';
 export default {
+	data() {
+		return {};
+	},
 	computed: {
-		formData() {
+		postData() {
 			const post = this.$store.getters.getPost;
 			return {
 				title: post.title,
@@ -60,8 +74,17 @@ export default {
 				createdAt: moment(post.createdAt).format('YY.MM.DD HH:mm'),
 			};
 		},
+		isRecommend() {
+			return this.$store.getters.getPost.isRecommend;
+		},
 		recommendColor() {
-			return this.$store.getters.getPost.isRecommend ? '#ff4d4f' : '#d9d9d9';
+			const redColor = '#ff4d4f';
+			const grayColor = '#d9d9d9';
+			if (this.isRecommend) {
+				return redColor;
+			} else {
+				return grayColor;
+			}
 		},
 	},
 	methods: {
@@ -69,14 +92,16 @@ export default {
 			this.$router.push('/post');
 		},
 		async clickRecommend() {
+			if (!this.$store.getters.isLogin) {
+				alert('로그인을 해주세요.');
+				return;
+			}
 			const data = {
 				number: this.$route.params.postId,
 				userId: this.$store.getters.getUserData.userId,
 			};
 			await this.$store.dispatch('PRESS_RECOMMEND', data);
 			this.$store.commit('TOGGLE_RECOMMEND');
-
-			// this.isRecommend = !this.isRecommend;
 		},
 	},
 };
@@ -115,5 +140,11 @@ export default {
 }
 .button_right button {
 	margin: 0 2px;
+}
+.textRecommend {
+	color: #ff4d4f;
+}
+.btnRecommend {
+	border: 1px solid #ff4d4f;
 }
 </style>
