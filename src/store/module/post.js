@@ -4,8 +4,9 @@ import {
 	lookupPosts,
 	deletePost,
 	// editPost,
+	createComment,
+	pressRecommend,
 } from '@/api/postApi';
-import { createComment, pressRecommend } from '@/api/postAddonApi';
 
 const state = {
 	posts: [],
@@ -89,7 +90,8 @@ const actions = {
 	},
 	async PRESS_RECOMMEND(context, userData) {
 		try {
-			await pressRecommend(userData);
+			const res = await pressRecommend(userData);
+			console.log(res);
 		} catch (err) {
 			console.error(err);
 		}

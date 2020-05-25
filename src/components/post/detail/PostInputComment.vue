@@ -36,6 +36,7 @@ export default {
 				contents: this.commentData,
 				userId: this.$store.getters.getUserData.userId,
 				nickname: this.$store.getters.getUserData.nickname,
+				postNumber: this.$route.params.postId,
 			};
 			this.$store.dispatch('CREATE_COMMENT', submitData);
 			this.commentData = '';

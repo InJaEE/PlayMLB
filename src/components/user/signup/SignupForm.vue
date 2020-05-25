@@ -111,9 +111,13 @@ export default {
 				if (errMsg === 'used nickname') {
 					this.alertModalStatus.title = '이미 사용중인 닉네임입니다.';
 					this.alertModalStatus.subTitle = '다른 닉네임을 입력해주세요.';
+					this.nickname = '';
+					this.password = '';
 				} else if (errMsg === 'used id') {
 					this.alertModalStatus.title = '이미 사용중인 아이디입니다.';
 					this.alertModalStatus.subTitle = '다른 아이디를 입력해주세요.';
+					this.userId = '';
+					this.password = '';
 				}
 				this.alertModalStatus.status = 'warning';
 				this.alertModalStatus.visible = true;

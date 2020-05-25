@@ -15,4 +15,8 @@ export default [
 		},
 		component: () => import('@/components/post/PostWrite.vue'),
 	},
+	{
+		path: '/post/:postId/edit',
+		component: () => import('@/components/post/PostEdit.vue'),
+	},
 ];

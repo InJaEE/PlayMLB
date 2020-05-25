@@ -1,7 +1,7 @@
-import { userInstance, authUserInstance } from './';
+import { authUserInstance } from './';
 
 function lookupPosts() {
-	return userInstance.get('/postWithoutAuth');
+	return authUserInstance.get('/post');
 }
 
 function createPost(data) {
@@ -9,8 +9,7 @@ function createPost(data) {
 }
 
 function lookupOnePost(postNumber) {
-	return userInstance.get(`/postWithoutAuth/${postNumber}`);
-	// return userInstance.get(`/post/${postNumber}`);
+	return authUserInstance.get(`/post/${postNumber}`);
 }
 
 function deletePost(postNumber) {
@@ -21,4 +20,20 @@ function editPost(postNumber) {
 	return authUserInstance.put(`/post/${postNumber}`);
 }
 
-export { lookupPosts, createPost, lookupOnePost, deletePost, editPost };
+function createComment(data) {
+	return authUserInstance.post(`/post/${data.postNumber}/comments`, data);
+}
+
+function pressRecommend(data) {
+	return authUserInstance.put(`/post/${data.postNumber}/recommend`, data);
+}
+
+export {
+	lookupPosts,
+	createPost,
+	lookupOnePost,
+	deletePost,
+	editPost,
+	createComment,
+	pressRecommend,
+};

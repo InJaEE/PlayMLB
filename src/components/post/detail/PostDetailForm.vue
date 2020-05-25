@@ -48,7 +48,7 @@
 				<span
 					v-if="postData.writer === this.$store.getters.getUserData.nickname"
 				>
-					<a-button>수정</a-button>
+					<a-button @click="editPost">수정</a-button>
 					<a-button type="danger" @click="deletePost">삭제</a-button>
 				</span>
 				<a-button type="primary">글쓰기</a-button>
@@ -66,7 +66,6 @@ export default {
 	computed: {
 		postData() {
 			const post = this.$store.getters.getPost;
-
 			return {
 				title: post.title,
 				contents: post.contents,
@@ -102,14 +101,20 @@ export default {
 			const data = {
 				number: this.$route.params.postId,
 				userId: this.$store.getters.getUserData.userId,
+				postNumber: this.$route.params.postId,
 			};
 			await this.$store.dispatch('PRESS_RECOMMEND', data);
 			this.$store.commit('TOGGLE_RECOMMEND');
 		},
-		deletePost() {
-			this.$store.dispatch('DELETE_POST', this.$route.params.postId);
-			alert('삭제완료');
-			this.$router.push('/post');
+		editPost() {
+			this.$router.push(`/post/${this.$route.params.postId}/edit`);
+		},
+		async deletePost() {
+			if (confirm('정말로 삭제하시겠습니까?')) {
+				await this.$store.dispatch('DELETE_POST', this.$route.params.postId);
+				alert('삭제완료');
+				this.$router.push('/post');
+			}
 		},
 	},
 };
