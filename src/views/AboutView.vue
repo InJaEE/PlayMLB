@@ -1,9 +1,17 @@
 <template>
-	<div>https://github.com/InJaEE/PlayMLB</div>
+	<div>
+		https://github.com/InJaEE/PlayMLB
+		<about-main></about-main>
+	</div>
 </template>
 
 <script>
-export default {};
+import AboutMain from '@/components/AboutMain.vue';
+export default {
+	components: {
+		AboutMain,
+	},
+};
 </script>
 
 <style></style>

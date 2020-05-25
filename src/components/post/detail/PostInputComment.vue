@@ -3,11 +3,11 @@
 		<a-input-search
 			:placeholder="computedPlaceHolder"
 			size="large"
-			@search="onSearch"
+			@search="enterComment"
 			:disabled="!this.$store.getters.isLogin"
 			v-model="commentData"
 		>
-			<a-button slot="enterButton" @click="onSearch">
+			<a-button slot="enterButton" @click="enterComment">
 				등록
 			</a-button>
 		</a-input-search>
@@ -30,9 +30,7 @@ export default {
 		},
 	},
 	methods: {
-		onSearch() {
-			console.log(this.$store.getters.getUserData);
-
+		async enterComment() {
 			const submitData = {
 				number: this.$route.params.postId,
 				contents: this.commentData,
@@ -40,6 +38,7 @@ export default {
 				nickname: this.$store.getters.getUserData.nickname,
 			};
 			this.$store.dispatch('CREATE_COMMENT', submitData);
+			this.commentData = '';
 		},
 	},
 };

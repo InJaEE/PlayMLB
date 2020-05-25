@@ -1,11 +1,11 @@
-import { userInstance } from '.';
+import { authUserInstance, userInstance } from '.';
 
 function createComment(data) {
-	return userInstance.post('/postAddon/comments', data);
+	return authUserInstance.post('/post/comments', data);
 }
 
 function pressRecommend(data) {
-	return userInstance.put('/postAddon/recommend', data);
+	return authUserInstance.put('/post/recommend', data);
 }
 
 export { createComment, pressRecommend };

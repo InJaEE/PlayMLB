@@ -11,6 +11,7 @@
 						<span>작성일: {{ postData.createdAt }}</span>
 					</span>
 					<span class="header_right">
+						<span>추천: {{ postData.countRecommend }}</span> |
 						<span>조회수: {{ postData.views }} </span>
 					</span>
 				</div>
@@ -48,7 +49,7 @@
 					v-if="postData.writer === this.$store.getters.getUserData.nickname"
 				>
 					<a-button>수정</a-button>
-					<a-button type="danger">삭제</a-button>
+					<a-button type="danger" @click="deletePost">삭제</a-button>
 				</span>
 				<a-button type="primary">글쓰기</a-button>
 			</span>
@@ -65,12 +66,14 @@ export default {
 	computed: {
 		postData() {
 			const post = this.$store.getters.getPost;
+
 			return {
 				title: post.title,
 				contents: post.contents,
 				writer: post.createdBy,
 				views: post.views,
 				recommend: post.recommend,
+				countRecommend: post.countRecommend,
 				createdAt: moment(post.createdAt).format('YY.MM.DD HH:mm'),
 			};
 		},
@@ -102,6 +105,11 @@ export default {
 			};
 			await this.$store.dispatch('PRESS_RECOMMEND', data);
 			this.$store.commit('TOGGLE_RECOMMEND');
+		},
+		deletePost() {
+			this.$store.dispatch('DELETE_POST', this.$route.params.postId);
+			alert('삭제완료');
+			this.$router.push('/post');
 		},
 	},
 };

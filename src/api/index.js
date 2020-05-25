@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setInterceptors } from './interceptors/';
 
 let serverURL;
 
@@ -16,4 +17,12 @@ const userInstance = axios.create({
 	baseURL: serverURL,
 });
 
+function userInstanceWithAuth() {
+	const userInstance = axios.create({
+		baseURL: serverURL,
+	});
+	return setInterceptors(userInstance);
+}
+
 export { instance, userInstance };
+export const authUserInstance = userInstanceWithAuth();

@@ -1,4 +1,4 @@
-import { loginUser, kakaoLoginUser } from '@/api/userApi';
+import { loginUser, kakaoLoginUser, signupUser } from '@/api/userApi';
 import {
 	saveAuthToCookie,
 	saveIdToCookie,
@@ -62,22 +62,24 @@ const actions = {
 				console.log('Login Failed: Unauthorized');
 			}
 		} catch (err) {
-			console.error(err);
-			alert('서버와의 연결이 끊어졌습니다.');
-			throw err;
+			//console.error(err);
+			alert(err.response.data);
 		}
 	},
 	async KAKAO_LOGIN_USER({ commit }, userData) {
 		const res = await kakaoLoginUser(userData);
 		const user = {
-			userId: res.data.user.userId,
-			nickname: res.data.user.nickname,
+			userId: res.data.userId,
+			nickname: res.data.nickname,
 			token: res.data.token,
 		};
 		commit('SET_USER_DATA', user);
 		saveAuthToCookie(res.data.token);
-		saveIdToCookie(res.data.user.userId);
-		saveUserToCookie(res.data.user.nickname);
+		saveIdToCookie(res.data.userId);
+		saveUserToCookie(res.data.nickname);
+	},
+	async SIGNUP_USER({ commit }, userData) {
+		await signupUser(userData);
 	},
 };
 export default {

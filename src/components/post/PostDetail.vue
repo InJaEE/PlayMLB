@@ -1,16 +1,17 @@
 <template>
 	<div>
 		<post-detail-form></post-detail-form>
+		<!-- <button @click="addComment">TEST</button> -->
 		<div class="comment">
 			<post-input-comment></post-input-comment>
-			<div v-for="(item, index) in comments" :key="index">
+			<div v-for="(item, index) in commentList" :key="index">
 				<div v-if="currentComment(index)">
 					<post-comment :comment="item"></post-comment>
 				</div>
 			</div>
 			<a-pagination
 				:current="currentCommentPage"
-				:total="comments.length"
+				:total="commentList.length"
 				:pageSize="commentPageSize"
 				@change="changePage"
 				:hideOnSinglePage="true"
@@ -37,7 +38,11 @@ export default {
 			commentPageSize: 5,
 		};
 	},
-	computed: {},
+	computed: {
+		commentList() {
+			return this.comments;
+		},
+	},
 	methods: {
 		currentComment(index) {
 			return (
@@ -46,6 +51,9 @@ export default {
 		},
 		changePage(i) {
 			this.currentCommentPage = i;
+		},
+		addComment(v) {
+			this.comments.push(v);
 		},
 	},
 	async created() {

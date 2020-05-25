@@ -1,22 +1,24 @@
-import { userInstance } from './';
+import { userInstance, authUserInstance } from './';
 
 function lookupPosts() {
-	return userInstance.get('/post');
+	return userInstance.get('/postWithoutAuth');
 }
 
 function createPost(data) {
-	return userInstance.post('/post', data);
+	return authUserInstance.post('/post', data);
 }
 
 function lookupOnePost(postNumber) {
-	return userInstance.get(`/post/${postNumber}`);
+	return userInstance.get(`/postWithoutAuth/${postNumber}`);
+	// return userInstance.get(`/post/${postNumber}`);
 }
 
 function deletePost(postNumber) {
-	return userInstance.delete(`/post/${postNumber}`);
+	return authUserInstance.delete(`/post/${postNumber}`);
 }
 
 function editPost(postNumber) {
-	return userInstance.put(`/post/${postNumber}`);
+	return authUserInstance.put(`/post/${postNumber}`);
 }
+
 export { lookupPosts, createPost, lookupOnePost, deletePost, editPost };

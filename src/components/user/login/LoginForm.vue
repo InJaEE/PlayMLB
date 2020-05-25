@@ -72,12 +72,8 @@ export default {
 				userId,
 				password,
 			};
-			try {
-				await this.$store.dispatch('LOGIN_USER', userData);
-				this.$router.push('/');
-			} catch (err) {
-				alert('로그인 실패');
-			}
+			await this.$store.dispatch('LOGIN_USER', userData);
+			this.$router.push('/');
 		},
 	},
 };

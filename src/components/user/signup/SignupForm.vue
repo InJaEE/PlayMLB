@@ -2,6 +2,10 @@
 	<div class="wrapper">
 		<h1>회원가입</h1>
 		<div>
+			<alert-modal
+				:modalInfo="alertModalStatus"
+				@closeModal="alertModalStatus.visible = false"
+			></alert-modal>
 			<form @submit.prevent="signup">
 				<div class="id_area" :class="{ focus: this.isIdFocus }">
 					<input
@@ -46,8 +50,11 @@
 </template>
 
 <script>
-import { signupUser } from '@/api/userApi';
+import AlertModal from '@/components/common/AlertModal.vue';
 export default {
+	components: {
+		AlertModal,
+	},
 	data() {
 		return {
 			userId: '',
@@ -57,6 +64,12 @@ export default {
 			isIdFocus: false,
 			isNickFocus: false,
 			isPwdFocus: false,
+			alertModalStatus: {
+				visible: false,
+				title: '타이틀',
+				subTitle: '서브타이틀',
+				status: 'success',
+			},
 		};
 	},
 	methods: {
@@ -64,7 +77,7 @@ export default {
 			this.isIdFocus = !this.isIdFocus;
 		},
 		focusNickInputBox() {
-			this.isIdFocus = !this.isIdFocus;
+			this.isNickFocus = !this.isNickFocus;
 		},
 		focusPwdInputBox() {
 			this.isPwdFocus = !this.isPwdFocus;
@@ -72,10 +85,7 @@ export default {
 		async signup() {
 			let { userId, nickname, password } = this;
 			if (userId.trim() === '') {
-				console.log(userId);
-
 				this.logMessage = '아이디를 입력해주세요.';
-
 				return;
 			} else if (nickname.trim() === '') {
 				this.logMessage = '닉네임을 입력해주세요.';
@@ -89,11 +99,25 @@ export default {
 				password,
 				nickname,
 			};
-			const res = await signupUser(userData);
-			console.log(res);
-		},
-		kakaoSignup() {
-			alert('준비중입니다.');
+			try {
+				console.log(this.alertModalStatus);
+				await this.$store.dispatch('SIGNUP_USER', userData);
+				this.alertModalStatus.status = 'success';
+				this.alertModalStatus.title = '회원가입을 완료하였습니다.';
+				this.alertModalStatus.subTitle = 'PlayMLB에 오신것을 환영합니다!';
+				this.alertModalStatus.visible = true;
+			} catch (err) {
+				const errMsg = err.response.data.msg;
+				if (errMsg === 'used nickname') {
+					this.alertModalStatus.title = '이미 사용중인 닉네임입니다.';
+					this.alertModalStatus.subTitle = '다른 닉네임을 입력해주세요.';
+				} else if (errMsg === 'used id') {
+					this.alertModalStatus.title = '이미 사용중인 아이디입니다.';
+					this.alertModalStatus.subTitle = '다른 아이디를 입력해주세요.';
+				}
+				this.alertModalStatus.status = 'warning';
+				this.alertModalStatus.visible = true;
+			}
 		},
 	},
 };

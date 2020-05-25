@@ -3,8 +3,9 @@ import {
 	lookupOnePost,
 	lookupPosts,
 	deletePost,
-	editPost,
+	// editPost,
 } from '@/api/postApi';
+import { createComment, pressRecommend } from '@/api/postAddonApi';
 
 const state = {
 	posts: [],
@@ -28,14 +29,24 @@ const mutations = {
 	RESET_POST(state) {
 		state.post = {};
 	},
+	ADD_COMMENT(state, payload) {
+		state.post.comments.unshift(payload);
+	},
 	TOGGLE_RECOMMEND(state) {
+		const isRecommend = state.post.isRecommend;
+		if (isRecommend) {
+			state.post.countRecommend -= 1;
+		} else {
+			state.post.countRecommend += 1;
+		}
+
 		state.post.isRecommend = !state.post.isRecommend;
 	},
 };
 const actions = {
 	async CREATE_POST(context, postData) {
 		try {
-			const res = await createPost(postData);
+			await createPost(postData);
 		} catch (err) {
 			console.error(err);
 		}
@@ -51,23 +62,38 @@ const actions = {
 		} else {
 			post.isRecommend = false;
 		}
+		post.countRecommend = post.recommend.length;
+
 		post.comments.sort((a, b) => {
 			return b.createdAt < a.createdAt ? -1 : b.createdAt > a.createdAt ? 1 : 0;
 		});
-
 		commit('SET_POST', post);
 	},
 	async LOOKUP_POSTS(context) {
 		const { data } = await lookupPosts();
 		context.commit('SET_POSTS', data.posts);
 	},
-	async DELETE_POST(context, postData) {
-		const res = await deletePost();
+	async DELETE_POST(context, postNumber) {
+		await deletePost(postNumber);
 	},
-	async EDIT_POST(context, postData) {
-		const res = await editPost();
+	// async EDIT_POST(context, postData) {
+	// 	const res = await editPost();
+	// },
+	async CREATE_COMMENT(context, commentData) {
+		try {
+			context.commit('ADD_COMMENT', commentData);
+			await createComment(commentData);
+		} catch (err) {
+			console.error(err);
+		}
 	},
-	PRESS_RECOMMEND_BUTTON(context) {},
+	async PRESS_RECOMMEND(context, userData) {
+		try {
+			await pressRecommend(userData);
+		} catch (err) {
+			console.error(err);
+		}
+	},
 };
 
 export default { state, getters, mutations, actions };
