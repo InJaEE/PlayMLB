@@ -5,7 +5,7 @@
 			<input
 				type="text"
 				id="username"
-				placeholder="선수 이름을 입력해주세요."
+				placeholder="선수 이름을 영어로 입력해주세요."
 				class="input_row"
 				@focus="focusInputBox"
 				@blur="focusInputBox"

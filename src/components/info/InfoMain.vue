@@ -14,6 +14,7 @@
 import InfoHeader from './InfoHeader.vue';
 import InfoTeamMain from './team/InfoTeamMain.vue';
 import PlayerList from './player/InfoPlayerList.vue';
+
 export default {
 	components: {
 		InfoHeader,

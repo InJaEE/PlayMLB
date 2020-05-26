@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<a-modal v-model="modalInfo.visible" @ok="handleOk" :footer="null">
+		<a-modal v-model="modalInfo.visible" :footer="null">
 			<a-result
 				:status="modalInfo.status"
 				:title="modalInfo.title"

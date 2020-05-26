@@ -1,11 +1,16 @@
 <template>
 	<div>
 		<info-input></info-input>
-		<info-player-card
-			:playerList="searchResult"
-			v-if="isList"
-		></info-player-card>
-		<info-player-detail v-else></info-player-detail>
+		<div v-if="isEmpty(searchResult)">
+			<info-player-empty></info-player-empty>
+		</div>
+		<div v-else>
+			<info-player-card
+				:playerList="searchResult"
+				v-if="isList"
+			></info-player-card>
+			<info-player-detail v-else></info-player-detail>
+		</div>
 	</div>
 </template>
 
@@ -13,12 +18,19 @@
 import InfoInput from '../InfoInput.vue';
 import InfoPlayerCard from './InfoPlayerCard.vue';
 import InfoPlayerDetail from './InfoPlayerDetail.vue';
+import InfoPlayerEmpty from './InfoPlayerEmpty.vue';
 import { isEmpty } from '@/utils/check';
 export default {
 	components: {
 		InfoInput,
 		InfoPlayerCard,
 		InfoPlayerDetail,
+		InfoPlayerEmpty,
+	},
+	data() {
+		return {
+			isEmpty,
+		};
 	},
 	computed: {
 		loadingCheck() {
