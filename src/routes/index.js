@@ -59,16 +59,9 @@ const router = new VueRouter({
 			component: () => import('@/views/AboutView.vue'),
 		},
 		{
-			path: '/userInfo',
-			component: () => import('@/views/UserInfoView.vue'),
-			meta: {
-				auth: true,
-			},
-		},
-		/*{
 			path: '*',
 			redirect: '/',
-		},*/
+		},
 	],
 });
 

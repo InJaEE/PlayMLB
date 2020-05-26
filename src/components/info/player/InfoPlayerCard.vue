@@ -24,7 +24,7 @@
 								/>
 							</span>
 							<h2 class="player name">
-								{{ item.name }} #{{ item.backNumber || 'N/A' }}
+								{{ item.name }} {{ '#' + item.backNumber }}
 							</h2>
 						</div>
 					</router-link>

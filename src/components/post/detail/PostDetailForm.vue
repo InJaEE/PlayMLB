@@ -107,7 +107,8 @@ export default {
 			this.$store.commit('TOGGLE_RECOMMEND');
 		},
 		editPost() {
-			this.$router.push(`/post/${this.$route.params.postId}/edit`);
+			alert('준비중입니다.');
+			//this.$router.push(`/post/${this.$route.params.postId}/edit`);
 		},
 		async deletePost() {
 			if (confirm('정말로 삭제하시겠습니까?')) {

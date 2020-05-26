@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<info-input></info-input>
-		<div v-if="isEmpty(searchResult)">
+		<div v-if="isEmpty(searchResult) && isList">
 			<info-player-empty></info-player-empty>
 		</div>
 		<div v-else>

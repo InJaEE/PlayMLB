@@ -44,9 +44,6 @@
 					<span class="user_name">
 						{{ this.$store.getters.getUserData.nickname }}님
 					</span>
-					<span>
-						<router-link to="/userinfo">회원정보</router-link>
-					</span>
 					<span @click="logout">
 						<a style="cursor:pointer">로그아웃</a>
 					</span>

@@ -1,63 +1,73 @@
 <template>
-	<section class="about_wrapper">
-		<table>
-			<thead>
-				<tr>
-					<th>
-						Baekend
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>
-						<img src="@/assets/stack/express.png" alt="express js" />
-					</th>
-					<th>
-						<img src="@/assets/stack/mongoDB.png" alt="mongoDB" />
-					</th>
-					<th>
-						<img src="@/assets/stack/mongoose.png" alt="mongoose" />
-					</th>
-				</tr>
-			</tbody>
-		</table>
-		<table>
-			<thead>
-				<tr>
-					<th>
-						Frontend
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>Vue</th>
-					<th>Vuex</th>
-					<th>Vue router</th>
-					<th>Antd</th>
-					<th>MLB API</th>
-				</tr>
-			</tbody>
-		</table>
-	</section>
+	<div>
+		<section class="contents about_wrapper">
+			<a-card title="Backend" class="card">
+				<div v-for="item in backend" :key="item.title">
+					<a :href="item.url" target="_blank">
+						<a-card-grid>
+							<img
+								:src="require(`@/assets/stack/${item.img}`)"
+								:title="item.title"
+								:alt="item.title"
+							/>
+						</a-card-grid>
+					</a>
+				</div>
+			</a-card>
+			<a-card title="Frontend">
+				<div v-for="item in frontend" :key="item.title">
+					<a :href="item.url" target="_blank">
+						<a-card-grid>
+							<img
+								:src="require(`@/assets/stack/${item.img}`)"
+								:title="item.title"
+								:alt="item.title"
+							/>
+						</a-card-grid>
+					</a>
+				</div>
+			</a-card>
+		</section>
+		<div class="show_code">
+			<span class="value_area">
+				<a href="https://github.com/InJaEE/PlayMLB" target="_blank">
+					<a-icon type="github" theme="filled" />
+					<strong>
+						소스코드 보기
+					</strong>
+				</a>
+			</span>
+		</div>
+	</div>
 </template>
 
 <script>
-export default {};
+import { backend, frontend } from '@/data/stack.js';
+export default {
+	data() {
+		return {
+			backend,
+			frontend,
+		};
+	},
+};
 </script>
 
 <style scoped>
 .about_wrapper {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -100px;
-	margin-left: -100px;
-	width: 200px;
-	height: 200px;
+	margin-top: 100px;
 }
-table {
-	border: 1px solid black;
+img {
+	max-height: 50px;
+}
+.show_code {
+	margin: 50px 0;
+}
+.value_area {
+	font-size: 25px;
+}
+a {
+	color: black;
+	text-decoration: none;
 }
 </style>

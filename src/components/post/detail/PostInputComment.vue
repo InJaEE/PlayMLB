@@ -1,16 +1,28 @@
 <template>
-	<div>
-		<a-input-search
-			:placeholder="computedPlaceHolder"
-			size="large"
-			@search="enterComment"
-			:disabled="!this.$store.getters.isLogin"
-			v-model="commentData"
+	<div class="commentForm">
+		<div class="input_wrapper">
+			<a-input-search
+				:placeholder="computedPlaceHolder"
+				size="large"
+				@search="enterComment"
+				:disabled="!this.$store.getters.isLogin"
+				v-model="commentData"
+			>
+				<a-button
+					slot="enterButton"
+					@click="enterComment"
+					:disabled="commentLengthChk"
+				>
+					등록
+				</a-button>
+			</a-input-search>
+		</div>
+		<div
+			class="comment_limit"
+			:class="{ commentLengthWarning: commentLengthChk }"
 		>
-			<a-button slot="enterButton" @click="enterComment">
-				등록
-			</a-button>
-		</a-input-search>
+			댓글 길이: {{ commentLength }}/50
+		</div>
 	</div>
 </template>
 
@@ -28,6 +40,14 @@ export default {
 			}
 			return '댓글을 입력하려면 로그인을 해주세요.';
 		},
+		commentLength() {
+			return this.commentData.length;
+		},
+		commentLengthChk() {
+			console.log(this.commentData.length > 50);
+
+			return this.commentData.length > 50;
+		},
 	},
 	methods: {
 		async enterComment() {
@@ -44,4 +64,17 @@ export default {
 	},
 };
 </script>
-<style scoped></style>
+<style scoped>
+.commentForm {
+	padding-top: 20px;
+	border-top: 1px solid #041e42;
+	border-bottom: 1px solid #041e42;
+}
+.comment_limit {
+	text-align: left;
+	margin: 5px 20px;
+}
+.commentLengthWarning {
+	color: red;
+}
+</style>

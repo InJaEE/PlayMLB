@@ -7,6 +7,7 @@
 			v-model="contents"
 			class="input_contents"
 		/>
+		<div></div>
 		<div class="button_group">
 			<a-button type="primary" @click="submitForm">글 작성</a-button>
 			<a-button type="danger" @click="goBack">뒤로가기</a-button>
@@ -24,7 +25,14 @@ export default {
 	},
 	methods: {
 		async submitForm() {
-			// console.log('!@', this.$store.getters.getUserData);
+			if (this.title.length > 20) {
+				alert('글 제목은 30자를 넘을 수 없습니다.');
+				return;
+			}
+			if (this.contents.length > 300) {
+				alert('글 내용은 300자를 넘을 수 없습니다.');
+				return;
+			}
 
 			const submitData = {
 				title: this.title,

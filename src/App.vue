@@ -19,7 +19,7 @@
 <script>
 import AppHeader from './components/AppHeader.vue';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import isChrome from '@/utils/browserChk';
+import { isChrome } from '@/utils/check';
 
 export default {
 	components: {

@@ -1,6 +1,5 @@
 <template>
 	<div>
-		https://github.com/InJaEE/PlayMLB
 		<about-main></about-main>
 	</div>
 </template>
