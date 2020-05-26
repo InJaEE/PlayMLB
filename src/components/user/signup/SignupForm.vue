@@ -4,7 +4,7 @@
 		<div>
 			<alert-modal
 				:modalInfo="alertModalStatus"
-				@closeModal="alertModalStatus.visible = false"
+				@closeModal="closeAlertModal"
 			></alert-modal>
 			<form @submit.prevent="signup">
 				<div class="id_area" :class="{ focus: this.isIdFocus }">
@@ -100,7 +100,6 @@ export default {
 				nickname,
 			};
 			try {
-				console.log(this.alertModalStatus);
 				await this.$store.dispatch('SIGNUP_USER', userData);
 				this.alertModalStatus.status = 'success';
 				this.alertModalStatus.title = '회원가입을 완료하였습니다.';
@@ -121,6 +120,12 @@ export default {
 				}
 				this.alertModalStatus.status = 'warning';
 				this.alertModalStatus.visible = true;
+			}
+		},
+		closeAlertModal() {
+			this.alertModalStatus.visible = false;
+			if (this.alertModalStatus.status === 'success') {
+				this.$router.push('/');
 			}
 		},
 	},
