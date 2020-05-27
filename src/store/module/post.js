@@ -3,7 +3,7 @@ import {
 	lookupOnePost,
 	lookupPosts,
 	deletePost,
-	// editPost,
+	editPost,
 	createComment,
 	pressRecommend,
 } from '@/api/postApi';
@@ -58,6 +58,7 @@ const actions = {
 			return v.recommendBy === getters.getUserData.userId;
 		});
 		const post = data.post;
+		post.createdBy = post.createdBy.nickname;
 		if (chkRecommend) {
 			post.isRecommend = true;
 		} else {
@@ -77,9 +78,10 @@ const actions = {
 	async DELETE_POST(context, postNumber) {
 		await deletePost(postNumber);
 	},
-	// async EDIT_POST(context, postData) {
-	// 	const res = await editPost();
-	// },
+	async EDIT_POST(context, postData) {
+		const res = await editPost(postData);
+		console.log(res);
+	},
 	async CREATE_COMMENT(context, commentData) {
 		try {
 			context.commit('ADD_COMMENT', commentData);

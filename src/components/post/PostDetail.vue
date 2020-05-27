@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<post-detail-form></post-detail-form>
-		<!-- <button @click="addComment">TEST</button> -->
 		<div class="comment">
 			<post-input-comment></post-input-comment>
 			<div v-for="(item, index) in commentList" :key="index">
@@ -33,6 +32,7 @@ export default {
 	},
 	data() {
 		return {
+			//post: {},
 			comments: [],
 			currentCommentPage: 1,
 			commentPageSize: 5,
@@ -60,6 +60,7 @@ export default {
 		this.$store.commit('SET_LOADING', true);
 		this.$store.commit('RESET_POST');
 		await this.$store.dispatch('LOOKUP_ONE_POST', this.$route.params.postId);
+		//this.post = this.$store.getters.getPost;
 		this.comments = this.$store.getters.getPost.comments;
 		this.$store.commit('SET_LOADING', false);
 	},

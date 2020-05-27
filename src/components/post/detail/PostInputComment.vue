@@ -44,8 +44,6 @@ export default {
 			return this.commentData.length;
 		},
 		commentLengthChk() {
-			console.log(this.commentData.length > 50);
-
 			return this.commentData.length > 50;
 		},
 	},

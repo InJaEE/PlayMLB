@@ -2,7 +2,7 @@
 	<div>
 		<ul class="cardList">
 			<li v-for="item in teamList" :key="item.mlb_org" class="card">
-				<div>
+				<div @click="moveToClubPage(item[1].name)" class="urlLink">
 					<img
 						width="50px"
 						height="50px"
@@ -10,8 +10,9 @@
 							`https://www.mlbstatic.com/team-logos/team-cap-on-light/${item[1].mlb_org_id}.svg`
 						"
 						:alt="item[1].name_display_full"
-					/><br />
-					<h4 @click="moveToClubPage(item[1].name)" class="urlLink">
+						class="clubImg"
+					/>
+					<h4>
 						{{ item[1].name_display_full }}
 					</h4>
 				</div>
@@ -49,5 +50,8 @@ li {
 .urlLink {
 	cursor: pointer;
 	color: #2b2ba5;
+}
+.clubImg {
+	margin-bottom: 10px;
 }
 </style>

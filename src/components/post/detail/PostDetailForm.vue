@@ -11,8 +11,7 @@
 						<span>작성일: {{ postData.createdAt }}</span>
 					</span>
 					<span class="header_right">
-						<span>추천: {{ postData.countRecommend }}</span> |
-						<span>조회수: {{ postData.views }} </span>
+						<span>추천: {{ postData.countRecommend }}</span>
 					</span>
 				</div>
 			</span>
@@ -51,7 +50,7 @@
 					<a-button @click="editPost">수정</a-button>
 					<a-button type="danger" @click="deletePost">삭제</a-button>
 				</span>
-				<a-button type="primary">글쓰기</a-button>
+				<a-button type="primary" @click="moveNewPost">글쓰기</a-button>
 			</span>
 		</div>
 	</div>
@@ -64,18 +63,6 @@ export default {
 		return {};
 	},
 	computed: {
-		postData() {
-			const post = this.$store.getters.getPost;
-			return {
-				title: post.title,
-				contents: post.contents,
-				writer: post.createdBy,
-				views: post.views,
-				recommend: post.recommend,
-				countRecommend: post.countRecommend,
-				createdAt: moment(post.createdAt).format('YY.MM.DD HH:mm'),
-			};
-		},
 		isRecommend() {
 			return this.$store.getters.getPost.isRecommend;
 		},
@@ -87,6 +74,18 @@ export default {
 			} else {
 				return grayColor;
 			}
+		},
+		postData() {
+			const post = this.$store.getters.getPost;
+			return {
+				title: post.title,
+				contents: post.contents,
+				writer: post.createdBy,
+				views: post.views,
+				recommend: post.recommend,
+				countRecommend: post.countRecommend,
+				createdAt: moment(post.createdAt).format('YY.MM.DD HH:mm'),
+			};
 		},
 	},
 	methods: {
@@ -116,6 +115,21 @@ export default {
 				alert('삭제완료');
 				this.$router.push('/post');
 			}
+		},
+		moveNewPost() {
+			this.$router.push('/newPost');
+		},
+		initPostData() {
+			const post = this.$store.getters.getPost;
+			this.postData = {
+				title: post.title,
+				contents: post.contents,
+				writer: post.createdBy,
+				views: post.views,
+				recommend: post.recommend,
+				countRecommend: post.countRecommend,
+				createdAt: moment(post.createdAt).format('YY.MM.DD HH:mm'),
+			};
 		},
 	},
 };

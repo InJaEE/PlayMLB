@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<a-table
-			:columns="columns"
+			:columns="Columns"
 			:data-source="posts"
 			:customRow="customRow"
 			:pagination="pagination"
@@ -15,54 +15,12 @@
 
 <script>
 import { formatFullDate } from '@/utils/filters';
-const columns = [
-	{
-		title: '글번호',
-		dataIndex: 'key',
-		width: '10%',
-		key: 'number',
-		align: 'center',
-	},
-	{
-		title: '제목',
-		dataIndex: 'title',
-		width: '40%',
-		key: 'title',
-		align: 'center',
-	},
-	{
-		title: '조회수',
-		dataIndex: 'views',
-		width: '10%',
-		key: 'views',
-		align: 'center',
-	},
-	{
-		title: '글쓴이',
-		dataIndex: 'writer',
-		width: '10%',
-		key: 'writer',
-		align: 'center',
-	},
-	{
-		title: '작성일',
-		dataIndex: 'created',
-		width: '10%',
-		key: 'created',
-		align: 'center',
-	},
-	{
-		title: '추천',
-		dataIndex: 'recommend',
-		width: '10%',
-		key: 'recommend',
-		align: 'center',
-	},
-];
+import Columns from '@/data/postHeader';
+
 export default {
 	data() {
 		return {
-			columns,
+			Columns,
 			posts: [],
 			pagination: {
 				position: 'top',
@@ -76,8 +34,7 @@ export default {
 				const obj = {
 					key: v.number,
 					title: v.title,
-					views: v.views,
-					writer: v.createdBy,
+					writer: v.createdBy.nickname,
 					created: formatFullDate(v.createdAt),
 					recommend: v.recommend.length,
 				};
@@ -87,12 +44,22 @@ export default {
 				return b.key - a.key;
 			});
 			this.posts = data;
+			// this.posts.unshift({
+			// 	key: '공지사항',
+			// 	title: 'MLB에 관련한 내용만 작성해주세요.',
+			// 	writer: '관리자',
+			// 	created: '1999.12.20',
+			// 	recommend: 99,
+			// });
 		},
 		customRow(record) {
 			const vm = this;
 			return {
 				on: {
 					async click() {
+						if (record.key === '공지사항') {
+							return;
+						}
 						vm.$router.push(`/post/${record.key}`);
 					},
 				},

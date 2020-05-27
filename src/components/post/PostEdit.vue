@@ -1,9 +1,16 @@
 <template>
-	<div>edit</div>
+	<div>
+		<edit-form></edit-form>
+	</div>
 </template>
 
 <script>
-export default {};
+import EditForm from '@/components/post/write/EditForm.vue';
+export default {
+	components: {
+		EditForm,
+	},
+};
 </script>
 
 <style></style>

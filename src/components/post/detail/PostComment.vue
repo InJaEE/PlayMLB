@@ -1,6 +1,6 @@
 <template>
 	<a-comment>
-		<a slot="author"><a-icon type="user" /> {{ comment.nickname }}</a>
+		<a slot="author"><a-icon type="user" /> {{ comment.createdBy.nickname }}</a>
 		<p slot="content" style="text-align:left">
 			{{ comment.contents }}
 		</p>

@@ -2,15 +2,15 @@
 	<div>
 		<league-menu></league-menu>
 		<div class="league">
-			<h3>동부지구</h3>
+			<div>동부지구</div>
 			<info-team-list :teamList="eastClubList"></info-team-list>
 		</div>
 		<div class="league">
-			<h3>중부지구</h3>
+			<div>중부지구</div>
 			<info-team-list :teamList="centralClubList"></info-team-list>
 		</div>
 		<div class="league">
-			<h3>서부지구</h3>
+			<div>서부지구</div>
 			<info-team-list :teamList="westClubList"></info-team-list>
 		</div>
 	</div>
@@ -74,7 +74,10 @@ export default {
 	margin: 30px 0;
 	border-bottom: 1px solid black;
 }
-.league h3 {
+.league div {
 	margin-bottom: 30px;
+	font-size: 15px;
+	font-family: 'Serif';
+	font-weight: bold;
 }
 </style>
