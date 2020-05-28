@@ -3,6 +3,7 @@ import {
 	lookupOnePost,
 	lookupPosts,
 	deletePost,
+	lookupForEdit,
 	editPost,
 	createComment,
 	pressRecommend,
@@ -40,7 +41,6 @@ const mutations = {
 		} else {
 			state.post.countRecommend += 1;
 		}
-
 		state.post.isRecommend = !state.post.isRecommend;
 	},
 };
@@ -78,8 +78,12 @@ const actions = {
 	async DELETE_POST(context, postNumber) {
 		await deletePost(postNumber);
 	},
+	async LOOKUP_FOR_EDIT(context, postNumber) {
+		const res = await lookupForEdit(postNumber);
+		context.commit('SET_POST', res.data);
+	},
 	async EDIT_POST(context, postData) {
-		const res = await editPost(postData);
+		const res = await editPost(postData.number, postData.data);
 		console.log(res);
 	},
 	async CREATE_COMMENT(context, commentData) {

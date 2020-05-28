@@ -34,12 +34,12 @@ const mutations = {
 		state.token = userData.token;
 	},
 	LOGOUT_USER(state) {
-		deleteCookie('playMLB_user');
-		deleteCookie('playMLB_id');
 		deleteCookie('playMLB_auth');
+		deleteCookie('playMLB_id');
+		deleteCookie('playMLB_user');
+		state.token = '';
 		state.userId = '';
 		state.nickname = '';
-		state.token = '';
 	},
 };
 const actions = {

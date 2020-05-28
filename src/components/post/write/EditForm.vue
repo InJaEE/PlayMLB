@@ -1,18 +1,21 @@
 <template>
 	<div class="contents">
 		<div>
-			<a-input placeholder="제목" v-model="title" class="input_title"></a-input>
+			<a-input
+				placeholder="제목"
+				v-model="post.title"
+				class="input_title"
+			></a-input>
 		</div>
 		<a-textarea
 			placeholder="내용"
 			:rows="10"
 			class="input_contents"
-			v-model="contents"
+			v-model="post.contents"
 		>
 		</a-textarea>
 		<div class="button_group">
 			<a-button type="primary" @click="submitForm">수정하기</a-button>
-			<a-button type="danger" @click="goBack">뒤로가기</a-button>
 		</div>
 	</div>
 </template>
@@ -22,14 +25,13 @@ import { notification } from 'ant-design-vue';
 export default {
 	data() {
 		return {
-			title: '',
-			contents: '',
+			post: {},
 		};
 	},
 	methods: {
 		async submitForm() {
-			const titleLeng = this.title.length;
-			const contentsLeng = this.contents.length;
+			const titleLeng = this.post.title.length;
+			const contentsLeng = this.post.contents.length;
 			if (titleLeng > 20) {
 				notification.open({
 					message: '글 제목은 30자를 넘을 수 없습니다.',
@@ -53,20 +55,28 @@ export default {
 				return;
 			}
 			const submitData = {
-				title: this.title,
-				contents: this.contents,
+				title: this.post.title,
+				contents: this.post.contents,
 			};
-			await this.$store.dispatch('EDIT_POST', submitData);
+			await this.$store.dispatch('EDIT_POST', {
+				number: this.$route.params.postId,
+				data: submitData,
+			});
 			this.$router.push('/post');
 		},
-		goBack() {
-			if (this.contents.length > 0) {
-				if (!confirm('정말 뒤로가시겠습니까?')) {
-					return;
-				}
-			}
-			this.$router.go(-1);
-		},
+	},
+	async created() {
+		this.$store.commit('SET_LOADING', true);
+		try {
+			await this.$store.dispatch('LOOKUP_FOR_EDIT', this.$route.params.postId);
+		} catch (err) {
+			alert('잘못된 접근입니다.');
+			console.error(err);
+			this.$router.push('/post');
+		} finally {
+			this.$store.commit('SET_LOADING', false);
+		}
+		this.post = this.$store.getters.getPost;
 	},
 };
 </script>

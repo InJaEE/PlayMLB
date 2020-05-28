@@ -16,6 +16,7 @@ function getAuthFromCookie() {
 		'$1',
 	);
 }
+
 function getIdFromCookie() {
 	return document.cookie.replace(
 		/(?:(?:^|.*;\s*)playMLB_id\s*=\s*([^;]*).*$)|^.*$/,

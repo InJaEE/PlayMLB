@@ -16,8 +16,12 @@ function deletePost(postNumber) {
 	return authUserInstance.delete(`/post/${postNumber}`);
 }
 
-function editPost(postNumber) {
-	return authUserInstance.put(`/post/${postNumber}`);
+function lookupForEdit(postNumber) {
+	return authUserInstance.put(`/post/${postNumber}/edit`);
+}
+
+function editPost(postNumber, postData) {
+	return authUserInstance.put(`/post/${postNumber}`, postData);
 }
 
 function createComment(data) {
@@ -33,6 +37,7 @@ export {
 	createPost,
 	lookupOnePost,
 	deletePost,
+	lookupForEdit,
 	editPost,
 	createComment,
 	pressRecommend,
