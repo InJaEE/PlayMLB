@@ -83,8 +83,8 @@ const actions = {
 		context.commit('SET_POST', res.data);
 	},
 	async EDIT_POST(context, postData) {
-		const res = await editPost(postData.number, postData.data);
-		console.log(res);
+		await editPost(postData.number, postData.data);
+		//console.log(res);
 	},
 	async CREATE_COMMENT(context, commentData) {
 		try {
@@ -96,8 +96,8 @@ const actions = {
 	},
 	async PRESS_RECOMMEND(context, userData) {
 		try {
-			const res = await pressRecommend(userData);
-			console.log(res);
+			await pressRecommend(userData);
+			//console.log(res);
 		} catch (err) {
 			console.error(err);
 		}

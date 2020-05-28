@@ -1,5 +1,6 @@
 <template>
 	<div>
+		Use Vue-tiny-slider
 		<img class="contents" src="@/assets/scherzer.jpg" alt="" />
 	</div>
 </template>

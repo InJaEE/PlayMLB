@@ -78,7 +78,7 @@ const actions = {
 		saveIdToCookie(res.data.userId);
 		saveUserToCookie(res.data.nickname);
 	},
-	async SIGNUP_USER({ commit }, userData) {
+	async SIGNUP_USER(context, userData) {
 		await signupUser(userData);
 	},
 };
