@@ -1,5 +1,6 @@
 <template>
 	<div class="contents">
+		<h1>글 작성하기</h1>
 		<div>
 			<a-input placeholder="제목" v-model="title" class="input_title"></a-input>
 		</div>

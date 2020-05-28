@@ -1,5 +1,6 @@
 <template>
 	<div class="contents">
+		<h1>글 수정하기</h1>
 		<div>
 			<a-input
 				placeholder="제목"

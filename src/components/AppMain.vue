@@ -1,20 +1,25 @@
 <template>
 	<div class="contents">
-		<vue-tiny-slider v-bind="tinySliderOptions">
+		<a-carousel arrows :autoplay="true">
+			<div
+				slot="prevArrow"
+				class="custom-slick-arrow"
+				style="left: 10px;zIndex: 1"
+			>
+				<a-icon type="left-circle" />
+			</div>
+			<div slot="nextArrow" class="custom-slick-arrow" style="right: 10px">
+				<a-icon type="right-circle" />
+			</div>
 			<template v-for="(item, index) in imgs">
 				<img :src="require(`@/assets/slider/${item}.jpg`)" :key="index" />
-				<!-- <img src="@/assets/slider/1.jpg" alt="" /> -->
 			</template>
-		</vue-tiny-slider>
+		</a-carousel>
 	</div>
 </template>
 
 <script>
-import VueTinySlider from 'vue-tiny-slider';
 export default {
-	components: {
-		VueTinySlider,
-	},
 	data() {
 		return {
 			tinySliderOptions: {
@@ -52,14 +57,30 @@ export default {
 	max-height: 800px;
 	border-radius: 20px 20px;
 }
-.pageBtn {
-	border: 0;
-	padding: 0;
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	margin-top: -18px;
-	z-index: 1;
-	background: transparent;
+.ant-carousel >>> .slick-slide {
+	text-align: center;
+	/* height: 160px; */
+	line-height: 160px;
+	background: #364d79;
+	overflow: hidden;
+}
+
+.ant-carousel >>> .custom-slick-arrow {
+	width: 25px;
+	height: 25px;
+	font-size: 25px;
+	color: #fff;
+	background-color: rgba(31, 45, 61, 0.11);
+	opacity: 0.3;
+}
+.ant-carousel >>> .custom-slick-arrow:before {
+	display: none;
+}
+.ant-carousel >>> .custom-slick-arrow:hover {
+	opacity: 0.5;
+}
+
+.ant-carousel >>> .slick-slide h3 {
+	color: #fff;
 }
 </style>
