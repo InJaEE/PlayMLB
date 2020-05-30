@@ -62,7 +62,7 @@ export default {
 
 <style scoped>
 .stat_wrapper {
-	width: 70%;
+	width: 80%;
 	margin: 0 auto;
 	margin-top: 20px;
 	margin-bottom: 50px;

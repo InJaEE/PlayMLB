@@ -107,4 +107,9 @@ export default {
 .seasonSelected {
 	border-bottom: solid 3px #057aff;
 }
+h3 {
+	font-size: 20px;
+	font-family: 'Serif';
+	font-weight: bold;
+}
 </style>

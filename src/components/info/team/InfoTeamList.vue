@@ -12,7 +12,7 @@
 						:alt="item[1].name_display_full"
 						class="clubImg"
 					/>
-					<h4>
+					<h4 class="teamName">
 						{{ item[1].name_display_full }}
 					</h4>
 				</div>
@@ -48,7 +48,10 @@ li {
 	width: 100%;
 }
 .urlLink {
+	margin-top: 20px;
 	cursor: pointer;
+}
+.teamName {
 	color: #2b2ba5;
 }
 .clubImg {
