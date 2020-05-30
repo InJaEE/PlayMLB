@@ -38,7 +38,7 @@ export default {
 			if (this.$store.getters.isLogin) {
 				return '댓글을 입력해주세요.';
 			}
-			return '댓글을 입력하려면 로그인을 해주세요.';
+			return '댓글을 입력하려면 로그인 해주세요.';
 		},
 		commentLength() {
 			return this.commentData.length;

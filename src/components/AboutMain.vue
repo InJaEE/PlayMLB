@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<test-card></test-card>
 		<section class="contents about_wrapper">
 			<a-card title="Backend" class="card">
 				<div v-for="item in backend" :key="item.title">
@@ -44,11 +43,7 @@
 
 <script>
 import { backend, frontend } from '@/data/stack.js';
-import TestCard from '@/components/TestCard';
 export default {
-	components: {
-		TestCard,
-	},
 	data() {
 		return {
 			backend,

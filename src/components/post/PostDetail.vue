@@ -32,7 +32,6 @@ export default {
 	},
 	data() {
 		return {
-			//post: {},
 			comments: [],
 			currentCommentPage: 1,
 			commentPageSize: 5,

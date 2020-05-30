@@ -1,100 +1,72 @@
 <template>
 	<div>
-		<div class="player_card">
-			<div class="player_img">
-				<img
+		<a-skeleton
+			:loading="false"
+			style="align-items: center"
+			class="player_info"
+		>
+			<a-list-item-meta>
+				<div slot="description">
+					<a-descriptions bordered :column="2">
+						<a-descriptions-item label="이름">
+							{{ playerDetail.name }}
+						</a-descriptions-item>
+						<a-descriptions-item label="트위터">
+							<a
+								:href="`https://www.twitter.com/${playerDetail.twitter}`"
+								target="_blank"
+							>
+								<i class="fab fa-twitter"></i>
+								{{ playerDetail.twitter }}
+							</a>
+						</a-descriptions-item>
+						<a-descriptions-item label="생년월일">
+							{{ playerDetail.birthDate }}
+						</a-descriptions-item>
+						<a-descriptions-item label="출생">
+							{{ playerDetail.country }} {{ playerDetail.birthCity }}
+						</a-descriptions-item>
+						<a-descriptions-item label="소속팀">
+							{{ playerDetail.teamName }}
+						</a-descriptions-item>
+						<a-descriptions-item label="포지션">
+							{{
+								`${playerDetail.position}(${playerDetail.throwsHand}${playerDetail.batsHand})`
+							}}
+						</a-descriptions-item>
+						<a-descriptions-item label="등번호">
+							{{ playerDetail.backNumber }}
+						</a-descriptions-item>
+						<a-descriptions-item label="신장/체중">
+							{{ playerDetail.height }}/{{ playerDetail.weight }}
+						</a-descriptions-item>
+						<a-descriptions-item label="고등학교">
+							{{ playerDetail.highSchool || '-' }}
+						</a-descriptions-item>
+						<a-descriptions-item label="대학교">
+							{{ playerDetail.college || '-' }}
+						</a-descriptions-item>
+						<a-descriptions-item label="데뷔일">
+							{{ playerDetail.debutDate }}
+						</a-descriptions-item>
+						<a-descriptions-item label="별명">
+							{{ playerDetail.nickname || '-' }}
+						</a-descriptions-item>
+					</a-descriptions>
+				</div>
+				<a-avatar
+					slot="avatar"
+					shape="square"
+					:size="150"
+					style="height: 250px;"
+					ref="playerAvatar"
 					:src="
 						`https://securea.mlb.com/mlb/images/players/head_shot/${playerDetail.playerId}.jpg`
 					"
-					:alt="playerDetail.name"
-					@error="imgError"
+					:loadError="imgError"
 				/>
-			</div>
-			<span class="player_info">
-				<div>
-					<span>
-						<strong>이름: </strong>
-						<span>{{ playerDetail.name }}</span>
-					</span>
-				</div>
-				<div>
-					<span>
-						<strong>생년월일: </strong>
-						<span>{{ playerDetail.birthDate }}</span>
-					</span>
-				</div>
-				<div>
-					<span>
-						<strong>소속팀: </strong>
-						<span>{{ playerDetail.teamName }}</span>
-					</span>
-				</div>
-				<div>
-					<span>
-						<strong>등번호: </strong>
-						<span>#{{ playerDetail.backNumber }}</span>
-					</span>
-				</div>
-
-				<div>
-					<span>
-						<strong>고등학교: </strong>
-						<span>{{ playerDetail.highSchool || '-' }}</span>
-					</span>
-				</div>
-				<div>
-					<span>
-						<strong>데뷔일: </strong>
-						<span>{{ playerDetail.debutDate }}</span>
-					</span>
-				</div>
-			</span>
-			<div>
-				<div>
-					<span>
-						<a
-							:href="`https://www.twitter.com/${playerDetail.twitter}`"
-							target="_blank"
-						>
-							<i class="fab fa-twitter"></i>
-							{{ playerDetail.twitter }}
-						</a>
-					</span>
-				</div>
-				<div>
-					<span>
-						<strong>출생: </strong>
-						<span>{{ playerDetail.country }} {{ playerDetail.birthCity }}</span>
-					</span>
-				</div>
-				<div>
-					<span>
-						<strong>포지션: </strong>
-						<span>{{
-							`${playerDetail.position}(${playerDetail.throwsHand}${playerDetail.batsHand})`
-						}}</span>
-					</span>
-				</div>
-				<div>
-					<span>
-						<strong>신장/체중: </strong>
-						<span> {{ playerDetail.height }}/{{ playerDetail.weight }} </span>
-					</span>
-				</div>
-				<div>
-					<span>
-						<strong>대학교: </strong>
-						<span>{{ playerDetail.college || '-' }}</span>
-					</span>
-				</div>
-				<div>
-					<span>
-						<strong>별명: </strong>
-						<span>{{ playerDetail.nickname || '-' }}</span>
-					</span>
-				</div>
-			</div>
-		</div>
+			</a-list-item-meta>
+		</a-skeleton>
 	</div>
 </template>
 
@@ -102,11 +74,8 @@
 export default {
 	props: ['playerDetail'],
 	methods: {
-		moveToTwitter(twitterURL) {
-			window.open(`www.twitter.com/${twitterURL}`, '_blank');
-		},
-		imgError(e) {
-			e.target.src =
+		imgError() {
+			this.$refs.playerAvatar.src =
 				'https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg';
 		},
 	},
@@ -114,36 +83,15 @@ export default {
 </script>
 
 <style scoped>
-.player_card {
-	overflow: hidden;
-	border: 1px solid #cfcfcf;
-	padding: 10px 20px;
+.player_info {
+	max-width: 800px;
+	max-height: 500px;
 	margin: 0 auto;
-	margin-top: 10px;
-	width: 60%;
-	display: flex;
-	justify-content: space-between;
-}
-.player_card .player_img {
-	float: left;
-	width: 98px;
-	margin-right: 40px;
-}
-.player_img img {
-	width: 100%;
-}
-.player_card ul {
-	display: block;
-	width: 420px;
-	float: left;
 }
 a:visited {
 	color: blue;
 }
 a:active {
 	color: blue;
-}
-.player_info > div > span {
-	margin-right: 5px;
 }
 </style>

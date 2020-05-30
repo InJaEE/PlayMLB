@@ -24,12 +24,6 @@ export default {
 		InfoPlayerDetailHitterStat,
 		InfoPlayerDetailPitcherStat,
 	},
-	data() {
-		return {
-			//playerDetail: [],
-			//seasonStat: [],
-		};
-	},
 	computed: {
 		playerPosition() {
 			const { position } = this.$store.getters.fetchedPlayerDetail;
