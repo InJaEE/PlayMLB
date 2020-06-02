@@ -31,24 +31,12 @@
 </template>
 
 <script>
+import { pitcherTableHeader } from '@/data/statTableHeader';
 export default {
 	props: ['stat'],
 	data() {
 		return {
-			thList: [
-				'시즌',
-				'팀',
-				'승',
-				'패',
-				'세이브',
-				'평균자책',
-				'탈삼진',
-				'이닝',
-				'피안타',
-				'피홈런',
-				'볼넷',
-				'경기수',
-			],
+			thList: pitcherTableHeader,
 		};
 	},
 };

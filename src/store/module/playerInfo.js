@@ -54,28 +54,28 @@ const mutations = {
 const actions = {
 	// 검색 후 검색결과의 선수ID를 담아둔다.
 	async FETCH_PLAYER_ID({ commit }, name) {
-		// try {
-		const res = await getPlayers(name);
-		const data = res.data.search_player_all.queryResults.row;
-		const playerList = [];
-		// try {
-		if (data.constructor === Object) {
-			playerList.push(data.player_id);
-		} else {
-			data.forEach(v => {
-				playerList.push(v.player_id);
-			});
+		try {
+			const res = await getPlayers(name);
+			const data = res.data.search_player_all.queryResults.row;
+			const playerList = [];
+			// try {
+			if (data.constructor === Object) {
+				playerList.push(data.player_id);
+			} else {
+				data.forEach(v => {
+					playerList.push(v.player_id);
+				});
+			}
+			// } catch (err) {
+			// 	if (err.name === 'TypeError') {
+			// 		alert('검색결과가 존재하지 않습니다');
+			// 	}
+			// }
+			commit('SET_PLAYER_ID_LIST', playerList);
+			return res;
+		} catch (err) {
+			console.error(err);
 		}
-		// } catch (err) {
-		// 	if (err.name === 'TypeError') {
-		// 		alert('검색결과가 존재하지 않습니다');
-		// 	}
-		// }
-		commit('SET_PLAYER_ID_LIST', playerList);
-		return res;
-		// } catch (err) {
-		// 	console.error(err);
-		// }
 	},
 	// 여러명
 	// 담아둔 선수ID로 기본정보 조회
@@ -159,7 +159,6 @@ const actions = {
 					});
 					continue;
 				}
-
 				result.push(data);
 			}
 			const careerStat = await dispatch('FETCH_HITTER_CAREER_STAT', playerId);
@@ -200,7 +199,6 @@ const actions = {
 					});
 					continue;
 				}
-				//////////////////////////////////
 				statAvg.w += Number(data.w);
 				statAvg.l += Number(data.l);
 				statAvg.sv += Number(data.sv);
@@ -211,7 +209,6 @@ const actions = {
 				statAvg.hr += Number(data.hr);
 				statAvg.bb += Number(data.bb);
 				statAvg.g += Number(data.g);
-				//////////////////////////////////
 				result.push(data);
 			}
 
@@ -224,12 +221,15 @@ const actions = {
 		}
 	},
 	async FETCH_HITTER_CAREER_STAT(store, playerId) {
-		const res = await getHitterCareerStat(playerId);
-		const data = res.data.sport_career_hitting.queryResults.row;
-
-		data.season = 'Total';
-		data.team_short = '-';
-		return data;
+		try {
+			const res = await getHitterCareerStat(playerId);
+			const data = res.data.sport_career_hitting.queryResults.row;
+			data.season = 'Total';
+			data.team_short = '-';
+			return data;
+		} catch (err) {
+			console.error(err);
+		}
 	},
 };
 

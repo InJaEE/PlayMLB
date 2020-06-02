@@ -1,4 +1,0 @@
-- 전체팀
-    - https://lookup-service-prod.mlb.com/json/named.team_all_season.bam?sport_code='mlb'&all_star_sw='N'&season=2019
-- 리그
-    - league, division_abbrev
