@@ -53,23 +53,31 @@ const actions = {
 		}
 	},
 	async LOOKUP_ONE_POST({ getters, commit }, postData) {
-		const { data } = await lookupOnePost(postData);
-		const chkRecommend = data.post.recommend.find(v => {
-			return v.recommendBy === getters.getUserData.userId;
-		});
-		const post = data.post;
-		post.createdBy = post.createdBy.nickname;
-		if (chkRecommend) {
-			post.isRecommend = true;
-		} else {
-			post.isRecommend = false;
-		}
-		post.countRecommend = post.recommend.length;
+		try {
+			const { data } = await lookupOnePost(postData);
+			const chkRecommend = data.post.recommend.find(v => {
+				return v.recommendBy === getters.getUserData.userId;
+			});
+			const post = data.post;
+			post.createdBy = post.createdBy.nickname;
+			if (chkRecommend) {
+				post.isRecommend = true;
+			} else {
+				post.isRecommend = false;
+			}
+			post.countRecommend = post.recommend.length;
 
-		post.comments.sort((a, b) => {
-			return b.createdAt < a.createdAt ? -1 : b.createdAt > a.createdAt ? 1 : 0;
-		});
-		commit('SET_POST', post);
+			post.comments.sort((a, b) => {
+				return b.createdAt < a.createdAt
+					? -1
+					: b.createdAt > a.createdAt
+					? 1
+					: 0;
+			});
+			commit('SET_POST', post);
+		} catch (err) {
+			console.error();
+		}
 	},
 	async LOOKUP_POSTS(context) {
 		const { data } = await lookupPosts();
@@ -79,12 +87,19 @@ const actions = {
 		await deletePost(postNumber);
 	},
 	async LOOKUP_FOR_EDIT(context, postNumber) {
-		const res = await lookupForEdit(postNumber);
-		context.commit('SET_POST', res.data);
+		try {
+			const res = await lookupForEdit(postNumber);
+			context.commit('SET_POST', res.data);
+		} catch (err) {
+			console.error(err);
+		}
 	},
 	async EDIT_POST(context, postData) {
-		await editPost(postData.number, postData.data);
-		//console.log(res);
+		try {
+			await editPost(postData.number, postData.data);
+		} catch (err) {
+			console.error(err);
+		}
 	},
 	async CREATE_COMMENT(context, commentData) {
 		try {
@@ -97,7 +112,6 @@ const actions = {
 	async PRESS_RECOMMEND(context, userData) {
 		try {
 			await pressRecommend(userData);
-			//console.log(res);
 		} catch (err) {
 			console.error(err);
 		}

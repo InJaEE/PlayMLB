@@ -17,7 +17,7 @@
 </template>
 <script>
 export default {
-	props: ['modalInfo'],
+	props: { modalInfo: Object },
 	methods: {
 		handleOk() {
 			this.$emit('closeModal');

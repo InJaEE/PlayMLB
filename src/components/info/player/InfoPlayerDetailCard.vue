@@ -58,7 +58,7 @@
 					slot="avatar"
 					shape="square"
 					:size="150"
-					style="height: 250px;"
+					style="height:auto; width:auto; max-height: 180px; max-width: 120px"
 					ref="playerAvatar"
 					:src="
 						`https://securea.mlb.com/mlb/images/players/head_shot/${playerDetail.playerId}.jpg`

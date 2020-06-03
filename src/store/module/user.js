@@ -47,7 +47,6 @@ const actions = {
 		try {
 			const res = await loginUser(userData);
 			if (res.status === 200) {
-				console.log('Login Success');
 				const user = {
 					userId: res.data.user.userId,
 					nickname: res.data.user.nickname,
