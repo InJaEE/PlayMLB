@@ -1,5 +1,5 @@
 <template>
-	<header>
+	<nav>
 		<div class="header">
 			<div class="logoContent">
 				<img src="../assets/mlbLogo.png" width="80" height="40" alt="PlayMLB" />
@@ -54,7 +54,7 @@
 				</template>
 			</div>
 		</div>
-	</header>
+	</nav>
 </template>
 
 <script>
@@ -69,8 +69,6 @@ export default {
 			this.$store.commit('SET_LOADING', true);
 			this.$store.commit('LOGOUT_USER');
 			this.$store.commit('SET_LOADING', false);
-			//alert('로그아웃 되었습니다.');
-			//this.$router.push('/');
 			location.replace('/');
 		},
 	},
