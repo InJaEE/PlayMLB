@@ -16,7 +16,7 @@ export default [
 		component: () => import('@/views/post/PostWrite.vue'),
 	},
 	{
-		path: '/post/:postId/edit',
+		path: '/post/edit/:postId',
 		component: () => import('@/views/post/PostEdit.vue'),
 	},
 ];
