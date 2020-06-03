@@ -5,11 +5,11 @@ export default [
 		component: () => import('@/views/post/PostView.vue'),
 	},
 	{
-		path: '/post/:postId',
+		path: '/post/view/:postId',
 		component: () => import('@/views/post/PostDetailView.vue'),
 	},
 	{
-		path: '/newPost',
+		path: '/post/new',
 		meta: {
 			auth: true,
 		},

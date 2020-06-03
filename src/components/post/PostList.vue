@@ -60,13 +60,13 @@ export default {
 						if (record.key === '공지사항') {
 							return;
 						}
-						vm.$router.push(`/post/${record.key}`);
+						vm.$router.push(`/post/view/${record.key}`);
 					},
 				},
 			};
 		},
 		write() {
-			this.$router.push('/newPost');
+			this.$router.push('/post/new');
 		},
 	},
 	async created() {

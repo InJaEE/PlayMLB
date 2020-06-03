@@ -113,7 +113,7 @@ export default {
 			}
 		},
 		moveNewPost() {
-			this.$router.push('/newPost');
+			this.$router.push('/post/new');
 		},
 		initPostData() {
 			const post = this.$store.getters.getPost;
