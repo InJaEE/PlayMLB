@@ -13,10 +13,10 @@ export default [
 		meta: {
 			auth: true,
 		},
-		component: () => import('@/components/post/PostWrite.vue'),
+		component: () => import('@/views/post/PostWrite.vue'),
 	},
 	{
 		path: '/post/:postId/edit',
-		component: () => import('@/components/post/PostEdit.vue'),
+		component: () => import('@/views/post/PostEdit.vue'),
 	},
 ];
