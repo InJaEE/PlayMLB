@@ -58,13 +58,14 @@
 					slot="avatar"
 					shape="square"
 					:size="150"
-					style="height:auto; width:auto; max-height: 180px; max-width: 120px"
+					style="height:auto;
+				width:auto; max-height: 180px; max-width: 120px"
 					ref="playerAvatar"
 					:src="
 						`https://securea.mlb.com/mlb/images/players/head_shot/${playerDetail.playerId}.jpg`
 					"
-					:loadError="imgError"
 				/>
+				<!-- :loadError="imgError" -->
 			</a-list-item-meta>
 		</a-skeleton>
 	</div>
@@ -72,7 +73,12 @@
 
 <script>
 export default {
-	props: ['playerDetail'],
+	props: {
+		playerDetail: {
+			type: [Array, Object],
+			required: true,
+		},
+	},
 	methods: {
 		imgError() {
 			this.$refs.playerAvatar.src =

@@ -1,5 +1,5 @@
 <template>
-	<nav>
+	<header>
 		<div class="header">
 			<div class="logoContent">
 				<img src="../assets/mlbLogo.png" width="80" height="40" alt="PlayMLB" />
@@ -54,7 +54,7 @@
 				</template>
 			</div>
 		</div>
-	</nav>
+	</header>
 </template>
 
 <script>
@@ -71,6 +71,12 @@ export default {
 			this.$store.commit('SET_LOADING', false);
 			location.replace('/');
 		},
+	},
+	created() {
+		this.$store.commit('SET_LOADING', true);
+		setTimeout(() => {
+			this.$store.commit('SET_LOADING', false);
+		}, 500);
 	},
 };
 </script>

@@ -1,9 +1,6 @@
 <template>
 	<div>
-		<div v-if="isLoading">
-			<loading-spinner></loading-spinner>
-		</div>
-		<div v-else>
+		<main>
 			<h3>타자 순위</h3>
 			<div class="season">
 				<span
@@ -27,21 +24,18 @@
 				:thData="thList"
 				@refresh="fetchHitterRank"
 			></player-stat-list>
-		</div>
+		</main>
 	</div>
 </template>
 
 <script>
 import PlayerStatList from './common/PlayerStatList.vue';
-import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 export default {
 	components: {
 		PlayerStatList,
-		LoadingSpinner,
 	},
 	data() {
 		return {
-			isLoading: false,
 			hitterList: {},
 			season: this.$route.query.season || new Date().getFullYear() - 1,
 			statType: this.$route.query.statType || 'hr',
@@ -73,7 +67,7 @@ export default {
 	},
 	methods: {
 		async fetchHitterRank() {
-			this.isLoading = true;
+			this.$store.commit('SET_LOADING', true);
 			let { season, statType } = this.$route.query;
 			if (season === undefined) season = new Date().getFullYear() - 1;
 			if (statType === undefined) statType = 'hr';
@@ -82,7 +76,7 @@ export default {
 				statType,
 			});
 			this.hitterList = this.$store.getters.fetchedHitterRank;
-			this.isLoading = false;
+			this.$store.commit('SET_LOADING', false);
 		},
 		toggleSeason(path) {
 			let { statType } = this.$route.query;

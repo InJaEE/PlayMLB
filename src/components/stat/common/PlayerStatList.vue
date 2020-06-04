@@ -77,7 +77,7 @@
 <script>
 export default {
 	props: {
-		playerData: Array,
+		playerData: [Array, Object],
 		thData: Array,
 	},
 	computed: {
