@@ -46,11 +46,7 @@ const mutations = {
 };
 const actions = {
 	async CREATE_POST(context, postData) {
-		try {
-			await createPost(postData);
-		} catch (err) {
-			console.error(err);
-		}
+		await createPost(postData);
 	},
 	async LOOKUP_ONE_POST({ getters, commit }, postData) {
 		try {
@@ -76,7 +72,7 @@ const actions = {
 			});
 			commit('SET_POST', post);
 		} catch (err) {
-			console.error();
+			console.error(err);
 		}
 	},
 	async LOOKUP_POSTS(context) {
