@@ -23,7 +23,7 @@
 			</tr>
 			<tr v-for="(item, index) in playerData" :key="item.player_id">
 				<td>{{ index + 1 }}</td>
-				<td class="inner">
+				<td>
 					<div>
 						<img
 							class="emblem_img"
@@ -134,6 +134,7 @@ td {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: block;
+	margin: 0 auto;
 }
 .name {
 	text-align: left;

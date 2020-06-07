@@ -59,6 +59,11 @@ const router = new VueRouter({
 			component: () => import('@/views/AboutView.vue'),
 		},
 		{
+			path: '/error',
+			name: 'error',
+			component: () => import('@/views/ErrorView.vue'),
+		},
+		{
 			path: '*',
 			redirect: '/',
 		},
