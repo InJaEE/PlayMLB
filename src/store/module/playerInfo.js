@@ -58,19 +58,16 @@ const actions = {
 			const res = await getPlayers(name);
 			const data = res.data.search_player_all.queryResults.row;
 			const playerList = [];
-			// try {
-			if (data.constructor === Object) {
-				playerList.push(data.player_id);
-			} else {
-				data.forEach(v => {
-					playerList.push(v.player_id);
-				});
+			if (data) {
+				if (data.constructor === Object) {
+					playerList.push(data.player_id);
+				} else {
+					data.forEach(v => {
+						playerList.push(v.player_id);
+					});
+				}
 			}
-			// } catch (err) {
-			// 	if (err.name === 'TypeError') {
-			// 		alert('검색결과가 존재하지 않습니다');
-			// 	}
-			// }
+
 			commit('SET_PLAYER_ID_LIST', playerList);
 			return res;
 		} catch (err) {

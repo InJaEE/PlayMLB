@@ -44,6 +44,7 @@ export default {
 		},
 	},
 	async created() {
+		this.$store.commit('SET_LOADING', true);
 		this.$store.commit('RESET_PLAYER_LIST');
 		// 새로고침했을때 query값으로 데이터 불러오기
 		try {
@@ -57,6 +58,8 @@ export default {
 			}
 		} catch (err) {
 			this.$router.push('/info/player');
+		} finally {
+			this.$store.commit('SET_LOADING', false);
 		}
 	},
 };
