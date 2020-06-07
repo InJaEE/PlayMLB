@@ -133,7 +133,6 @@ td {
 .player {
 	overflow: hidden;
 	text-overflow: ellipsis;
-	white-space: nowrap;
 	display: block;
 }
 .name {
