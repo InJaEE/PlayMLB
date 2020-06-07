@@ -58,6 +58,9 @@ export default {
 	margin-top: 100px;
 }
 img {
+	width: auto;
+	height: auto;
+	max-width: 100%;
 	max-height: 50px;
 }
 .show_code {
