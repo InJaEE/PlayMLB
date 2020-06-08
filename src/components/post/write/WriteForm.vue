@@ -38,9 +38,9 @@ export default {
 				});
 				return;
 			}
-			if (contentsLeng > 1000) {
+			if (contentsLeng > 3000) {
 				notification.open({
-					message: '글 내용은 1000자를 넘을 수 없습니다.',
+					message: '글 내용은 3000자를 넘을 수 없습니다.',
 					icon: <a-icon type="warning" style="color: red" />,
 				});
 				return;
