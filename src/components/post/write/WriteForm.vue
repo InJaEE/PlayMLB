@@ -2,13 +2,17 @@
 	<div class="contents">
 		<h1>글 작성하기</h1>
 		<div>
-			<a-input placeholder="제목" v-model="title" class="input_title"></a-input>
+			<a-input
+				placeholder="제목"
+				v-model="post.title"
+				class="input_title"
+			></a-input>
 		</div>
 		<a-textarea
 			placeholder="내용"
 			:rows="10"
 			class="input_contents"
-			v-model="contents"
+			v-model="post.contents"
 		>
 		</a-textarea>
 		<div class="button_group">
@@ -19,54 +23,12 @@
 </template>
 
 <script>
-import { notification } from 'ant-design-vue';
+import PostFormMixin from '@/mixins/PostFormMixin.vue';
 export default {
-	data() {
-		return {
-			title: '',
-			contents: '',
-		};
-	},
+	mixins: [PostFormMixin],
 	methods: {
-		async submitForm() {
-			const titleLeng = this.title.length;
-			const contentsLeng = this.contents.length;
-			if (titleLeng > 500) {
-				notification.open({
-					message: '글 제목은 50자를 넘을 수 없습니다.',
-					icon: <a-icon type="warning" style="color: red" />,
-				});
-				return;
-			}
-			if (contentsLeng > 3000) {
-				notification.open({
-					message: '글 내용은 3000자를 넘을 수 없습니다.',
-					icon: <a-icon type="warning" style="color: red" />,
-				});
-				return;
-			}
-			if (!titleLeng) {
-				alert('제목을 입력해주세요');
-				return;
-			}
-			if (!contentsLeng) {
-				alert('내용을 입력해주세요');
-				return;
-			}
-			const submitData = {
-				title: this.title,
-				contents: this.contents,
-			};
-			try {
-				await this.$store.dispatch('CREATE_POST', submitData);
-			} catch (err) {
-				alert('글 작성에 실패하였습니다.');
-				console.error(err);
-			}
-			this.$router.push('/post');
-		},
 		goBack() {
-			if (this.contents.length > 0) {
+			if (this.post.contents.length > 0) {
 				if (!confirm('정말 뒤로가시겠습니까?')) {
 					return;
 				}

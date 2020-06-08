@@ -22,49 +22,13 @@
 </template>
 
 <script>
-import { notification } from 'ant-design-vue';
+import PostFormMixin from '@/mixins/PostFormMixin.vue';
 export default {
+	mixins: [PostFormMixin],
 	data() {
 		return {
 			post: {},
 		};
-	},
-	methods: {
-		async submitForm() {
-			const titleLeng = this.post.title.length;
-			const contentsLeng = this.post.contents.length;
-			if (titleLeng > 20) {
-				notification.open({
-					message: '글 제목은 30자를 넘을 수 없습니다.',
-					icon: <a-icon type="warning" style="color: red" />,
-				});
-				return;
-			}
-			if (contentsLeng > 1000) {
-				notification.open({
-					message: '글 내용은 1000자를 넘을 수 없습니다.',
-					icon: <a-icon type="warning" style="color: red" />,
-				});
-				return;
-			}
-			if (!titleLeng) {
-				alert('제목을 입력해주세요');
-				return;
-			}
-			if (!contentsLeng) {
-				alert('내용을 입력해주세요');
-				return;
-			}
-			const submitData = {
-				title: this.post.title,
-				contents: this.post.contents,
-			};
-			await this.$store.dispatch('EDIT_POST', {
-				number: this.$route.params.postId,
-				data: submitData,
-			});
-			this.$router.push('/post');
-		},
 	},
 	async created() {
 		this.$store.commit('SET_LOADING', true);
