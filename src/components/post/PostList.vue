@@ -60,20 +60,27 @@ export default {
 						if (record.key === '공지사항') {
 							return;
 						}
-						vm.$router.push(`/post/${record.key}`);
+						vm.$router.push(`/post/view/${record.key}`);
 					},
 				},
 			};
 		},
 		write() {
-			this.$router.push('/newPost');
+			this.$router.push('/post/new');
 		},
 	},
 	async created() {
 		this.$store.commit('SET_LOADING', true);
-		await this.$store.dispatch('LOOKUP_POSTS');
-		this.setPosts(this.$store.getters.getPosts);
-		this.$store.commit('SET_LOADING', false);
+		try {
+			await this.$store.dispatch('LOOKUP_POSTS');
+			this.setPosts(this.$store.getters.getPosts);
+		} catch (err) {
+			this.$router.push('/error');
+			alert('서버와의 통신 과정에서 오류가 발생하였습니다.');
+			console.error(err);
+		} finally {
+			this.$store.commit('SET_LOADING', false);
+		}
 	},
 };
 </script>

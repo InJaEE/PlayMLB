@@ -31,9 +31,9 @@ export default {
 		async submitForm() {
 			const titleLeng = this.title.length;
 			const contentsLeng = this.contents.length;
-			if (titleLeng > 20) {
+			if (titleLeng > 500) {
 				notification.open({
-					message: '글 제목은 30자를 넘을 수 없습니다.',
+					message: '글 제목은 50자를 넘을 수 없습니다.',
 					icon: <a-icon type="warning" style="color: red" />,
 				});
 				return;
@@ -57,7 +57,12 @@ export default {
 				title: this.title,
 				contents: this.contents,
 			};
-			await this.$store.dispatch('CREATE_POST', submitData);
+			try {
+				await this.$store.dispatch('CREATE_POST', submitData);
+			} catch (err) {
+				alert('글 작성에 실패하였습니다.');
+				console.error(err);
+			}
 			this.$router.push('/post');
 		},
 		goBack() {

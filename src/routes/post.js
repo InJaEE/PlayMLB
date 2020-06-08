@@ -5,18 +5,21 @@ export default [
 		component: () => import('@/views/post/PostView.vue'),
 	},
 	{
-		path: '/post/:postId',
+		path: '/post/view/:postId',
+		name: 'postDetail',
 		component: () => import('@/views/post/PostDetailView.vue'),
 	},
 	{
-		path: '/newPost',
+		path: '/post/new',
+		name: 'postCreate',
 		meta: {
 			auth: true,
 		},
 		component: () => import('@/views/post/PostWrite.vue'),
 	},
 	{
-		path: '/post/:postId/edit',
+		path: '/post/edit/:postId',
+		name: 'postEdit',
 		component: () => import('@/views/post/PostEdit.vue'),
 	},
 ];

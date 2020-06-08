@@ -36,7 +36,7 @@
 <script>
 import { hitterTableHeader } from '@/data/statTableHeader';
 export default {
-	props: ['stat'],
+	props: { stat: Array },
 	data() {
 		return {
 			thList: hitterTableHeader,

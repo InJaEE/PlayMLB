@@ -33,7 +33,7 @@
 <script>
 import { pitcherTableHeader } from '@/data/statTableHeader';
 export default {
-	props: ['stat'],
+	props: { stat: Array },
 	data() {
 		return {
 			thList: pitcherTableHeader,

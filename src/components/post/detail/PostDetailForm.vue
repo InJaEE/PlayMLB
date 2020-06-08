@@ -59,9 +59,6 @@
 <script>
 import moment from 'moment';
 export default {
-	data() {
-		return {};
-	},
 	computed: {
 		isRecommend() {
 			return this.$store.getters.getPost.isRecommend;
@@ -106,8 +103,7 @@ export default {
 			this.$store.commit('TOGGLE_RECOMMEND');
 		},
 		editPost() {
-			//alert('준비중입니다.');
-			this.$router.push(`/post/${this.$route.params.postId}/edit`);
+			this.$router.push(`/post/edit/${this.$route.params.postId}`);
 		},
 		async deletePost() {
 			if (confirm('정말로 삭제하시겠습니까?')) {
@@ -117,7 +113,7 @@ export default {
 			}
 		},
 		moveNewPost() {
-			this.$router.push('/newPost');
+			this.$router.push('/post/new');
 		},
 		initPostData() {
 			const post = this.$store.getters.getPost;

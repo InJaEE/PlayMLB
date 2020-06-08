@@ -59,7 +59,6 @@ export default {
 		this.$store.commit('SET_LOADING', true);
 		this.$store.commit('RESET_POST');
 		await this.$store.dispatch('LOOKUP_ONE_POST', this.$route.params.postId);
-		//this.post = this.$store.getters.getPost;
 		this.comments = this.$store.getters.getPost.comments;
 		this.$store.commit('SET_LOADING', false);
 	},

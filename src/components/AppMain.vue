@@ -12,7 +12,11 @@
 				<a-icon type="right-circle" />
 			</div>
 			<template v-for="(item, index) in imgs">
-				<img :src="require(`@/assets/slider/${item}.jpg`)" :key="index" />
+				<img
+					:src="require(`@/assets/slider/${item}.jpg`)"
+					:key="index"
+					:alt="item"
+				/>
 			</template>
 		</a-carousel>
 	</div>
