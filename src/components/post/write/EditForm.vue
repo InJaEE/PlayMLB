@@ -1,20 +1,10 @@
 <template>
 	<div class="contents">
 		<h1>글 수정하기</h1>
-		<div>
-			<a-input
-				placeholder="제목"
-				v-model="post.title"
-				class="input_title"
-			></a-input>
-		</div>
-		<a-textarea
-			placeholder="내용"
-			:rows="10"
-			class="input_contents"
-			v-model="post.contents"
-		>
-		</a-textarea>
+		<quill-editor
+			@changeContents="changeContents"
+			@changeTitle="titleChange"
+		></quill-editor>
 		<div class="button_group">
 			<a-button type="primary" @click="submitForm">수정하기</a-button>
 		</div>
@@ -23,8 +13,12 @@
 
 <script>
 import PostFormMixin from '@/mixins/PostFormMixin.vue';
+import quillEditor from '@/components/post/write/QuillEditor.vue';
 export default {
 	mixins: [PostFormMixin],
+	components: {
+		quillEditor,
+	},
 	data() {
 		return {
 			post: {},
@@ -47,10 +41,6 @@ export default {
 </script>
 
 <style scoped>
-.input_contents {
-	resize: none;
-	margin: 10px 0 30px 0;
-}
 .button_group button {
 	margin: 0 5px;
 }

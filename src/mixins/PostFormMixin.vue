@@ -20,9 +20,9 @@ export default {
 				});
 				return;
 			}
-			if (contentsLeng > 3000) {
+			if (contentsLeng > 3000000) {
 				notification.open({
-					message: '글 내용은 3000자를 넘을 수 없습니다.',
+					message: '글 내용은 3000000자를 넘을 수 없습니다.',
 					icon: <a-icon type="warning" style="color: red" />,
 				});
 				return;
@@ -39,13 +39,27 @@ export default {
 				title: this.post.title,
 				contents: this.post.contents,
 			};
-			try {
-				await this.$store.dispatch('CREATE_POST', submitData);
-			} catch (err) {
-				alert('글 작성에 실패하였습니다.');
-				console.error(err);
+
+			if (this.$route.name === 'postEdit') {
+				await this.$store.dispatch('EDIT_POST', {
+					number: this.$route.params.postId,
+					data: submitData,
+				});
+			} else {
+				try {
+					await this.$store.dispatch('CREATE_POST', submitData);
+				} catch (err) {
+					alert('글 작성에 실패하였습니다.');
+					console.error(err);
+				}
 			}
 			this.$router.push('/post');
+		},
+		changeContents(value) {
+			this.post.contents = value;
+		},
+		titleChange(value) {
+			this.post.title = value;
 		},
 	},
 };

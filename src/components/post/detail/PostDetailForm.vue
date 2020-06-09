@@ -15,9 +15,7 @@
 					</span>
 				</div>
 			</span>
-			<p class="contents">
-				{{ postData.contents }}
-			</p>
+			<p class="contents" v-html="postData.contents"></p>
 			<div class="card_footer">
 				<span class="recommend">
 					<a-button
@@ -154,7 +152,9 @@ export default {
 	text-align: left;
 	margin-top: 10px;
 	margin-bottom: 50px;
+	word-break: break-all;
 }
+
 .form_footer {
 	margin-bottom: 20px;
 	display: flex;
