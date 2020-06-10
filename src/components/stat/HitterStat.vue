@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import PlayerStatList from './common/PlayerStatList.vue';
+import PlayerStatList from './PlayerStatList.vue';
 export default {
 	components: {
 		PlayerStatList,

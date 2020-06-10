@@ -18,14 +18,9 @@
 </template>
 
 <script>
-// you can also register quill modules in the component
-// import Quill from 'quill';
-// import { someModule } from '../yourModulePath/someQuillModule.js';
-// Quill.register('modules/someModule', someModule);
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-
 import { quillEditor } from 'vue-quill-editor';
 
 export default {
