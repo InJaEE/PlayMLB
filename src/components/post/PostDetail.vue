@@ -58,8 +58,13 @@ export default {
 	async created() {
 		this.$store.commit('SET_LOADING', true);
 		this.$store.commit('RESET_POST');
-		await this.$store.dispatch('LOOKUP_ONE_POST', this.$route.params.postId);
-		this.comments = this.$store.getters.getPost.comments;
+		try {
+			await this.$store.dispatch('LOOKUP_ONE_POST', this.$route.params.postId);
+			this.comments = this.$store.getters.getPost.comments;
+		} catch (err) {
+			alert('잘못된 접근입니다.');
+			this.$router.push('/');
+		}
 		this.$store.commit('SET_LOADING', false);
 	},
 };

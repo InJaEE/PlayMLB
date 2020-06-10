@@ -113,18 +113,6 @@ export default {
 		moveNewPost() {
 			this.$router.push('/post/new');
 		},
-		initPostData() {
-			const post = this.$store.getters.getPost;
-			this.postData = {
-				title: post.title,
-				contents: post.contents,
-				writer: post.createdBy,
-				views: post.views,
-				recommend: post.recommend,
-				countRecommend: post.countRecommend,
-				createdAt: moment(post.createdAt).format('YY.MM.DD HH:mm'),
-			};
-		},
 	},
 };
 </script>

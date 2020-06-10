@@ -49,31 +49,23 @@ const actions = {
 		await createPost(postData);
 	},
 	async LOOKUP_ONE_POST({ getters, commit }, postData) {
-		try {
-			const { data } = await lookupOnePost(postData);
-			const chkRecommend = data.post.recommend.find(v => {
-				return v.recommendBy === getters.getUserData.userId;
-			});
-			const post = data.post;
-			post.createdBy = post.createdBy.nickname;
-			if (chkRecommend) {
-				post.isRecommend = true;
-			} else {
-				post.isRecommend = false;
-			}
-			post.countRecommend = post.recommend.length;
-
-			post.comments.sort((a, b) => {
-				return b.createdAt < a.createdAt
-					? -1
-					: b.createdAt > a.createdAt
-					? 1
-					: 0;
-			});
-			commit('SET_POST', post);
-		} catch (err) {
-			console.error(err);
+		const { data } = await lookupOnePost(postData);
+		const chkRecommend = data.post.recommend.find(v => {
+			return v.recommendBy === getters.getUserData.userId;
+		});
+		const post = data.post;
+		post.createdBy = post.createdBy.nickname;
+		if (chkRecommend) {
+			post.isRecommend = true;
+		} else {
+			post.isRecommend = false;
 		}
+		post.countRecommend = post.recommend.length;
+
+		post.comments.sort((a, b) => {
+			return b.createdAt < a.createdAt ? -1 : b.createdAt > a.createdAt ? 1 : 0;
+		});
+		commit('SET_POST', post);
 	},
 	async LOOKUP_POSTS(context) {
 		const { data } = await lookupPosts();
