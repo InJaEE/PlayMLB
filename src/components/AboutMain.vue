@@ -50,6 +50,12 @@ export default {
 			frontend,
 		};
 	},
+	created() {
+		this.$store.commit('SET_LOADING', true);
+		setTimeout(() => {
+			this.$store.commit('SET_LOADING', false);
+		}, 500);
+	},
 };
 </script>
 
