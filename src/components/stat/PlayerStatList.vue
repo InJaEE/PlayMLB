@@ -10,15 +10,10 @@
 					@click="sortData(item[1])"
 					class="toggleHeader"
 				>
-					<span :class="{ selected: selectedType === item[1] }">
+					<div :class="selectedStat(item[1])">
 						{{ item[0] }}
-					</span>
-					<span>
-						<i
-							class="fas fa-sort-down"
-							:class="{ selected: selectedType === item[1] }"
-						></i>
-					</span>
+						<i class="fas fa-sort-down" :class="selectedStat(item[1])"></i>
+					</div>
 				</th>
 			</tr>
 			<tr v-for="(item, index) in playerData" :key="item.player_id">
@@ -81,9 +76,6 @@ export default {
 		thData: Array,
 	},
 	computed: {
-		selectedType() {
-			return this.$route.query.statType;
-		},
 		hitterORpitcher() {
 			let param = this.$route.params.type;
 			if (param === undefined) {
@@ -100,6 +92,25 @@ export default {
 			}
 			this.$router.push({ query: { season, statType } });
 			this.$emit('refresh');
+		},
+		selectedStat(v) {
+			const route = this.$route;
+			if (route.query.statType === v) {
+				return 'selected';
+			} else if (
+				route.params.type === 'hitter' &&
+				!route.query.statType &&
+				v === 'hr'
+			) {
+				return 'selected';
+			} else if (
+				route.params.type === 'pitcher' &&
+				!route.query.statType &&
+				v === 'era'
+			) {
+				return 'selected';
+			}
+			return '';
 		},
 	},
 };
