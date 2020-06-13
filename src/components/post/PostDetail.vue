@@ -13,7 +13,7 @@
 				:total="commentList.length"
 				:pageSize="commentPageSize"
 				@change="changePage"
-				:hideOnSinglePage="true"
+				class="commentPagination"
 			/>
 		</div>
 	</div>
@@ -74,5 +74,8 @@ export default {
 .comment {
 	width: 70%;
 	margin: 0 auto;
+}
+.commentPagination {
+	margin-bottom: 30px;
 }
 </style>

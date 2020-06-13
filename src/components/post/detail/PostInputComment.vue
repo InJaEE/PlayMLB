@@ -69,7 +69,6 @@ export default {
 	padding-top: 20px;
 	border-top: 1px solid #041e42;
 	border-bottom: 1px solid #041e42;
-	margin-bottom: 30px;
 }
 .comment_limit {
 	text-align: left;
