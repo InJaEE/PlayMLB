@@ -52,11 +52,13 @@ export default {
 			const submitData = {
 				number: this.$route.params.postId,
 				contents: this.commentData,
-				userId: this.$store.getters.getUserData.userId,
-				nickname: this.$store.getters.getUserData.nickname,
 				postNumber: this.$route.params.postId,
+				createdBy: {
+					userId: this.$store.getters.getUserData.userId,
+					nickname: this.$store.getters.getUserData.nickname,
+				},
 			};
-			this.$store.dispatch('CREATE_COMMENT', submitData);
+			await this.$store.dispatch('CREATE_COMMENT', submitData);
 			this.commentData = '';
 		},
 	},
@@ -67,6 +69,7 @@ export default {
 	padding-top: 20px;
 	border-top: 1px solid #041e42;
 	border-bottom: 1px solid #041e42;
+	margin-bottom: 30px;
 }
 .comment_limit {
 	text-align: left;
