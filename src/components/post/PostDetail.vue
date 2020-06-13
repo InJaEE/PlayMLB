@@ -51,9 +51,6 @@ export default {
 		changePage(i) {
 			this.currentCommentPage = i;
 		},
-		addComment(v) {
-			this.comments.push(v);
-		},
 	},
 	async created() {
 		this.$store.commit('SET_LOADING', true);
