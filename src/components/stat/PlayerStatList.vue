@@ -98,7 +98,7 @@ export default {
 			if (route.query.statType === v) {
 				return 'selected';
 			} else if (
-				route.params.type === 'hitter' &&
+				(route.params.type === 'hitter' || !route.params.type) &&
 				!route.query.statType &&
 				v === 'hr'
 			) {
