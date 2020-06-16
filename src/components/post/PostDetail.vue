@@ -23,6 +23,7 @@
 import PostDetailForm from '@/components/post/detail/PostDetailForm.vue';
 import PostInputComment from '@/components/post/detail/PostInputComment.vue';
 import PostComment from '@/components/post/detail/PostComment.vue';
+import { LOOKUP_ONE_POST } from '@/store/module/post';
 
 export default {
 	components: {
@@ -56,7 +57,7 @@ export default {
 		this.$store.commit('SET_LOADING', true);
 		this.$store.commit('RESET_POST');
 		try {
-			await this.$store.dispatch('LOOKUP_ONE_POST', this.$route.params.postId);
+			await this.$store.dispatch(LOOKUP_ONE_POST, this.$route.params.postId);
 			this.comments = this.$store.getters.getPost.comments;
 		} catch (err) {
 			alert('잘못된 접근입니다.');

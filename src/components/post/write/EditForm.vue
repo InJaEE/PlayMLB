@@ -14,6 +14,7 @@
 <script>
 import PostFormMixin from '@/mixins/PostFormMixin.vue';
 import quillEditor from '@/components/post/write/QuillEditor.vue';
+import { LOOKUP_FOR_EDIT } from '@/store/module/post';
 export default {
 	mixins: [PostFormMixin],
 	components: {
@@ -27,7 +28,7 @@ export default {
 	async created() {
 		this.$store.commit('SET_LOADING', true);
 		try {
-			await this.$store.dispatch('LOOKUP_FOR_EDIT', this.$route.params.postId);
+			await this.$store.dispatch(LOOKUP_FOR_EDIT, this.$route.params.postId);
 		} catch (err) {
 			alert('잘못된 접근입니다.');
 			console.error(err);

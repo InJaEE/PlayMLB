@@ -56,6 +56,7 @@
 
 <script>
 import moment from 'moment';
+import { DELETE_POST, PRESS_RECOMMEND } from '@/store/module/post';
 export default {
 	computed: {
 		isRecommend() {
@@ -97,7 +98,7 @@ export default {
 				userId: this.$store.getters.getUserData.userId,
 				postNumber: this.$route.params.postId,
 			};
-			await this.$store.dispatch('PRESS_RECOMMEND', data);
+			await this.$store.dispatch(PRESS_RECOMMEND, data);
 			this.$store.commit('TOGGLE_RECOMMEND');
 		},
 		editPost() {
@@ -105,7 +106,7 @@ export default {
 		},
 		async deletePost() {
 			if (confirm('정말로 삭제하시겠습니까?')) {
-				await this.$store.dispatch('DELETE_POST', this.$route.params.postId);
+				await this.$store.dispatch(DELETE_POST, this.$route.params.postId);
 				alert('삭제완료');
 				this.$router.push('/post');
 			}

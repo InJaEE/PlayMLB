@@ -9,6 +9,15 @@ import {
 	pressRecommend,
 } from '@/api/postApi';
 
+export const CREATE_POST = 'CREATE_POST';
+export const LOOKUP_ONE_POST = 'LOOKUP_ONE_POST';
+export const LOOKUP_POSTS = 'LOOKUP_POSTS';
+export const DELETE_POST = 'DELETE_POST';
+export const LOOKUP_FOR_EDIT = 'LOOKUP_FOR_EDIT';
+export const EDIT_POST = 'EDIT_POST';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const PRESS_RECOMMEND = 'PRESS_RECOMMEND';
+
 const state = {
 	posts: [],
 	post: {},
@@ -45,10 +54,10 @@ const mutations = {
 	},
 };
 const actions = {
-	async CREATE_POST(context, postData) {
+	async [CREATE_POST](context, postData) {
 		await createPost(postData);
 	},
-	async LOOKUP_ONE_POST({ getters, commit }, postData) {
+	async [LOOKUP_ONE_POST]({ getters, commit }, postData) {
 		const { data } = await lookupOnePost(postData);
 		const chkRecommend = data.post.recommend.find(v => {
 			return v.recommendBy === getters.getUserData.userId;
@@ -67,14 +76,14 @@ const actions = {
 		});
 		commit('SET_POST', post);
 	},
-	async LOOKUP_POSTS(context) {
+	async [LOOKUP_POSTS](context) {
 		const { data } = await lookupPosts();
 		context.commit('SET_POSTS', data.posts);
 	},
-	async DELETE_POST(context, postNumber) {
+	async [DELETE_POST](context, postNumber) {
 		await deletePost(postNumber);
 	},
-	async LOOKUP_FOR_EDIT(context, postNumber) {
+	async [LOOKUP_FOR_EDIT](context, postNumber) {
 		try {
 			const res = await lookupForEdit(postNumber);
 			context.commit('SET_POST', res.data);
@@ -82,14 +91,14 @@ const actions = {
 			console.error(err);
 		}
 	},
-	async EDIT_POST(context, postData) {
+	async [EDIT_POST](context, postData) {
 		try {
 			await editPost(postData.number, postData.data);
 		} catch (err) {
 			console.error(err);
 		}
 	},
-	async CREATE_COMMENT(context, commentData) {
+	async [CREATE_COMMENT](context, commentData) {
 		try {
 			context.commit('ADD_COMMENT', commentData);
 			await createComment(commentData);
@@ -97,7 +106,7 @@ const actions = {
 			console.error(err);
 		}
 	},
-	async PRESS_RECOMMEND(context, userData) {
+	async [PRESS_RECOMMEND](context, userData) {
 		try {
 			await pressRecommend(userData);
 		} catch (err) {

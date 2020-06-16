@@ -22,6 +22,7 @@ import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
 import { quillEditor } from 'vue-quill-editor';
+import { LOOKUP_FOR_EDIT } from '@/store/module/post';
 
 export default {
 	components: {
@@ -54,10 +55,7 @@ export default {
 		if (this.$route.name === 'postEdit') {
 			this.$store.commit('SET_LOADING', true);
 			try {
-				await this.$store.dispatch(
-					'LOOKUP_FOR_EDIT',
-					this.$route.params.postId,
-				);
+				await this.$store.dispatch(LOOKUP_FOR_EDIT, this.$route.params.postId);
 			} catch (err) {
 				alert('잘못된 접근입니다.');
 				console.error(err);

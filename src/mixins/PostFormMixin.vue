@@ -1,5 +1,6 @@
 <script>
 import { notification } from 'ant-design-vue';
+import { CREATE_POST, EDIT_POST } from '@/store/module/post';
 export default {
 	data() {
 		return {
@@ -41,13 +42,13 @@ export default {
 			};
 
 			if (this.$route.name === 'postEdit') {
-				await this.$store.dispatch('EDIT_POST', {
+				await this.$store.dispatch(EDIT_POST, {
 					number: this.$route.params.postId,
 					data: submitData,
 				});
 			} else {
 				try {
-					await this.$store.dispatch('CREATE_POST', submitData);
+					await this.$store.dispatch(CREATE_POST, submitData);
 				} catch (err) {
 					alert('글 작성에 실패하였습니다.');
 					console.error(err);

@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { CREATE_COMMENT } from '@/store/module/post';
 export default {
 	data() {
 		return {
@@ -58,7 +59,7 @@ export default {
 					nickname: this.$store.getters.getUserData.nickname,
 				},
 			};
-			await this.$store.dispatch('CREATE_COMMENT', submitData);
+			await this.$store.dispatch(CREATE_COMMENT, submitData);
 			this.commentData = '';
 		},
 	},

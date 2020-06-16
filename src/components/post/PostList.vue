@@ -16,6 +16,7 @@
 <script>
 import { formatFullDate } from '@/utils/filters';
 import Columns from '@/data/postHeader';
+import { LOOKUP_POSTS } from '@/store/module/post';
 
 export default {
 	data() {
@@ -44,13 +45,6 @@ export default {
 				return b.key - a.key;
 			});
 			this.posts = data;
-			// this.posts.unshift({
-			// 	key: '공지사항',
-			// 	title: 'MLB에 관련한 내용만 작성해주세요.',
-			// 	writer: '관리자',
-			// 	created: '1999.12.20',
-			// 	recommend: 99,
-			// });
 		},
 		customRow(record) {
 			const vm = this;
@@ -72,7 +66,7 @@ export default {
 	async created() {
 		this.$store.commit('SET_LOADING', true);
 		try {
-			await this.$store.dispatch('LOOKUP_POSTS');
+			await this.$store.dispatch(LOOKUP_POSTS);
 			this.setPosts(this.$store.getters.getPosts);
 		} catch (err) {
 			this.$router.push('/error');
