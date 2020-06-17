@@ -25,11 +25,6 @@ export default {
 		LeagueMenu,
 		InfoTeamList,
 	},
-	data() {
-		return {
-			isLoading: false,
-		};
-	},
 	computed: {
 		eastClubList() {
 			return this.getLeagueClub('e');
@@ -39,15 +34,6 @@ export default {
 		},
 		westClubList() {
 			return this.getLeagueClub('w');
-		},
-	},
-	watch: {
-		isLoading(newV) {
-			if (newV) {
-				this.$store.commit('SET_LOADING', true);
-			} else if (!newV) {
-				this.$store.commit('SET_LOADING', false);
-			}
 		},
 	},
 	methods: {
@@ -62,9 +48,9 @@ export default {
 		},
 	},
 	async created() {
-		this.isLoading = true;
+		this.$store.commit('SET_LOADING', true);
 		await this.$store.dispatch('FETCH_ALL_CLUB', 2019);
-		this.isLoading = false;
+		this.$store.commit('SET_LOADING', false);
 	},
 };
 </script>
