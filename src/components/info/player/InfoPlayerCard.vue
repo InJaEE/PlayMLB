@@ -31,9 +31,7 @@
 							`https://securea.mlb.com/mlb/images/players/head_shot/${item.playerId}.jpg`
 						"
 						shape="square"
-						ref="playerAvatar"
 						style="height:100px; width: 70px;"
-						:loadError="imgError"
 					/>
 				</a-list-item-meta>
 			</a-list-item>
@@ -60,10 +58,6 @@ export default {
 		};
 	},
 	methods: {
-		imgError() {
-			this.$refs.playerAvatar.src =
-				'https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg';
-		},
 		currentPage(index) {
 			return (
 				Math.floor(index / this.playerPageSize) + 1 === this.currentPlayerPage
