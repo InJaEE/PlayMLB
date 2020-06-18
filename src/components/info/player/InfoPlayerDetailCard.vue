@@ -58,8 +58,9 @@
 					slot="avatar"
 					shape="square"
 					:size="150"
-					style="height:auto;
-				width:auto; max-height: 180px; max-width: 120px"
+					style="height:auto; width:auto; 
+						max-height: 180px; max-width: 120px; min-width: 50px
+						margin: 10px 0"
 					ref="playerAvatar"
 					:src="
 						`https://securea.mlb.com/mlb/images/players/head_shot/${playerDetail.playerId}.jpg`
@@ -90,8 +91,6 @@ export default {
 
 <style scoped>
 .player_info {
-	max-width: 800px;
-	max-height: 500px;
 	margin: 0 auto;
 }
 a:visited {
@@ -99,5 +98,9 @@ a:visited {
 }
 a:active {
 	color: blue;
+}
+ant-descriptions-row > th,
+td {
+	padding: 0 0;
 }
 </style>

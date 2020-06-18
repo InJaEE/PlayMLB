@@ -145,8 +145,12 @@ const actions = {
 	async FETCH_HITTER_SEASON_STAT({ commit, dispatch }, { playerId, from, to }) {
 		const result = [];
 		try {
+			console.log(0);
+
 			for (let i = from; i <= to; i++) {
 				const res = await getHitterSeasonStat(i, playerId);
+				console.log('@', res);
+
 				const data = res.data.sport_hitting_tm.queryResults.row;
 
 				if (data === undefined) continue;
@@ -158,6 +162,8 @@ const actions = {
 				}
 				result.push(data);
 			}
+			console.log(result);
+
 			const careerStat = await dispatch('FETCH_HITTER_CAREER_STAT', playerId);
 			result.push(careerStat);
 			commit('SET_PLAYER_SEASON_STAT', result);

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="stat.length > 0">
 		<div class="stat_wrapper">
 			<table class="table">
 				<thead class="tableHeader">

@@ -50,18 +50,19 @@ export default {
 		const debutDate = new Date(
 			this.$store.getters.fetchedPlayerDetail.debutDate,
 		).getFullYear();
-
-		let dispatchName = '';
-		if (this.playerPosition) {
-			dispatchName = 'FETCH_PITCHER_SEASON_STAT';
-		} else {
-			dispatchName = 'FETCH_HITTER_SEASON_STAT';
+		if (!isNaN(debutDate)) {
+			let dispatchName = '';
+			if (this.playerPosition) {
+				dispatchName = 'FETCH_PITCHER_SEASON_STAT';
+			} else {
+				dispatchName = 'FETCH_HITTER_SEASON_STAT';
+			}
+			await this.$store.dispatch(dispatchName, {
+				playerId,
+				from: debutDate,
+				to: new Date().getFullYear() - 1,
+			});
 		}
-		await this.$store.dispatch(dispatchName, {
-			playerId,
-			from: debutDate,
-			to: new Date().getFullYear() - 1,
-		});
 
 		this.$store.commit('SET_LOADING', false);
 	},
