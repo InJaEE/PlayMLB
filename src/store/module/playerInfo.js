@@ -5,6 +5,7 @@ import {
 	getPitcherSeasonStat,
 	getPlayer,
 	getHitterCareerStat,
+	getPitcherCareerStat,
 } from '@/api/statApi';
 import {
 	formatDate,
@@ -166,24 +167,11 @@ const actions = {
 		}
 	},
 
-	// FIXME: 타자처럼 커리어 전체 스탯을 가져오는 API 사용해도됨
-	async FETCH_PITCHER_SEASON_STAT({ commit }, { playerId, from, to }) {
+	async FETCH_PITCHER_SEASON_STAT(
+		{ commit, dispatch },
+		{ playerId, from, to },
+	) {
 		const result = [];
-		const statAvg = {
-			season: 'Total',
-			team_short: '-',
-			w: 0,
-			l: 0,
-			sv: 0,
-			er: 0,
-			era: 0,
-			so: 0,
-			ip: 0,
-			h: 0,
-			hr: 0,
-			bb: 0,
-			g: 0,
-		};
 		try {
 			for (let i = from; i <= to; i++) {
 				const res = await getPitcherSeasonStat(i, playerId);
@@ -196,31 +184,30 @@ const actions = {
 					});
 					continue;
 				}
-				statAvg.w += Number(data.w);
-				statAvg.l += Number(data.l);
-				statAvg.sv += Number(data.sv);
-				statAvg.er += Number(data.er);
-				statAvg.so += Number(data.so);
-				statAvg.ip += Number(data.ip);
-				statAvg.h += Number(data.h);
-				statAvg.hr += Number(data.hr);
-				statAvg.bb += Number(data.bb);
-				statAvg.g += Number(data.g);
 				result.push(data);
 			}
-
-			statAvg.era = ((statAvg.er * 9) / statAvg.ip).toFixed(2);
-
-			result.push(statAvg);
+			const careerStat = await dispatch('FETCH_PITCHER_CAREER_STAT', playerId);
+			result.push(careerStat);
 			commit('SET_PLAYER_SEASON_STAT', result);
 		} catch (err) {
 			console.error(err);
 		}
 	},
-	async FETCH_HITTER_CAREER_STAT(store, playerId) {
+	async FETCH_HITTER_CAREER_STAT(_, playerId) {
 		try {
 			const res = await getHitterCareerStat(playerId);
 			const data = res.data.sport_career_hitting.queryResults.row;
+			data.season = 'Total';
+			data.team_short = '-';
+			return data;
+		} catch (err) {
+			console.error(err);
+		}
+	},
+	async FETCH_PITCHER_CAREER_STAT(_, playerId) {
+		try {
+			const res = await getPitcherCareerStat(playerId);
+			const data = res.data.sport_career_pitching.queryResults.row;
 			data.season = 'Total';
 			data.team_short = '-';
 			return data;

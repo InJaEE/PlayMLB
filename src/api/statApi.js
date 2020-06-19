@@ -53,6 +53,12 @@ function getHitterCareerStat(playerId) {
 	);
 }
 
+function getPitcherCareerStat(playerId) {
+	return instance.get(
+		`/named.sport_career_pitching.bam?league_list_id='mlb'&game_type='R'&player_id='${playerId}'`,
+	);
+}
+
 export {
 	getAllClub,
 	getPlayers,
@@ -63,4 +69,5 @@ export {
 	getHitterSeasonStat,
 	getPitcherSeasonStat,
 	getHitterCareerStat,
+	getPitcherCareerStat,
 };
