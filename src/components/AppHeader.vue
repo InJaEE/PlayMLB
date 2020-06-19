@@ -1,11 +1,11 @@
 <template>
-	<nav>
-		<div class="nav">
+	<header>
+		<div class="header">
 			<div class="logoContent">
 				<img src="../assets/mlbLogo.png" width="80" height="40" alt="PlayMLB" />
 				<router-link to="/" class="mainTitle">PlayMLB</router-link>
 			</div>
-			<ul class="menu">
+			<ul class="nav">
 				<li :class="{ selected: toggleMenu.includes('post') }">
 					<router-link to="/post">
 						게시판
@@ -27,13 +27,13 @@
 					</router-link>
 				</li>
 			</ul>
-			<ul class="navigations">
+			<ul class="userNav">
 				<template v-if="this.$store.getters.isLogin">
 					<li class="user_name">
 						{{ this.$store.getters.getUserData.nickname }}님
 					</li>
 					<li @click="logout">
-						<a style="cursor:pointer">로그아웃</a>
+						<a>로그아웃</a>
 					</li>
 				</template>
 				<template v-else>
@@ -45,11 +45,11 @@
 					</li>
 				</template>
 			</ul>
-			<span class="nav_toggleBtn" @click="clickNavToggleBtn">
+			<div class="nav_toggleBtn" @click="clickNavToggleBtn">
 				<i class="fas fa-bars"></i>
-			</span>
+			</div>
 		</div>
-	</nav>
+	</header>
 </template>
 
 <script>
@@ -67,8 +67,8 @@ export default {
 			location.replace('/');
 		},
 		clickNavToggleBtn() {
-			document.querySelector('.navigations').classList.toggle('active');
-			document.querySelector('.menu').classList.toggle('active');
+			document.querySelector('.userNav').classList.toggle('active');
+			document.querySelector('.nav').classList.toggle('active');
 		},
 	},
 	created() {
@@ -84,7 +84,7 @@ export default {
 a {
 	color: white;
 }
-.nav {
+.header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -97,7 +97,7 @@ a {
 	display: table;
 	padding: 5px 0;
 }
-.navigations {
+.userNav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -118,7 +118,7 @@ ul li {
 img {
 	display: table-cell;
 }
-.menu {
+.nav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -135,21 +135,22 @@ img {
 .nav_toggleBtn {
 	position: absolute;
 	right: 20px;
+	top: 10px;
 	display: none;
 	font-size: 20px;
 	cursor: pointer;
 }
 @media screen and (max-width: 790px) {
-	.nav {
+	.header {
 		flex-direction: column;
 	}
-	.menu {
+	.nav {
 		display: none;
 		flex-direction: column;
 		align-items: center;
 		width: 100%;
 	}
-	.navigations {
+	.userNav {
 		display: none;
 		flex-direction: column;
 		align-items: center;
@@ -158,11 +159,11 @@ img {
 	.nav_toggleBtn {
 		display: block;
 	}
-	.menu.active,
-	.navigations.active {
+	.nav.active,
+	.userNav.active {
 		display: flex;
 	}
-	.navigations.active {
+	.userNav.active {
 		flex-direction: row;
 		justify-content: center;
 	}

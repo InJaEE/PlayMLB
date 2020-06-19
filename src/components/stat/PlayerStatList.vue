@@ -10,7 +10,7 @@
 					@click="sortData(item[1])"
 					class="toggleHeader"
 				>
-					<div :class="selectedStat(item[1])">
+					<div class="statType" :class="selectedStat(item[1])">
 						{{ item[0] }}
 						<i class="fas fa-sort-down" :class="selectedStat(item[1])"></i>
 					</div>
@@ -18,23 +18,21 @@
 			</tr>
 			<tr v-for="(item, index) in playerData" :key="item.player_id">
 				<td>{{ index + 1 }}</td>
-				<td>
-					<div>
-						<img
-							class="emblem_img"
-							:src="
-								`https://www.mlbstatic.com/team-logos/team-cap-on-light/${item.team_id}.svg`
-							"
-							alt=""
-						/>
-						<div>
-							<router-link :to="`/info/player/${item.player_id}`">
-								<span class="player name">
-									{{ item.name_display_first_last }}</span
-								>
-							</router-link>
-							<span class="player team">{{ item.team_name }}</span>
-						</div>
+				<td class="playerBaseInfo">
+					<img
+						:src="
+							`https://www.mlbstatic.com/team-logos/team-cap-on-light/${item.team_id}.svg`
+						"
+						alt="emblem"
+						class="emblem_img"
+					/>
+					<div class="teamAndName">
+						<router-link :to="`/info/player/${item.player_id}`">
+							<span class="player name">
+								{{ item.name_display_first_last }}</span
+							>
+						</router-link>
+						<span class="player team">{{ item.team_name }}</span>
 					</div>
 				</td>
 				<template v-if="hitterORpitcher === 'hitter'">
@@ -134,6 +132,9 @@ export default {
 .selected {
 	color: blue;
 }
+i.selected {
+	transform: rotate(180deg);
+}
 td {
 	height: 50px;
 	border-bottom: 1px solid #f4f4f4;
@@ -145,7 +146,6 @@ td {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: block;
-	margin: 0 auto;
 }
 .name {
 	text-align: left;
@@ -168,5 +168,14 @@ a:visited {
 }
 a:active {
 	color: blue;
+}
+
+.playerBaseInfo {
+	display: flex;
+	align-items: center;
+}
+.playerBaseInfo .teamAndName {
+	display: flex;
+	flex-direction: column;
 }
 </style>

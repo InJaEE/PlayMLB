@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<section>
 		<a-table
 			:columns="Columns"
 			:data-source="posts"
@@ -10,7 +10,7 @@
 		<a-button type="primary" @click="write" class="write_button"
 			>글쓰기</a-button
 		>
-	</div>
+	</section>
 </template>
 
 <script>
