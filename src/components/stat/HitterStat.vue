@@ -30,6 +30,7 @@
 
 <script>
 import PlayerStatList from './PlayerStatList.vue';
+import { hitterHeader } from '@/data/statListTableHeader';
 export default {
 	components: {
 		PlayerStatList,
@@ -39,21 +40,7 @@ export default {
 			hitterList: {},
 			season: this.$route.query.season || new Date().getFullYear() - 1,
 			statType: this.$route.query.statType || 'hr',
-			thList: [
-				['타수', 'ab'],
-				['타율', 'avg'],
-				['타점', 'rbi'],
-				['홈런', 'hr'],
-				['도루', 'sb'],
-				['득점', 'r'],
-				['안타', 'h'],
-				['2루타', 'd'],
-				['3루타', 't'],
-				['볼넷', 'bb'],
-				['삼진', 'so'],
-				['출루율', 'obp'],
-				['경기수', 'g'],
-			],
+			thList: hitterHeader,
 		};
 	},
 	computed: {

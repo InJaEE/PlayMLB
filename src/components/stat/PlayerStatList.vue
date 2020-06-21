@@ -159,8 +159,8 @@ td {
 }
 .emblem_img {
 	padding-left: 20px;
-	width: 40px;
-	height: 40px;
+	max-width: 40px;
+	max-height: 40px;
 	float: left;
 }
 a:visited {
@@ -169,10 +169,10 @@ a:visited {
 a:active {
 	color: blue;
 }
-
 .playerBaseInfo {
 	display: flex;
 	align-items: center;
+	overflow: hidden;
 }
 .playerBaseInfo .teamAndName {
 	display: flex;

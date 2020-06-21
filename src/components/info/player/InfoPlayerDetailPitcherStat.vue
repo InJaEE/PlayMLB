@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { pitcherTableHeader } from '@/data/statTableHeader';
+import { pitcherTableHeader } from '@/data/playerDetailTableHeader';
 export default {
 	props: { stat: Array },
 	data() {

@@ -30,6 +30,7 @@
 
 <script>
 import PlayerStatList from './PlayerStatList.vue';
+import { pitcherHeader } from '@/data/statListTableHeader';
 export default {
 	components: {
 		PlayerStatList,
@@ -39,18 +40,7 @@ export default {
 			pitcherList: {},
 			season: new Date().getFullYear() - 1,
 			statType: 'era',
-			thList: [
-				['승', 'w'],
-				['패', 'l'],
-				['세이브', 'sv'],
-				['평균자책', 'era'],
-				['탈삼진', 'so'],
-				['이닝', 'ip'],
-				['피안타', 'h'],
-				['피홈런', 'hr'],
-				['볼넷', 'bb'],
-				['경기수', 'g'],
-			],
+			thList: pitcherHeader,
 		};
 	},
 	computed: {

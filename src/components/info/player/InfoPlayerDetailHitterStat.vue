@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { hitterTableHeader } from '@/data/statTableHeader';
+import { hitterTableHeader } from '@/data/playerDetailTableHeader';
 export default {
 	props: { stat: Array },
 	data() {
