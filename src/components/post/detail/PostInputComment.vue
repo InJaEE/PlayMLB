@@ -68,8 +68,8 @@ export default {
 <style scoped>
 .commentForm {
 	padding-top: 20px;
-	border-top: 1px solid #041e42;
-	border-bottom: 1px solid #041e42;
+	border-top: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
 }
 .comment_limit {
 	text-align: left;

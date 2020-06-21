@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<section>
 		<a-card :bordered="true" class="card">
 			<span slot="title" class="header">
 				<div>
@@ -51,7 +51,7 @@
 				<a-button type="primary" @click="moveNewPost">글쓰기</a-button>
 			</span>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script>
@@ -130,12 +130,8 @@ export default {
 }
 .post_header {
 	font-size: 12px;
-}
-.header_left {
-	float: left;
-}
-.header_right {
-	float: right;
+	display: flex;
+	justify-content: space-between;
 }
 .contents {
 	text-align: left;

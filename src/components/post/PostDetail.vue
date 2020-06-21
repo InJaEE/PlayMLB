@@ -74,6 +74,7 @@ export default {
 	margin: 0 auto;
 }
 .commentPagination {
-	margin-bottom: 30px;
+	padding-top: 30px;
+	padding-bottom: 20px;
 }
 </style>
