@@ -4,7 +4,6 @@
 		<div class="search_area" :class="{ focus: this.isSearchFocus }">
 			<input
 				type="text"
-				id="username"
 				placeholder="선수 이름을 영어로 입력해주세요."
 				class="input_row"
 				@focus="focusInputBox"
@@ -37,6 +36,7 @@ export default {
 			this.errLog = '';
 			// 로딩
 			this.$store.commit('SET_LOADING', true);
+			console.log(true);
 
 			// 검색어 store에 입력
 			this.$store.commit('SET_SEARCH_WORD', this.searchWord);
@@ -63,6 +63,7 @@ export default {
 			});
 			// 로딩
 			this.$store.commit('SET_LOADING', false);
+			console.log(false);
 		},
 		focusInputBox() {
 			this.isSearchFocus = !this.isSearchFocus;

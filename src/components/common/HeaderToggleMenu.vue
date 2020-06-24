@@ -1,22 +1,20 @@
 <template>
-	<div>
-		<div class="toggleheader">
-			<span
-				class="router"
-				:class="{ selected: toggleType }"
-				@click="movePage(firstValue[currentPage])"
-			>
-				<slot name="team"></slot>
-			</span>
-			|
-			<span
-				class="router"
-				:class="{ selected: !toggleType }"
-				@click="movePage(secondValue[currentPage])"
-			>
-				<slot name="player"></slot>
-			</span>
-		</div>
+	<div class="toggleheader">
+		<span
+			class="router"
+			:class="{ selected: toggleType }"
+			@click="movePage(firstValue[currentPage])"
+		>
+			<slot name="team"></slot>
+		</span>
+		|
+		<span
+			class="router"
+			:class="{ selected: !toggleType }"
+			@click="movePage(secondValue[currentPage])"
+		>
+			<slot name="player"></slot>
+		</span>
 	</div>
 </template>
 

@@ -1,37 +1,35 @@
 <template>
-	<div>
-		<div class="league">
-			<ul>
-				<li>
-					<span
-						class="router"
-						:class="{ selected: toggleLeague }"
-						@click="movePage('al')"
-					>
-						<img
-							width="25px"
-							src="https://upload.wikimedia.org/wikipedia/en/thumb/5/54/American_League_logo.svg/125px-American_League_logo.svg.png"
-							alt="American League"
-						/>
-						아메리칸리그
-					</span>
-				</li>
-				<li>
-					<span
-						class="router"
-						:class="{ selected: !toggleLeague }"
-						@click="movePage('nl')"
-					>
-						<img
-							width="25px"
-							src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/MLB_National_League_logo.svg/200px-MLB_National_League_logo.svg.png"
-							alt="National League"
-						/>
-						내셔널리그
-					</span>
-				</li>
-			</ul>
-		</div>
+	<div class="league">
+		<ul>
+			<li>
+				<span
+					class="router"
+					:class="{ selected: toggleLeague }"
+					@click="movePage('al')"
+				>
+					<img
+						width="25px"
+						src="https://upload.wikimedia.org/wikipedia/en/thumb/5/54/American_League_logo.svg/125px-American_League_logo.svg.png"
+						alt="American League"
+					/>
+					아메리칸리그
+				</span>
+			</li>
+			<li>
+				<span
+					class="router"
+					:class="{ selected: !toggleLeague }"
+					@click="movePage('nl')"
+				>
+					<img
+						width="25px"
+						src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/MLB_National_League_logo.svg/200px-MLB_National_League_logo.svg.png"
+						alt="National League"
+					/>
+					내셔널리그
+				</span>
+			</li>
+		</ul>
 	</div>
 </template>
 
