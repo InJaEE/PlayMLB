@@ -8,18 +8,7 @@
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			alertModalStatus: {
-				visible: false,
-				title: '이 사이트는 크롬 브라우저에서 최적화돼있습니다.',
-				subTitle: '',
-				status: 'warning',
-			},
-		};
-	},
-};
+export default {};
 </script>
 
 <style scoped>
