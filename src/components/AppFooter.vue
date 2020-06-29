@@ -1,9 +1,25 @@
 <template>
-	<footer>InJaEE</footer>
+	<footer>{{ time }}</footer>
 </template>
 
 <script>
-export default {};
+export default {
+	data() {
+		return {
+			time: new Date(),
+		};
+	},
+	methods: {
+		now() {
+			return setInterval(() => {
+				this.time = new Date();
+			}, 1000);
+		},
+	},
+	created() {
+		this.now();
+	},
+};
 </script>
 
 <style scoped>
