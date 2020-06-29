@@ -10,11 +10,13 @@
 		<div v-show="!isLoading">
 			<router-view></router-view>
 		</div>
+		<app-footer></app-footer>
 	</div>
 </template>
 
 <script>
 import AppHeader from './components/AppHeader.vue';
+import AppFooter from './components/AppFooter.vue';
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 import ChromeWarning from '@/components/ChromeWarning.vue';
 import { isChrome } from '@/utils/check';
@@ -22,6 +24,7 @@ import { isChrome } from '@/utils/check';
 export default {
 	components: {
 		AppHeader,
+		AppFooter,
 		LoadingSpinner,
 		ChromeWarning,
 	},
