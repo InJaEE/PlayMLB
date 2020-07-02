@@ -11,8 +11,12 @@
 					class="toggleHeader"
 				>
 					<div class="statType" :class="selectedStat(item[1])">
-						{{ item[0] }}
-						<i class="fas fa-sort-down" :class="selectedStat(item[1])"></i>
+						<span>
+							{{ item[0] }}
+						</span>
+						<div class="sortButton">
+							<i class="fas fa-sort-down" :class="selectedStat(item[1])"></i>
+						</div>
 					</div>
 				</th>
 			</tr>
@@ -141,6 +145,7 @@ td {
 }
 .toggleHeader {
 	cursor: pointer;
+	padding: 0 10px;
 }
 .player {
 	overflow: hidden;
@@ -161,11 +166,8 @@ td {
 	padding-left: 20px;
 	max-width: 40px;
 	max-height: 40px;
-	float: left;
 }
-a:visited {
-	color: blue;
-}
+a:visited,
 a:active {
 	color: blue;
 }
@@ -177,5 +179,14 @@ a:active {
 .playerBaseInfo .teamAndName {
 	display: flex;
 	flex-direction: column;
+}
+.statType {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.statType .sortButton {
+	height: 100%;
+	margin-left: 5px;
 }
 </style>
